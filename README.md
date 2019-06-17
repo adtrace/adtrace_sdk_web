@@ -159,8 +159,6 @@ _adtrace.trackEvent(_eventConfig, function (result) {
 
 You can read more about special partners and these integrations in our [guide to special partners][special-partners].
 
-## <a id="license"></a>License
-
 [adtrace.com]:   https://adtrace.io
 [dashboard]:    http://adtrace.io
 [example-app]:  index.js
