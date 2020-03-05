@@ -9,6 +9,7 @@ This is the guide to the Javascript SDK of AdTrace™ for web apps. You can read
    * [Recommendations](#recommendations)
    * [Basic setup](#basic-setup)
 * [Additional features](#additional-features)
+   * [Adtrace Identifier](#adtrace-id)
    * [Event tracking](#event-tracking)
       * [Revenue tracking](#revenue-tracking)
       * [Callback parameters](#callback-parameters)
@@ -61,6 +62,16 @@ _adtrace.trackSession(function (result) {
 ## <a id="additional-features"></a>Additional features
 
 Once you integrate the AdTrace JS SDK into your web app, you can take advantage of the following features.
+
+### <a id="adtrace-id"></a>Adtrace Identifier
+
+When initializing of SDK complete, you can get **Adtrace Identifier**.
+
+```js
+var adtraceId = _adtrace.getAdId();
+```
+
+**Note**: If adtrace id equals `null`, that means the SDK is installing your data and will take a little time (under 10 seconds).
 
 ### <a id="event-tracking"></a>Event tracking
 
