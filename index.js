@@ -2,18 +2,21 @@
   'use strict';
 
   var _adtrace = new AdTrace({
-    app_token: 'bwyeo7y07nlb',
+    app_token: '9e8tyd0l38s7', // your app token
     environment: 'sandbox', // or 'production'
     os_name: 'android',
+    app_version: '1.0.0', // your app version
     device_ids: {
-      gps_adid: '5056e23a-dc1d-418f-b5a2-4ab3e75daab2'
+      gps_adid: '5056e23a-dc94-680f-b5a2-4ab3e84d45b2'
     }
   });
 
   var _eventConfig = {
-    event_token: 'g3mfiw',
+    event_token: '40mfee', // event token
+    // other optional parameters //
     revenue: 1000,
     currency: 'EUR',
+    event_value: 'my-value',
     callback_params: [{
       key: 'some-key-1',
       value: 'some-value-1'
@@ -36,12 +39,15 @@
   // Internal (demo) stuff, don't touch!
   var _trackSessionBtn = document.querySelector('#track-session');
   var _trackEventBtn = document.querySelector('#track-event');
+  var _adtraceIdContainer = document.querySelector('#adtrace-id');
   var _logContainer = document.querySelector('#log');
   var _waitingForResponseMsg = 'waiting for response, please wait...';
   var _loading = {};
 
   _trackSessionBtn.addEventListener('click', handleTrackSession);
   _trackEventBtn.addEventListener('click', handleTrackEvent);
+
+  _adtraceIdContainer.innerHTML = 'Adtrace ID: ' + _adtrace.getAdId();
 
   function handleTrackSession() {
 
