@@ -165,6 +165,6 @@ _adtrace.trackEvent(_eventConfig, function (result) {
 });
 ```
 
-[adtrace.com]:   https://adtrace.io
-[dashboard]:    http://adtrace.io
+[adtrace.io]:   https://adtrace.io
+[dashboard]:    https://adtrace.io
 [example-app]:  index.js
