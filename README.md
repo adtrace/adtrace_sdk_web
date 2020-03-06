@@ -9,6 +9,7 @@ This is the guide to the Javascript SDK of AdTrace™ for web apps. You can read
    * [Recommendations](#recommendations)
    * [Basic setup](#basic-setup)
 * [Additional features](#additional-features)
+   * [Adtrace Identifier](#adtrace-id)
    * [Event tracking](#event-tracking)
       * [Revenue tracking](#revenue-tracking)
       * [Callback parameters](#callback-parameters)
@@ -44,6 +45,7 @@ var _adtrace = new AdTrace({
   app_token: 'YourAppToken',
   environment: 'production', // or 'sandbox' in case you are testing SDK locally with your web app
   os_name: 'android',
+  app_version: '1.0.0', // your app version
   device_ids: {
     gps_adid: '5056e23a-dc1d-418f-b5a2-4ab3e75daab2' // each web app user needs to have unique identifier
   }
@@ -60,6 +62,16 @@ _adtrace.trackSession(function (result) {
 ## <a id="additional-features"></a>Additional features
 
 Once you integrate the AdTrace JS SDK into your web app, you can take advantage of the following features.
+
+### <a id="adtrace-id"></a>Adtrace Identifier
+
+When initializing of SDK complete, you can get **Adtrace Identifier**.
+
+```js
+var adtraceId = _adtrace.getAdId();
+```
+
+**Note**: If adtrace id equals `null`, that means the SDK is installing your data and will take a little time (under 10 seconds).
 
 ### <a id="event-tracking"></a>Event tracking
 
@@ -95,9 +107,7 @@ _adtrace.trackEvent(_eventConfig, function (result) {
 });
 ```
 
-When you set a currency token, adtrace will automatically convert the incoming revenues into a reporting revenue of your choice. Read more about [currency conversion here][currency-conversion].
-
-You can read more about revenue and event tracking in the [event tracking guide](https://docs.adtrace.com/en/event-tracking/#tracking-purchases-and-revenues).
+When you set a currency token, adtrace will automatically convert the incoming revenues into a reporting revenue of your choice.
 
 ### <a id="callback-parameters"></a>Callback parameters
 
@@ -130,8 +140,6 @@ In that case we would track the event and send a request to:
 
 It should be mentioned that we support a variety of placeholders like `{gps_adid}` that can be used as parameter values. In the resulting callback this placeholder would be replaced with the ID for Advertisers of the current device. Also note that we don't store any of your custom parameters, but only append them to your callbacks, thus without a callback they will not be saved nor sent to you.
 
-You can read more about using URL callbacks, including a full list of available values, in our [callbacks guide][callbacks-guide].
-
 ### <a id="partner-parameters"></a>Partner parameters
 
 You can also add parameters to be transmitted to network partners, which have been activated in your AdTrace dashboard.
@@ -157,12 +165,6 @@ _adtrace.trackEvent(_eventConfig, function (result) {
 });
 ```
 
-You can read more about special partners and these integrations in our [guide to special partners][special-partners].
-
-[adtrace.com]:   https://adtrace.io
-[dashboard]:    http://adtrace.io
+[adtrace.io]:   https://adtrace.io
+[dashboard]:    https://adtrace.io
 [example-app]:  index.js
-
-[callbacks-guide]:      https://docs.adtrace.com/en/callbacks
-[special-partners]:     https://docs.adtrace.com/en/special-partners
-[currency-conversion]:  https://docs.adtrace.com/en/event-tracking/#tracking-purchases-in-different-currencies
