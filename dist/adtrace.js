@@ -84,6 +84,10 @@
     _baseParams.os_name = getOS();
     _baseParams.app_version = '1.0.0';
 
+    if (_baseParams.environment == 'sandbox') {
+      console.log('Adtrace environment is running on sandbox. Please change it to `production` in reelase mode.')
+    }
+
     if (options.hasOwnProperty('default_tracker')) {
       _baseParams.default_tracker = options.default_tracker;
     }
@@ -126,6 +130,7 @@
             localStorage.setItem('adtrace_js_sdk_unique_id', _uniqueId);
             _basePackageBackoffTimer = 5; // reset
             _hanldePackages();
+            console.log("Adtrace SDk initialized successfully");
           }
           else {
             console.log("Adtrace SDK click will retry again in " + (_baseClickBackoffTimer * Math.pow(2, _baseClickBackoffCount)) + " Sec.");
