@@ -115,7 +115,7 @@
       getAdId: getAdId,
       trackSession: trackSession,
       trackEvent: trackEvent,
-      stableData: stableLocalData,
+      stableLocalData: stableLocalData,
     };
 
     function _initializeSDK() {
