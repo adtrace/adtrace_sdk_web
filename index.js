@@ -4,17 +4,14 @@
   var _adtrace = new AdTrace({
     app_token: '9e8tyd0l38s7', // your app token
     environment: 'sandbox', // or 'production'
-    os_name: 'android',
-    app_version: '1.0.0', // your app version
-    device_ids: {
-      gps_adid: '5056e23a-dc94-680f-b5a2-4ab3e84d45b2'
-    }
+    unique_id: '5056e23a-dc94-123o-b8a2-4ac4e08d45b2',
+    default_tracker: '0wbyf3z', // for changing default tracker (optional)
   });
 
   var _eventConfig = {
     event_token: '40mfee', // event token
     // other optional parameters //
-    revenue: 1000,
+    revenue: 10,
     currency: 'EUR',
     event_value: 'my-value',
     callback_params: [{
