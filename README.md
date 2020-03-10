@@ -195,4 +195,4 @@ _adtrace.stableLocalData();
 
 [adtrace.io]:   https://adtrace.io
 [dashboard]:    https://adtrace.io
-[example-app]:  index.js
+[example-app]:  example/index.js
