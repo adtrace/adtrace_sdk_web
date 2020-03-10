@@ -1,0 +1,25 @@
+{
+  "name": "web-adtrace",
+  "version": "1.1.2",
+  "description": "Web SDK of Adtrace",
+  "main": "adtrace.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adtrace/adtrace_sdk_web.git"
+  },
+  "keywords": [
+    "Adtrace"
+  ],
+  "author": "arefhosseini",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adtrace/adtrace_sdk_web/issues"
+  },
+  "homepage": "https://github.com/adtrace/adtrace_sdk_web#readme"
+}
