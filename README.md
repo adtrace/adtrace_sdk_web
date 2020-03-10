@@ -19,11 +19,17 @@ This is the guide to the Javascript SDK of AdTrace™ for web apps. You can read
 
 ## <a id="example-app"></a>Example apps
 
-You can check how SDK can be used in the web app by checking [example app][example-app] in this repository.
+You can check how SDK can be used in the web app by checking [example app][example-app] repository.
 
 ## <a id="basic-integration"></a>Basic integration
 
 This SDK can be used to track installs, sessions and events. Simply add the AdTrace JS SDK to your web app.
+
+Or if you are using `npm`, you can add it to your dependencies like this:
+
+```
+npm install web-adtrace
+```
 
 ### <a id="recommendations"></a>Recommendations
 
