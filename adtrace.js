@@ -6,7 +6,7 @@
     var req = new XMLHttpRequest();
 
     req.open(method, url, !0);
-    req.setRequestHeader('Client-SDK', 'js1.1.2');
+    req.setRequestHeader('Client-SDK', 'js1.1.3');
     if (method == 'POST') {
       req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
