@@ -16,6 +16,8 @@ This is the guide to the Javascript SDK of AdTrace™ for web apps. You can read
       * [Callback parameters](#callback-parameters)
       * [Partner parameters](#partner-parameters)
    * [Stable local data](#stable-local-data)
+* [Use with js libraries](#libs)
+   * [React](#libs-react)
 
 ## <a id="example-app"></a>Example apps
 
@@ -197,6 +199,33 @@ Because the unique device identifer & adtrace identifer saved in `localStorage`.
 localStorage.clear(); // clearing your own data
 _adtrace.stableLocalData(); 
 ```
+
+## <a id="libs"></a>Use with js libraries
+### <a id="libs-react"></a>React
+
+1.install this package using yarn (or npm):
+
+```
+yarn add web-adtrace
+```
+
+2.import web-adtrace anywhere for **once** (its better to import this lib on one of top level components like `App.js`):
+
+```js
+import 'web-adtrace';
+```
+
+3.create and initialize adtrace instance (you should use `window.AdTrace` instead of `AdTrace`):
+```js
+const adtrace = new window.AdTrace({
+  app_token: 'YourAppToken',
+  environment: 'production', // or 'sandbox' in case you are testing SDK locally with your web app
+  unique_id: '5056e23a-dc94-123o-b8a2-4ac4e08d45b2', // each web app user needs to have unique identifier,
+  default_tracker: 'Your non organic tracker' // optional
+});
+```
+
+4.use AdTrace's functions like the [examples above](#event-tracking)
 
 
 [adtrace.io]:   https://adtrace.io
