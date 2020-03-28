@@ -6,7 +6,7 @@
     var req = new XMLHttpRequest();
 
     req.open(method, url, !0);
-    req.setRequestHeader('Client-SDK', 'js1.1.3');
+    req.setRequestHeader('Client-SDK', 'js1.1.4');
     if (method == 'POST') {
       req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
@@ -49,13 +49,26 @@
   }
 
   function getOS() {
-    var osName = "unknown";
-    if (navigator.platform.indexOf("Android") != -1 ) osName = "android";
-    if (navigator.platform.indexOf("iPhone") != -1 ) osName = "ios";
-    if (navigator.platform.indexOf("Win") != -1 ) osName = "windows";
-    if (navigator.platform.indexOf("Mac") != -1 ) osName = "mac-os";
-    if (navigator.platform.indexOf("X11") != -1 ) osName = "unix";
-    if (navigator.platform.indexOf("Linux") != -1 ) osName = "linux";
+    var osName;
+    var platform = window.navigator.platform;
+    var userAgent = window.navigator.userAgent;
+    
+    if ( platform === 'MacIntel' || platform === 'MacPPC' ) {
+      osName = 'mac-os';
+    } else if ( platform === 'CrOS' ) {
+      osName = 'chrome-os';
+    } else if ( platform === 'Win32' || platform == 'Win64' ) {
+      osName = 'windows';
+    } else if ( !osName && /Android/.test(userAgent) ) {
+      osName = 'android';
+    } else if ( !osName && /Linux/.test(platform) ) {
+      osName = 'linux';
+    } else if ( !osName && /Windows/.test(userAgent) ) {
+      osName = 'windows';
+    }
+    else {
+      osName = 'unknown'; 
+    }
 
     return osName;
   }
@@ -85,7 +98,7 @@
     _baseParams.app_version = '1.0.0';
 
     if (_baseParams.environment == 'sandbox') {
-      console.log('Adtrace environment is running on sandbox. Please change it to `production` in reelase mode.')
+      console.log('Adtrace environment is running on sandbox. Please change it to `production` in release mode.')
     }
 
     if (options.hasOwnProperty('default_tracker')) {
