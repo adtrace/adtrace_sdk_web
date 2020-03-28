@@ -5,6 +5,8 @@ This is the guide to the Javascript SDK of AdTrace™ for web apps. You can read
 ## Table of contents
 
 * [Example apps](#example-app)
+   * [Web example](#web-example)
+   * [React example](#react-example)
 * [Basic integration](#basic-integration)
    * [Recommendations](#recommendations)
    * [Basic setup](#basic-setup)
@@ -21,7 +23,11 @@ This is the guide to the Javascript SDK of AdTrace™ for web apps. You can read
 
 ## <a id="example-app"></a>Example apps
 
-You can check how SDK can be used in the web app by checking [example app][example-app] repository.
+### <a id="web-example"></a>Web example
+By using the SDK to your web, you can check [web example][web-example] for better help.
+
+### <a id="react-example"></a>React example
+By using the SDK to your `React`, you can check [react example][react-example] for better help.
 
 ## <a id="basic-integration"></a>Basic integration
 
@@ -203,19 +209,19 @@ _adtrace.stableLocalData();
 ## <a id="libs"></a>Use with js libraries
 ### <a id="libs-react"></a>React
 
-1.install this package using yarn (or npm):
+1.Install this package using yarn (or npm):
 
 ```
 yarn add web-adtrace
 ```
 
-2.import web-adtrace anywhere for **once** (its better to import this lib on one of top level components like `App.js`):
+2.Import `web-adtrace` anywhere for **once** (its better to import this lib on one of top level components like `App.js`):
 
 ```js
 import 'web-adtrace';
 ```
 
-3.create and initialize adtrace instance (you should use `window.AdTrace` instead of `AdTrace`):
+3.Create and initialize adtrace instance **(you should use `window.AdTrace` instead of `AdTrace`)**:
 ```js
 const adtrace = new window.AdTrace({
   app_token: 'YourAppToken',
@@ -225,9 +231,10 @@ const adtrace = new window.AdTrace({
 });
 ```
 
-4.use AdTrace's functions like the [examples above](#event-tracking)
+4.Use AdTrace's functions like the [examples above](#event-tracking)
 
 
-[adtrace.io]:   https://adtrace.io
-[dashboard]:    https://adtrace.io
-[example-app]:  example/index.js
+[adtrace.io]:     https://adtrace.io
+[dashboard]:      https://adtrace.io
+[web-example]:    web-example/
+[react-example]:  react-example/
