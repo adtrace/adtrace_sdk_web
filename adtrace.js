@@ -6,7 +6,7 @@
     var req = new XMLHttpRequest();
 
     req.open(method, url, !0);
-    req.setRequestHeader('Client-SDK', 'js1.2.2');
+    req.setRequestHeader('Client-SDK', 'js1.2.3');
     if (method == 'POST') {
       req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
@@ -118,7 +118,7 @@
       baseParams.win_adid = baseParams.unique_id;
     }
 
-    if (baseParams.unique_id != uniqueId && _adId != null) {
+    if (baseParams.unique_id != uniqueId && adId != null) {
       localStorage.removeItem('adtrace_js_sdk_id');
       localStorage.setItem('adtrace_js_sdk_packages', '');
       adId = null;

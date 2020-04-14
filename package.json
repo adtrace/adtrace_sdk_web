@@ -1,6 +1,6 @@
 {
   "name": "web-adtrace",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Web SDK of Adtrace",
   "main": "adtrace.js",
   "directories": {
