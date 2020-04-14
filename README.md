@@ -16,8 +16,6 @@ This is the guide to the Javascript SDK of AdTrace™ for web. You can read more
       * [Callback parameters](#callback-parameters)
       * [Partner parameters](#partner-parameters)
    * [Stable local data](#stable-local-data)
-* [Use with js libraries](#libs)
-   * [React](#libs-react)
 
 ## <a id="example-app"></a>Example app
 
