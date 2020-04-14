@@ -1,12 +1,10 @@
 ## Summary
 
-This is the guide to the Javascript SDK of AdTrace™ for web apps. You can read more about AdTrace™ at [adtrace.io].
+This is the guide to the Javascript SDK of AdTrace™ for web. You can read more about AdTrace™ at [adtrace.io].
 
 ## Table of contents
 
-* [Example apps](#example-app)
-   * [Web example](#web-example)
-   * [React example](#react-example)
+* [Example app](#example-app)
 * [Basic integration](#basic-integration)
    * [Recommendations](#recommendations)
    * [Basic setup](#basic-setup)
@@ -21,17 +19,16 @@ This is the guide to the Javascript SDK of AdTrace™ for web apps. You can read
 * [Use with js libraries](#libs)
    * [React](#libs-react)
 
-## <a id="example-app"></a>Example apps
+## <a id="example-app"></a>Example app
 
-### <a id="web-example"></a>Web example
-By using the SDK to your web, you can check [web example][web-example] for better help.
-
-### <a id="react-example"></a>React example
-By using the SDK to your `React`, you can check [react example][react-example] for better help.
+By using the SDK to your web, you can check [example][example] for better help.
 
 ## <a id="basic-integration"></a>Basic integration
 
-This SDK can be used to track installs, sessions and events. Simply add the AdTrace JS SDK to your web app.
+This SDK can be used to track installs, sessions and events. Simply add the `adtrace.js` to html:
+```html
+<script type="text/javascript" src="adtrace.min.js"></script>
+```
 
 Or if you are using `npm`, you can add it to your dependencies like this:
 
@@ -58,7 +55,7 @@ With this in mind, initialisation of AdTrace JS SDK would look like this inside 
 var _adtrace = new AdTrace({
   app_token: 'YourAppToken',
   environment: 'production', // or 'sandbox' in case you are testing SDK locally with your web app
-  unique_id: '5056e23a-dc94-123o-b8a2-4ac4e08d45b2' // each web app user needs to have unique identifier,
+  unique_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // each web app user needs to have unique identifier,
   default_tracker: 'Your non organic tracker' // optional
 });
 
@@ -76,7 +73,7 @@ If it doesn't used, your data will attribiute in **organic tracker**.
 
 ## <a id="additional-features"></a>Additional features
 
-Once you integrate the AdTrace JS SDK into your web app, you can take advantage of the following features.
+Once you integrate the AdTrace JS SDK into your web, you can take advantage of the following features.
 
 ### <a id="adtrace-id"></a>Adtrace Identifier
 
@@ -206,35 +203,6 @@ localStorage.clear(); // clearing your own data
 _adtrace.stableLocalData(); 
 ```
 
-## <a id="libs"></a>Use with js libraries
-### <a id="libs-react"></a>React
-
-1.Install this package using yarn (or npm):
-
-```
-yarn add web-adtrace
-```
-
-2.Import `web-adtrace` anywhere for **once** (its better to import this lib on one of top level components like `App.js`):
-
-```js
-import 'web-adtrace';
-```
-
-3.Create and initialize adtrace instance **(you should use `window.AdTrace` instead of `AdTrace`)**:
-```js
-const adtrace = new window.AdTrace({
-  app_token: 'YourAppToken',
-  environment: 'production', // or 'sandbox' in case you are testing SDK locally with your web app
-  unique_id: '5056e23a-dc94-123o-b8a2-4ac4e08d45b2', // each web app user needs to have unique identifier,
-  default_tracker: 'Your non organic tracker' // optional
-});
-```
-
-4.Use AdTrace's functions like the [examples above](#event-tracking)
-
-
 [adtrace.io]:     https://adtrace.io
 [dashboard]:      https://adtrace.io
-[web-example]:    web-example/
-[react-example]:  react-example/
+[example]:    example/
