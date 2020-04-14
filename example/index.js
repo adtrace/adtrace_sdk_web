@@ -4,7 +4,7 @@
   var _adtrace = new AdTrace({
     app_token: '9e8tyd0l38s7', // your app token
     environment: 'sandbox', // or 'production' in release mode
-    unique_id: '5056e23a-dc98-184o-b8a2-4ac4e09d45b4',
+    unique_id: '5056e87a-dc98-184o-b8a2-4ac4e09d45b4',
     default_tracker: '0wbyf3z' // for changing default tracker (optional)
   });
 

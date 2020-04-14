@@ -6,7 +6,7 @@
     var req = new XMLHttpRequest();
 
     req.open(method, url, !0);
-    req.setRequestHeader('Client-SDK', 'js1.2.1');
+    req.setRequestHeader('Client-SDK', 'js1.2.2');
     if (method == 'POST') {
       req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
@@ -82,48 +82,48 @@
 
     options = options || {};
 
-    var _baseParams = {};
-    var _adId = localStorage.getItem('adtrace_js_sdk_id');
-    var _uniqueId = localStorage.getItem('adtrace_js_sdk_unique_id');
-    var _previousPackageIds = _getPreviousPackageIds();
-    var _baseClickBackoffTimer = 0.5; // second
-    var _basePackageBackoffTimer = 5; // second
-    var _baseClickBackoffCount = 0;
-    var _basePackageBackoffCount = 0;
-    var _isHandlingPackage = false;
+    var baseParams = {};
+    var adId = localStorage.getItem('adtrace_js_sdk_id');
+    var uniqueId = localStorage.getItem('adtrace_js_sdk_unique_id');
+    var previousPackageIds = getPreviousPackageIds();
+    var baseClickBackoffTimer = 0.5; // second
+    var basePackageBackoffTimer = 5; // second
+    var baseClickBackoffCount = 0;
+    var basePackageBackoffCount = 0;
+    var isHandlingPackage = false;
 
-    _baseParams.unique_id = options.unique_id;
-    _baseParams.app_token = options.app_token;
-    _baseParams.environment = options.environment;
-    _baseParams.os_name = getOS();
-    _baseParams.app_version = '1.0.0';
+    baseParams.unique_id = options.unique_id;
+    baseParams.app_token = options.app_token;
+    baseParams.environment = options.environment;
+    baseParams.os_name = getOS();
+    baseParams.app_version = '1.0.0';
 
-    if (_baseParams.environment == 'sandbox') {
+    if (baseParams.environment == 'sandbox') {
       console.log('Adtrace environment is running on sandbox. Please change it to `production` in release mode.')
     }
 
     if (options.hasOwnProperty('default_tracker')) {
-      _baseParams.default_tracker = options.default_tracker;
+      baseParams.default_tracker = options.default_tracker;
     }
 
-    if (_baseParams.os_name == 'android') {
-      _baseParams.gps_adid = _baseParams.unique_id;
-      _baseParams.android_uuid = _baseParams.unique_id;
+    if (baseParams.os_name == 'android') {
+      baseParams.gps_adid = baseParams.unique_id;
+      baseParams.android_uuid = baseParams.unique_id;
     }
-    else if (_baseParams.os_name == 'ios') {
-      _baseParams.idfa = _baseParams.unique_id;
-      _baseParams.idfv = _baseParams.unique_id; 
+    else if (baseParams.os_name == 'ios') {
+      baseParams.idfa = baseParams.unique_id;
+      baseParams.idfv = baseParams.unique_id; 
     }
     else {
-      _baseParams.win_adid = _baseParams.unique_id;
+      baseParams.win_adid = baseParams.unique_id;
     }
 
-    if (_baseParams.unique_id != _uniqueId && _adId != null) {
+    if (baseParams.unique_id != uniqueId && _adId != null) {
       localStorage.removeItem('adtrace_js_sdk_id');
       localStorage.setItem('adtrace_js_sdk_packages', '');
-      _adId = null;
+      adId = null;
     }
-    _initializeSDK();
+    initializeSDK();
 
     return {
       getAdId: getAdId,
@@ -132,43 +132,42 @@
       stableLocalData: stableLocalData,
     };
 
-    function _initializeSDK() {
+    function initializeSDK() {
 
-      if (_adId == null) {
+      if (adId == null) {
         trackInstall(function (result) {
           var resultJson = JSON.parse(result.responseText);
           if (resultJson.hasOwnProperty('adid')) {
-            _adId = resultJson.adid;
-            _uniqueId = _baseParams.unique_id;
-            localStorage.setItem('adtrace_js_sdk_id', _adId);
-            localStorage.setItem('adtrace_js_sdk_unique_id', _uniqueId);
-            _basePackageBackoffTimer = 5; // reset
-            _hanldePackages();
+            adId = resultJson.adid;
+            uniqueId = baseParams.unique_id;
+            localStorage.setItem('adtrace_js_sdk_id', adId);
+            localStorage.setItem('adtrace_js_sdk_unique_id', uniqueId);
+            basePackageBackoffTimer = 5; // reset
+            hanldePackages();
             console.log("Adtrace SDk initialized successfully");
           }
           else {
-            console.log("Adtrace SDK click will retry again in " + (_baseClickBackoffTimer * Math.pow(2, _baseClickBackoffCount)) + " Sec.");
+            console.log("Adtrace SDK click will retry again in " + (baseClickBackoffTimer * Math.pow(2, baseClickBackoffCount)) + " Sec.");
             console.log((new Date).getTime());
-            setTimeout(_initializeSDK, _baseClickBackoffTimer * Math.pow(2, _baseClickBackoffCount) * 1000);
-            _baseClickBackoffCount += 1;
+            setTimeout(initializeSDK, baseClickBackoffTimer * Math.pow(2, baseClickBackoffCount) * 1000);
+            baseClickBackoffCount += 1;
           }
         }, function (errorMsg, error) {
           console.log(errorMsg);
-          console.log("Adtrace SDK click will retry again in " + (_baseClickBackoffTimer * Math.pow(2, _baseClickBackoffCount)) + " Sec.");
-          console.log((new Date).getTime());
-          setTimeout(_initializeSDK, _baseClickBackoffTimer * Math.pow(2, _baseClickBackoffCount) * 1000);
-          _baseClickBackoffCount += 1;
+          console.log("Adtrace SDK click will retry again in " + (baseClickBackoffTimer * Math.pow(2, baseClickBackoffCount)) + " Sec.");
+          setTimeout(initializeSDK, baseClickBackoffTimer * Math.pow(2, baseClickBackoffCount) * 1000);
+          baseClickBackoffCount += 1;
         });
       }
       else {
-        _hanldePackages();
+        hanldePackages();
       }
 
     }
 
     function trackInstall(onSuccess, onError) {
 
-      var params = cloneObj(_baseParams);
+      var params = cloneObj(baseParams);
 
       params.device_type = 'phone';
       params.source = 'install_referrer';
@@ -189,14 +188,14 @@
 
     function trackSession(onSuccess, onError) {
 
-      var params = cloneObj(_baseParams);
+      var params = cloneObj(baseParams);
       params.created_at = (new Date().toISOString() + '+0000');
       params.sent_at = params.created_at;
 
       localStorage.setItem('adtrace_js_sdk_package_' + params.sent_at, 'https://app.adtrace.io/session?' + encodeQueryString(params));
-      _previousPackageIds.push(params.sent_at);
+      previousPackageIds.push(params.sent_at);
       localStorage.setItem('adtrace_js_sdk_packages', localStorage.getItem('adtrace_js_sdk_packages') + '&' + params.sent_at);
-      _hanldePackages(onSuccess, onError);
+      hanldePackages(onSuccess, onError);
 
     }
 
@@ -204,11 +203,11 @@
 
       options = options || {};
 
-      var params = cloneObj(_baseParams);
-      var revenue = _getRevenue(options);
+      var params = cloneObj(baseParams);
+      var revenue = getRevenue(options);
       var eventValue = options.event_value;
-      var callbackParams = _getMap(options.callback_params);
-      var partnerParams = _getMap(options.partner_params);
+      var callbackParams = getMap(options.callback_params);
+      var partnerParams = getMap(options.partner_params);
 
       params.event_token = options.event_token;
 
@@ -233,26 +232,26 @@
       params.sent_at = params.created_at;
 
       localStorage.setItem('adtrace_js_sdk_package_' + params.sent_at, 'https://app.adtrace.io/event?' + encodeQueryString(params));
-      _previousPackageIds.push(params.sent_at);
+      previousPackageIds.push(params.sent_at);
       localStorage.setItem('adtrace_js_sdk_packages', localStorage.getItem('adtrace_js_sdk_packages') + '&' + params.sent_at);
-      _hanldePackages(onSuccess, onError);
+      hanldePackages(onSuccess, onError);
 
     }
 
     function getAdId() {
-      return _adId;
+      return adId;
     }
 
     function stableLocalData() {
-      if (_adId) {
-        localStorage.setItem('adtrace_js_sdk_id', _adId);
+      if (adId) {
+        localStorage.setItem('adtrace_js_sdk_id', adId);
       }
-      if (_uniqueId) {
-        localStorage.setItem('adtrace_js_sdk_unique_id', _uniqueId);
+      if (uniqueId) {
+        localStorage.setItem('adtrace_js_sdk_unique_id', uniqueId);
       }
     }
 
-    function _getRevenue(options) {
+    function getRevenue(options) {
 
       var revenue = parseFloat(options.revenue);
 
@@ -267,7 +266,7 @@
 
     }
 
-    function _getMap(params) {
+    function getMap(params) {
 
       params = params || [];
 
@@ -285,7 +284,7 @@
 
     }
 
-    function _getPreviousPackageIds() {
+    function getPreviousPackageIds() {
 
       var previousPackages = [];
       var previousPackageIdsString = localStorage.getItem('adtrace_js_sdk_packages');
@@ -303,38 +302,38 @@
 
     }
 
-    function _hanldePackages(onSuccess, onError) {
-      if (!_isHandlingPackage) {
-        if (_previousPackageIds.length > 0 && _previousPackageIds[0] != '') {
-          _isHandlingPackage = true;
-          var packageData = localStorage.getItem('adtrace_js_sdk_package_' + _previousPackageIds[0]);
+    function hanldePackages(onSuccess, onError) {
+      if (!isHandlingPackage) {
+        if (previousPackageIds.length > 0 && previousPackageIds[0] != '') {
+          isHandlingPackage = true;
+          var packageData = localStorage.getItem('adtrace_js_sdk_package_' + previousPackageIds[0]);
           sendRequest('GET', packageData, null, function (result) {
-            var previousPackageIds = _previousPackageIds.slice();
-            previousPackageIds.shift();
-            localStorage.removeItem('adtrace_js_sdk_package_' + _previousPackageIds[0]);
+            var newPreviousPackageIds = previousPackageIds.slice();
+            newPreviousPackageIds.shift();
+            localStorage.removeItem('adtrace_js_sdk_package_' + previousPackageIds[0]);
             var previousPackageIdsString = "";
-            for (var i = 0; i < previousPackageIds.length; i++) {
-              previousPackageIdsString += previousPackageIds[i];
-              if (i + 1 != previousPackageIds.length) {
+            for (var i = 0; i < newPreviousPackageIds.length; i++) {
+              previousPackageIdsString += newPreviousPackageIds[i];
+              if (i + 1 != newPreviousPackageIds.length) {
                 previousPackageIdsString += '&';
               }
             }
             localStorage.setItem('adtrace_js_sdk_packages', previousPackageIdsString);
-            _previousPackageIds = previousPackageIds;
-            _isHandlingPackage = false;
-            _basePackageBackoffTimer = 5; // reset
-            if (_previousPackageIds.length > 0) {
-              _hanldePackages();
+            previousPackageIds = newPreviousPackageIds;
+            isHandlingPackage = false;
+            basePackageBackoffTimer = 5; // reset
+            if (previousPackageIds.length > 0) {
+              hanldePackages();
             }
             if (onSuccess) {
               onSuccess(result);
             }
           }, function (errorMsg, error) {
             console.log(errorMsg);
-            console.log("Adtrace SDK package will retry again in " + (_basePackageBackoffTimer * Math.pow(2, _basePackageBackoffCount)) + " Sec.");
-            setTimeout(_hanldePackages, _basePackageBackoffTimer * Math.pow(2, _basePackageBackoffCount) * 1000);
-            _basePackageBackoffCount += 1;
-            _isHandlingPackage = false;
+            console.log("Adtrace SDK package will retry again in " + (basePackageBackoffTimer * Math.pow(2, basePackageBackoffCount)) + " Sec.");
+            setTimeout(hanldePackages, basePackageBackoffTimer * Math.pow(2, basePackageBackoffCount) * 1000);
+            basePackageBackoffCount += 1;
+            isHandlingPackage = false;
             if (onError) {
               onError(errorMsg, error);
             }
