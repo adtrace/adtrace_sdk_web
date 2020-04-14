@@ -6,7 +6,7 @@
     var req = new XMLHttpRequest();
 
     req.open(method, url, !0);
-    req.setRequestHeader('Client-SDK', 'js1.1.4');
+    req.setRequestHeader('Client-SDK', 'js1.2.1');
     if (method == 'POST') {
       req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
@@ -48,29 +48,30 @@
     return copy
   }
 
+  /**
+   * Determine the mobile operating system.
+   * This function returns one of 'iOS', 'Android', 'Windows Phone', or 'unknown'.
+   *
+   * @returns {String}
+   */
   function getOS() {
-    var osName;
-    var platform = window.navigator.platform;
-    var userAgent = window.navigator.userAgent;
-    
-    if ( platform === 'MacIntel' || platform === 'MacPPC' ) {
-      osName = 'mac-os';
-    } else if ( platform === 'CrOS' ) {
-      osName = 'chrome-os';
-    } else if ( platform === 'Win32' || platform == 'Win64' ) {
-      osName = 'windows';
-    } else if ( !osName && /Android/.test(userAgent) ) {
-      osName = 'android';
-    } else if ( !osName && /Linux/.test(platform) ) {
-      osName = 'linux';
-    } else if ( !osName && /Windows/.test(userAgent) ) {
-      osName = 'windows';
-    }
-    else {
-      osName = 'unknown'; 
-    }
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    return osName;
+        // Windows Phone must come first because its UA also contains "Android"
+      if (/windows phone/i.test(userAgent)) {
+          return "windows-phone";
+      }
+
+      if (/android/i.test(userAgent)) {
+          return "android";
+      }
+
+      // iOS detection from: http://stackoverflow.com/a/9039885/177710
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+          return "ios";
+      }
+
+      return "unknown";
   }
 
   if (!'withCredentials' in new XMLHttpRequest()) {
