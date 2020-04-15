@@ -1,3 +1,5 @@
+[![NPM](https://img.shields.io/npm/v/web-adtrace.svg)](https://www.npmjs.com/package/web-adtrace) 
+
 ## Summary
 
 This is the guide to the Javascript SDK of AdTrace™ for web. You can read more about AdTrace™ at [adtrace.io].
