@@ -392,5 +392,5 @@ var adtrace = new AdTrace({
 
 ```js
 localStorage.clear(); // clearing your own data
-_adtrace.stableLocalData();
+adtrace.stableLocalData();
 ```
