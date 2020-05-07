@@ -20,6 +20,7 @@ This is the guide to the Javascript SDK of AdTrace™ for web. You can read more
 * [Integrate the SDK into your website](#qs-integrate-sdk)
    * [Create unique ID](#qs-create-unique-id)
    * [Basic setup](#qs-basic-setup)
+   * [Track session](#qs-track-session)
 
 ### Event tracking
 
@@ -79,11 +80,30 @@ With this in mind, initialisation of AdTrace JS SDK would look like this inside 
 
 ```js
 var adtrace = new AdTrace({
-  app_token: 'YourAppToken',
+  app_token: '{YourAppToken}',
   environment: 'production', // or 'sandbox' in case you are testing SDK locally with your web app
   unique_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // each web app user needs to have unique identifier,
 });
+```
 
+Replace `{YourAppToken}` with your app token. You can find this in your AdTrace panel.
+
+Depending on whether you build your app for testing or for production, you must set the environment with one of these values:
+
+```
+production
+sandbox
+```
+
+**Important**: This value should be set to `sandbox` if and only if you or someone else is testing your app. Make sure to set the environment to `production` just before you publish the app. Set it back to `sandbox` when you start developing and testing it again.
+
+We use this environment to distinguish between real traffic and test traffic from test devices. It is very important that you keep this value meaningful at all times!
+
+### <a id="qs-track-session"></a>Track session
+
+After initializing AdTrace SDK, you are feel free to track user session's look like this:
+
+```js
 adtrace.trackSession(function (result) {
     console.log(result);
   }, function (errorMsg, error) {
@@ -91,6 +111,8 @@ adtrace.trackSession(function (result) {
   }
 );
 ```
+
+**Note**: First tracking session take a little bit more time, because AdTrace should attribute and installing user's data first of all;
 
 ## Event tracking
 
@@ -232,7 +254,7 @@ The `default_tracker` is an **optional** parameter for attributing data to the *
 
 ```js
 var adtrace = new AdTrace({
-  app_token: 'YourAppToken',
+  app_token: '{YourAppToken}',
   environment: 'production', // or 'sandbox' in case you are testing SDK locally with your web app
   unique_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // each web app user needs to have unique identifier,
   default_tracker: 'Your non organic tracker' // optional
