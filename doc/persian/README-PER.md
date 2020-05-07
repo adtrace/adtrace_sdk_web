@@ -23,14 +23,14 @@ SDK وب ادتریس. شما برای اطلاعات بیشتر میتوانی�
 <ul>
   <li><a href="#qs-example-app">برنامه نمونه</a></li>
   <li><a href="#qs-getting-started">شروع پیاده سازی</a></li>
-    <ul>
-      <li><a href="#qs-sdk-add">افزودن SDK به پروژه</a></li>
+	  <ul>
+	    <li><a href="#qs-sdk-add">افزودن SDK به پروژه</a></li>
     </ul>
   <li><a href="#qs-integ-sdk">پیاده سازی SDK داخل وبسایت</a></li>
   <ul>
      <li><a href="#qs-create-unique-id">ساخت شناسه یکتا</a></li>
-    <li><a href="#qs-basic-setup">راه اندازی اولیه</a></li>
-    <li><a href="#qs-track-session">ردیابی نشست</a></li>
+	  <li><a href="#qs-basic-setup">راه اندازی اولیه</a></li>
+	  <li><a href="#qs-track-session">ردیابی نشست</a></li>
   </ul>
   </ul>
 </div>
@@ -114,7 +114,7 @@ npm install web-adtrace
 <div dir="rtl" align='right'>
 <code>unique_id</code> یک <strong>شناسه یکتا برای دستگاه</strong> میباشد که همانند <code>idfa</code> در iOS یا <code>gps_adid</code> در اندروید و یا <code>win_adid</code> در ویندوز میباشد. اگر برنامه شما نمیتواند آن شناسه ها را به کد جاوا اسکریپ شما ارسال نماید شما بایستی دستی این شناسه را طبق الگو <strong>UUID</strong> بسازید.
 </div>
-
+<br/>
 <div dir="rtl" align='right'>
 برای اطلاعات بیشتر درمورد نحوه ساخت UUID میتوانید به <a href="https://stackoverflow.com/a/2117523/4696843">این آموزش</a> مراجعه کنید.
 </div>
@@ -124,6 +124,7 @@ npm install web-adtrace
 <div dir="rtl" align='right'>
 باید درنظر بگیرید که راه اندازی SDK ادتریس باید به شکل زیر باشد:
 </div>
+<br/>
 
 ```js
 var adtrace = new AdTrace({
@@ -150,7 +151,7 @@ adtrace.trackSession(function (result) {
 </div>
 <br/>
 
-```dart
+```
 sandbox
 production
 ```
@@ -169,6 +170,7 @@ production
 <div dir="rtl" align='right'>
 بعد از راه اندازی اولیه SDK ادتریس، میتوانید نشست های کاربر را به شکل زیر رصد نمایید:
 </div>
+<br/>
 
 ```js
 adtrace.trackSession(function (result) {
@@ -178,6 +180,8 @@ adtrace.trackSession(function (result) {
   }
 );
 ```
+
+<br/>
 <div dir="rtl" align='right'>
 <strong>نکته</strong>: رصد کردن نشست اولیه یک مقداری زمان بیشتری میبرد، دلیل آن هم اتریبیوت و ارسال داده های نصب قبل آن میباشد.
 </div>
@@ -347,11 +351,13 @@ adtrace.trackEvent(eventConfig, function (result) {
 <div dir="rtl" align='right'>
 هنگامی که پیاده سازی ادتریس به طور کامل تمام شود میتوانید، به صورت زیر شناسه ادتریس را دریافت نمایید:
 </div>
+<br/>
 
 ```js
 var adtraceId = adtrace.getAdId();
 ```
 
+<br/>
 <div dir="rtl" align='right'>
 <strong>نکته</strong>: اگر شناسه ادتریس برابر با <code>null</code> باشد، این بدین معناست که SDK درحال نصب و اتریبیوت کردن داده های شماست و یک کم زمان (حدود 10 ثانیه) میبرد تا این مقدار از سرور دریافت شود.
 </div>
@@ -361,6 +367,7 @@ var adtraceId = adtrace.getAdId();
 <div dir="rtl" align='right'>
 مقدار <code>default_tracker</code> یک پارامتر <strong>اضافی</strong> میباشد که برای ردیابی ترکرهای <strong>غیر ارگانیک</strong> استفاده میشود.
 </div>
+<br/>
 
 ```js
 var adtrace = new AdTrace({
@@ -371,6 +378,7 @@ var adtrace = new AdTrace({
 });
 ```
 
+<br/>
 <div dir="rtl" align='right'>
 اگر این پارامتر استفاده نشود اتریبیوت کردن داده های شما بر روی <strong>ترکر ارگانیک</strong> انجام خواهد گرفت.
 </div>
@@ -380,6 +388,7 @@ var adtrace = new AdTrace({
 <div dir="rtl" align='right'>
 به دلیل اینکه شناسه یکتا (unique id) و شناسه ادتریس درون <code>localStorage</code> ذخیره میشود، اگر میخواهید <code>localStorage</code> خودتان را <code>clear</code> کنید این را درنظر بگیرید که متد <code><strong>stableLocalData</strong></code> را بعد از متد <code><strong>clear</strong></code> فراخوانی کنید تا داده های قبلی ادریس در <code>localStorage</code> ذخیره شوند:
 </div>
+<br/>
 
 ```js
 localStorage.clear(); // clearing your own data
