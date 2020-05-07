@@ -121,7 +121,7 @@ var eventConfig = {
   currency: 'EUR'
 };
 
-adtrace.trackEvent(_ventConfig, function (result) {
+adtrace.trackEvent(eventConfig, function (result) {
   console.log(result);
 }, function (errorMsg, error) {
   console.log(errorMsg, error);
