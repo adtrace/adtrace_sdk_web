@@ -130,7 +130,7 @@ npm install web-adtrace
 var adtrace = new AdTrace({
   app_token: '{YourAppToken}',
   environment: 'production', // or 'sandbox' in case you are testing SDK locally with your web app
-  unique_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // each web app user needs to have unique identifier,
+  unique_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // each web app user needs to have unique identifier
 });
 
 adtrace.trackSession(function (result) {
@@ -373,7 +373,7 @@ var adtraceId = adtrace.getAdId();
 var adtrace = new AdTrace({
   app_token: '{YourAppToken}',
   environment: 'production', // or 'sandbox' in case you are testing SDK locally with your web app
-  unique_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // each web app user needs to have unique identifier,
+  unique_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', // each web app user needs to have unique identifier
   default_tracker: 'Your non organic tracker' // optional
 });
 ```
