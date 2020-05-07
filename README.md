@@ -271,7 +271,7 @@ Because the unique device identifer & adtrace identifer saved in `localStorage`.
 
 ```js
 localStorage.clear(); // clearing your own data
-_adtrace.stableLocalData(); 
+adtrace.stableLocalData(); 
 ```
 
 [adtrace.io]:     https://adtrace.io
