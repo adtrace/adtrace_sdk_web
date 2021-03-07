@@ -21,7 +21,7 @@ SDK وب ادتریس. شما برای اطلاعات بیشتر میتوانی�
 
 <div dir="rtl" align='right'>
 <ul>
-  <li><a href="#qs-example-app">برنامه نمونه</a></li>
+  <li><a href="#qs-example-apps">برنامه های نمونه</a></li>
   <li><a href="#qs-getting-started">شروع پیاده سازی</a></li>
 	  <ul>
 	    <li><a href="#qs-sdk-add">افزودن SDK به پروژه</a></li>
@@ -69,12 +69,26 @@ SDK وب ادتریس. شما برای اطلاعات بیشتر میتوانی�
 </ul>
 </div>
 
+### <div dir="rtl" align='right'>استفاده در کتابخانه های جاوااسکریپت</div>
+
+<div dir="rtl" align='right'>
+<ul>
+  <li><a href="#web-libs-angular">انگولار</a></li> 
+</ul>
+</div>
+
 ## <div dir="rtl" align='right'>پیاده سازی فوری</div>
 
-### <div id="qs-example-app" dir="rtl" align='right'>برنامه نمونه</div>
+#### <div id="web-example" dir="rtl" align='right'>برنامه وب نمونه</div>
 
 <div dir="rtl" align='right'>
 درون <a href="/example">پوشه <code>نمونه</code></a> یک وبسایت نمونه وجود دارد که میتوانید بررسی کنید SDK ادتریس چگونه پیاده سازی شده است.
+</div>
+
+#### <div id="angular-example" dir="rtl" align='right'>برنامه انگولار نمونه</div>
+
+<div dir="rtl" align='right'>
+اگر کتاب خانه شما Angular میباشد، میتوانید از <a href="/example-angular">پوشه <code>Next نمونه</code></a> برای اطلاع از نحوه پیاده سازی کمک بگیرید.
 </div>
 
 ### <div id="qs-getting-started" dir="rtl" align='right'>شروع پیاده سازی</div>
@@ -394,3 +408,51 @@ var adtrace = new AdTrace({
 localStorage.clear(); // clearing your own data
 adtrace.stableLocalData();
 ```
+
+## <div dir="rtl" align='right'>استفاده در کتابخانه های جاوااسکریپت</div>
+
+### <div id="web-libs-angular" dir="rtl" align='right'>کتابخانه انگولار</div>
+
+<div dir="rtl" align='right'>
+<ul>
+  <li>ابتدا بوسیله <code>npm</code> و یا <code>yarn</code> SDK را به پروژه خود <a href="#qs-add-sdk">اضافه نمایید</a>.</li>
+  <li>سپس فایل <code>angular.json</code> را باز کرده و به صورت زیر فایل اسکریپت را به لیست اسکریپت ها اضافه کرده:</li>
+</ul>
+</div>
+
+```
+"scripts": [
+  "node_modules/web-adtrace/adtrace.js"
+]
+```
+
+<div dir="rtl" align='right'>
+<ul>
+  <li>سپس به صورت زیر در کامپوننتی که تمامی کتابخانه های خارجی را فراخوانی میکنید, بایستی <code>AdTrace</code> را تعیین کنید:</li>
+</ul>
+</div>
+
+```js
+declare var AdTrace: any;
+```
+
+<div dir="rtl" align='right'>
+<ul>
+  <li>حال ادتریس را راه اندازی نمایید:</li>
+</ul>
+</div>
+
+```js
+this.adtrace = new AdTrace({
+  app_token: 'YourAppToken',
+  environment: 'production', // or 'sandbox' in case you are testing SDK locally with your web app
+  unique_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // each web app user needs to have unique identifier
+});
+```
+
+<div dir="rtl" align='right'>
+<ul>
+  <li>حال میتوانید از متدهای ادتریس مثل <a href="#angular-example">برنامه نمونه انگولار</a> استفاده کنید.</li>
+</ul>
+</div>
+
