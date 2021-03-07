@@ -30,7 +30,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/web-adtrace/adtrace.js"
+            ]
           },
           "configurations": {
             "production": {
