@@ -290,14 +290,14 @@ adtrace.stableLocalData();
 
 - Next, open the `angular.json` file and locate the scripts array and update as follows:
     ```
-      "scripts": [
-        "node_modules/web-adtrace/adtrace.js"
-      ]
+    "scripts": [
+      "node_modules/web-adtrace/adtrace.js"
+    ]
     ```
 
 - Next, in the component where you want to call your external library you need to declare the `AdTrace` symbol like below:
     ```js
-        declare var AdTrace: any;
+    declare var AdTrace: any;
     ```
 
 - Create and initialize adtrace instance :
