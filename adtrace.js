@@ -6,7 +6,7 @@
     var req = new XMLHttpRequest();
 
     req.open(method, url, !0);
-    req.setRequestHeader('Client-SDK', 'js1.2.3');
+    req.setRequestHeader('Client-SDK', 'js1.2.4');
     if (method == 'POST') {
       req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
@@ -58,9 +58,9 @@
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
         // Windows Phone must come first because its UA also contains "Android"
-      if (/windows phone/i.test(userAgent)) {
-          return "windows-phone";
-      }
+//      if (/windows phone/i.test(userAgent)) {
+//          return "windows-phone";
+//      }
 
       if (/android/i.test(userAgent)) {
           return "android";
@@ -71,7 +71,7 @@
           return "ios";
       }
 
-      return "unknown";
+      return "android"; // will change this later
   }
 
   if (!'withCredentials' in new XMLHttpRequest()) {
@@ -148,7 +148,6 @@
           }
           else {
             console.log("Adtrace SDK click will retry again in " + (baseClickBackoffTimer * Math.pow(2, baseClickBackoffCount)) + " Sec.");
-            console.log((new Date).getTime());
             setTimeout(initializeSDK, baseClickBackoffTimer * Math.pow(2, baseClickBackoffCount) * 1000);
             baseClickBackoffCount += 1;
           }
