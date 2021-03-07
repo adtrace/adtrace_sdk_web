@@ -309,7 +309,7 @@ adtrace.stableLocalData();
 	});
 	```
  
-- Use AdTrace's methods like the [angular example](angular-example)
+- Use AdTrace's methods like the [angular example][angular-example]
 
 
 [adtrace.io]:     https://adtrace.io
