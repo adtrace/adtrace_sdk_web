@@ -79,6 +79,8 @@ SDK وب ادتریس. شما برای اطلاعات بیشتر میتوانی�
 
 ## <div dir="rtl" align='right'>پیاده سازی فوری</div>
 
+### <div id="qs-example-apps" dir="rtl" align='right'>برنامه های نمونه</div>
+
 #### <div id="web-example" dir="rtl" align='right'>برنامه وب نمونه</div>
 
 <div dir="rtl" align='right'>
