@@ -41,9 +41,9 @@ This is the guide to the Javascript SDK of AdTrace™ for web. You can read more
    * [Default tracker](#af-default-tracker)
    * [Stable local data](#af-stable-local-data)
    
-### Use with Web libraries
+### Use with Web frameworks
    
-   * [Angular](#web-libs-angular)
+   * [Angular](#framework-angular)
 
 ## Quick start
 
@@ -282,9 +282,9 @@ localStorage.clear(); // clearing your own data
 adtrace.stableLocalData(); 
 ```
 
-## Use with Web libraries
+## Use with Web frameworks
 
-### <a id="web-libs-angular"></a>Angular
+### <a id="framework-angular"></a>Angular
 
 - Add the SDK like [this](#qs-add-sdk) by `npm` or `yarn`.
 
@@ -309,7 +309,7 @@ adtrace.stableLocalData();
 	});
 	```
  
-- Use AdTrace's methods like the [angular example](#angular-example)
+- Use AdTrace's methods like the [angular example](angular-example)
 
 
 [adtrace.io]:     https://adtrace.io
