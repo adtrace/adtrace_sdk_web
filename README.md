@@ -15,7 +15,7 @@ This is the guide to the Javascript SDK of AdTrace™ for web. You can read more
 
 ### Quick start
 
-* [Example app](#qs-example-app)
+* [Example apps](#qs-example-apps)
 * [Getting started](#qs-getting-started)
    * [Add the SDK to your project](#qs-add-sdk)
 * [Integrate the SDK into your website](#qs-integrate-sdk)
@@ -40,12 +40,20 @@ This is the guide to the Javascript SDK of AdTrace™ for web. You can read more
    * [Adtrace Identifier](#af-adtrace-id)
    * [Default tracker](#af-default-tracker)
    * [Stable local data](#af-stable-local-data)
+   
+### Use with Web libraries
+   
+   * [Angular](#web-libs-angular)
 
 ## Quick start
 
-### <a id="qs-example-app"></a>Example app
+### <a id="qs-example-apps"></a>Example apps
 
+#### <a id="web-example"></a>Web example
 There are example website inside the [`example` directory][example]. In there you can check how the AdTrace SDK can be integrated.
+
+#### <a id="angular-example"></a>Angular example
+By using the SDK to your `Angular`, you can check [Angular example][angular-example] for better help.
 
 ### <a id="qs-getting-started"></a>Getting started
 
@@ -274,7 +282,38 @@ localStorage.clear(); // clearing your own data
 adtrace.stableLocalData(); 
 ```
 
+## Use with Web libraries
+
+### <a id="web-libs-angular"></a>Angular
+
+- Add the SDK like [this](#qs-add-sdk) by `npm` or `yarn`.
+
+- Next, open the `angular.json` file and locate the scripts array and update as follows:
+    ```
+      "scripts": [
+        "node_modules/web-adtrace/adtrace.js"
+      ]
+    ```
+
+- Next, in the component where you want to call your external library you need to declare the `AdTrace` symbol like below:
+    ```js
+        declare var AdTrace: any;
+    ```
+
+- Create and initialize adtrace instance :
+	```js
+	this.adtrace = new AdTrace({
+	  app_token: 'YourAppToken',
+	  environment: 'production', // or 'sandbox' in case you are testing SDK locally with your web app
+	  unique_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // each web app user needs to have unique identifier
+	});
+	```
+ 
+- Use AdTrace's methods like the [angular example](#angular-example)
+
+
 [adtrace.io]:     https://adtrace.io
 [panel]:      https://panel.adtrace.io
 [example]:    example/
+[angular-example]:    example-angular/
 [per-readme]:  ./doc/persian/README-PER.md
