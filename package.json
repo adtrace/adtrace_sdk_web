@@ -1,25 +1,94 @@
 {
-  "name": "web-adtrace",
-  "version": "1.2.4",
-  "description": "Web SDK of Adtrace",
-  "main": "adtrace.js",
-  "directories": {
-    "example": "example"
-  },
+  "name": "@adjustcom/adjust-web-sdk",
+  "version": "5.2.1",
+  "description": "This is the guide to the Javascript SDK of Adjust™ for web sites or web apps. You can read more about Adjust™ at [adjust.com].",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:demo": "webpack --mode production --config webpack.demo.config.js",
+    "build:sdk": "webpack --config webpack.sdk.config.js",
+    "build:snippet": "terser ./src/sdk/snippet.js -o ./dist/sdk.snippet.min.js -c -m",
+    "build": "npm-run-all build:sdk build:demo build:snippet",
+    "clean": "rm -rf ./demo/*",
+    "start": "webpack-dev-server --content-base dist --hot --mode development --config webpack.demo.config.js",
+    "lint": "eslint ./src --ext .js,.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "TZ=UTC jest",
+    "test:watch": "TZ=UTC jest --watchAll",
+    "test:coverage": "TZ=UTC jest --coverage",
+    "test:all": "npm-run-all test lint flow",
+    "flow": "flow status --quiet",
+    "prepublishOnly": "npm run test:all"
   },
+  "main": "dist/adjust-latest.js",
+  "types": "dist/adjust-latest.d.ts",
+  "keywords": [],
+  "author": "Adjust GmbH",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.12.13",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/plugin-transform-flow-comments": "^7.12.13",
+    "@babel/plugin-transform-runtime": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-flow": "^7.12.13",
+    "@babel/preset-typescript": "^7.12.13",
+    "@types/jest": "^26.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/parser": "^4.14.2",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-es6-promise": "^1.1.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "core-js-bundle": "^3.8.3",
+    "css-loader": "^1.0.1",
+    "es6-promise": "^4.2.8",
+    "eslint": "^7.19.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-jest": "^24.3.6",
+    "fake-indexeddb": "^2.1.1",
+    "file-loader": "^2.0.0",
+    "flow-bin": "^0.106.3",
+    "flow-webpack-plugin": "^1.2.0",
+    "fork-ts-checker-webpack-plugin": "^6.1.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.9.0",
+    "jest-localstorage-mock": "^2.4.6",
+    "mini-css-extract-plugin": "^0.4.5",
+    "node-sass": "^4.14.1",
+    "npm-run-all": "^4.1.5",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "regenerator-runtime": "^0.13.7",
+    "sass-loader": "^7.3.1",
+    "style-loader": "^0.23.1",
+    "terser": "^3.17.0",
+    "terser-webpack-plugin": "^1.4.1",
+    "typescript": "^4.1.3",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.12.13"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "files": [
+    "dist/adjust-latest.d.ts",
+    "dist/adjust-latest.js",
+    "dist/adjust-latest.min.js",
+    "docs/**/*",
+    "CHANGELOG.md"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adtrace/adtrace_sdk_web.git"
+    "url": "git+https://github.com/adjust/web_sdk.git"
   },
-  "keywords": [
-    "Adtrace"
-  ],
-  "author": "arefhosseini",
-  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/adtrace/adtrace_sdk_web/issues"
+    "url": "https://github.com/adjust/web_sdk/issues"
   },
-  "homepage": "https://github.com/adtrace/adtrace_sdk_web#readme"
+  "homepage": "https://github.com/adjust/web_sdk#readme"
 }

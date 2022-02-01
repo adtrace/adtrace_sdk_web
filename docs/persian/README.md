@@ -1,82 +1,79 @@
-## Summary
+##  خلاصه 
 
-This is the guide to the Javascript SDK of Adtrace™ for web sites or web apps. You can read more about Adtrace™ at [adtrace.io].
+این راهنمای  SDK جاوااسکریپت ادتریس برای وب سایت ها یا برنامه های وب است. می توانید اطلاعات بیشتری در مورد ادتریس را در وبسایت adtrace.io بخوانید.
 
-Read this in other languages: [English][en-readme], [Persian][fa-readme]
+این مطلب را به زبان های دیگر بخوانید: [انگلیسی][en-readme], [فارسی][fa-readme]
 
-## Table of contents
+## فهرست مطالب 
 
-* [Example apps](#example-app)
-* [Installation](#installation)
-* [Initialization](#initialization)
+* [اپلیکیشن مثال](#example-app)
+* [نصب و راه اندازی](#installation)
+* [مقداردهی اولیه](#initialization)
 * [Event tracking](#event-tracking)
-* [Global callback parameters](#global-callback-parameters)
-* [Global partner parameters](#global-partner-parameters)
-* [Offline/Online mode](#offline-online-mode)
-* [Stop/Restart SDK](#stop-restart-sdk)
-* [GDPR Forget Me](#gdpr-forget-me)
-* [Marketing Opt-out](#marketing-opt-out)
-* [License](#license)
+* [پارامتر های سراسری  کالبک](#global-callback-parameters)
+* [پارامتر های سراسری  پارتنر](#global-partner-parameters)
+* [حالت آفلاین / آنلاین](#offline-online-mode)
+* [توقف / راه اندازی مجدد SDK](#stop-restart-sdk)
+* [GDPR مرا فراموش کن](#gdpr-forget-me)
+* [انصراف از بازاریابی](#marketing-opt-out)
+* [لایسنس](#license)
 
-## <a id="example-app">Example apps</a>
+## <a id="example-app">اپلیکیشن مثال</a>
 
-You can check how our SDK can be used in the web app by checking [example app][example-app] in this repository.
+شما می‌توانید با بررسی برنامه مثال در [اینجا][example-app] بررسی کنید که چگونه SDK ما می‌تواند در برنامه وب استفاده شود.
 
-## <a id="installation">Installation</a>
+## <a id="installation">نصب و راه اندازی</a>
 
-This SDK can be used to track installs, sessions and events. Simply add the Adtrace Web SDK to your web app.
+این SDK را می توان برای ردیابی نصب‌ها، سشن‌ها و رویدادها استفاده کرد. به سادگی SDK وب ادتربس را به برنامه وب خود اضافه کنید.
 
-Our sdk is exposed under all module definitions, so it works under CommonJS and AMD environments and is also available through global `Adtrace` when imported through script tag in HTML.
-
-To load the Adtrace Web SDK paste the following snippet into the `<head>` tag:
+SDK ادتریس تحت تمام تعاریف ماژول قرار دارد، بنابراین در محیط‌های CommonJS و AMD کار می‌کند و همچنین  در صورت وارد کردن از طریق تگ `script` در HTML از طریق  متغیر سراسری `Adtrace` در دسترس است.
+  قبرای نصب SDK وب ادتربس قطعه کد زیر را در نگ `head` فایل  HTML جایگذاری کنید
 ```html
 <script type="application/javascript" src="./dist/adtrace-latest.min.js"></script>
 ```
 
-The Adtrace Web SDK should be loaded only once per page and it should be initiated once per page load.
+ SDK وب ادتربس باید فقط یک بار در هر صفحه بارگیری و راه‌اندازی شود.
 
-It's also possible to install our sdk through NPM:
+همچنین امکان نصب sdk ما از طریق NPM وجود دارد:
 
 ```
 npm install @adjustcom/adjust-web-sdk --save
 ```
-and import that :
+و سپس آن را وارد کنید:
 ```
 import Adtrace from "@adjustcom/adjust-web-sdk"
 ```
 
-## <a id="initialization">Initialization</a>
+## <a id="initialization">مقداردهی اولیه</a>
 
-In order to initialize the Adtrace Web SDK you must call the `Adtrace.initSdk` method as soon as possible:
-
+برای بکارگیری SDK وب ادتریس باید هر چه زودتر مقداردهی اولیه را با فراخوانی متد `Adtrace.initSdk` انجام دهید:
 ```js
 Adtrace.initSdk({
   appToken: 'YOUR_APP_TOKEN',
   environment: 'production'
 });
 ```
- 
-Here is the full list of available parameters for the `initSdk` method:
 
-### Mandatory params
+در اینجا لیست کامل پارامترهای موجود برای متد `initSdk` آمده است:
+### پارامترهای اجباری 
 
 <a id="app-token">**appToken**</a> `string`
 
-Initialization method requires this parameter, so make sure to provide valid app token
+متد مقداردهی اولیه به این پارامتر نیاز دارد، بنابراین مطمئن شوید که `appToken` را صحیح وارد کنید.
 
-<a id="environment">**environment**</a> `string` 
+<a id="environment">**environment**</a> `string`
 
-This param is also mandatory. Available options are `production` or `sandbox`. Use `sandbox` in case you are testing the SDK locally with your web app
+این پارامتر نیز اجباری است. گزینه های موجود `production` یا `sandbox` هستند. در صورتی که در حال آزمایش SDK به صورت لوکال هستید، از sandbox استفاده کنید.
 
-### Optional params
- 
+### پارامترهای اختیاری 
+
 <a id="attribution-callback">**attributionCallback**</a> `function`
 
-This param accepts function, and it's a callback function for the attribution change. Two arguments are provided to the callback, first one is an internal event name (can be ignored), and the other one is the object which holds information about the changed attribution
+این پارامتر یک تابع  می پذیرد و آن یک تابع کالبک  برای تغییر attribution است. دو آرگومان به این تابع callback پاس داده می شود، اولی یک نام رویداد داخلی است (می توان آن را نادیده گرفت)، و دیگری آبجکتی است که اطلاعات مربوط به attribution تغییر یافته را در خود نگه می دارد.
 
-Example:
+مثال:
 ```js
-Adjust.initSdk({
+Adtrace.initSdk({
   // ... other params go here, including mandatory ones
   attributionCallback: function (e, attribution) {
     // e: internal event name, can be ignored
@@ -87,44 +84,57 @@ Adjust.initSdk({
 
 <a id="default-tracker">**defaultTracker**</a> `string`
 
-By default, users who are not attributed to any campaigns will be attributed to the Organic tracker of the app. If you want to overwrite this behaviour and attributed this type of traffic under a different tracker, you can use this method to set a different default tracker.
+به طور پیش فرض، کاربرانی که به هیچ کمپین نسبت داده نمی شوند، به ترکر ارگانیک نسبت داده می شوند. اگر می خواهید این رفتار را بازنویسی کنید و این نوع ترافیک را به یک ترکر متفاوت نسبت دهید، می توانید از این پارامتر برای تغییر ترکر پیش فرض استفاده کنید.
 
 <a id="custom-url">**customUrl**</a> `string`
 
-By default all requests go to adtrace's endpoints. You are able to redirect all requests to your custom endpoint 
+به طور پیش فرض همه درخواست ها به endpoint های ادتریس می روند. شما می توانید تمام درخواست ها را به endpoint سفارشی خود ارسال کنید.
 
 <a id="event-deduplication-list-limit">**eventDeduplicationListLimit**</a> `number`
 
-By default this param is set to `10`. It is possible to override this limit but make sure that it is a positive number and not too big. This will cache last `n` deduplication ids (defined by this param) and use them to deduplicate events with repeating ids
-
+به طور پیش‌فرض این پارامتر روی 10 تنظیم شده است. می‌توان این محدودیت را نادیده گرفت، اما مطمئن شوید که عددی مثبت است و خیلی بزرگ نیست. این پارامتر `n` شناسه کپی شده (تعریف شده توسط این پارامتر) را در حافظه پنهان نگه می دارد و از آنها برای کپی کردن رویدادها با شناسه های تکراری استفاده می کند.
 <a id="log-level">**logLevel**</a> `string`
 
-By default this param is set to `error`. Possible values are `none`, `error`, `warning`, `info`, `verbose`. We highly recommend that you use `verbose` when testing in order to see precise logs and to make sure integration is done properly.
-Here are more details about each log level:
-- `verbose` - will print detailed messages in case of certain actions
-- `info` - will print only basic info messages, warnings and errors
-- `warning` - will print only warning and error messages
-- `error` - will print only error message
-- `none` - won't print anything
+به طور پیش فرض این پارامتر روی `error` تنظیم شده است. مقادیر ممکن  `none`, `error`, `warning`, `info`, `verbose` هستند. ما به شدت توصیه می‌کنیم که هنگام تست کردن، برای مشاهده گزارش‌های دقیق و اطمینان از اینکه یکپارچه‌سازی به درستی انجام می‌شود، از `verbose` استفاده کنید. در اینجا جزئیات بیشتری در مورد هر سطح گزارش وجود دارد:
+
+- `verbose` - در صورت انجام اقدامات خاص، پیام های دقیق را چاپ می کند
+- `info` - فقط پیام های اطلاعات اولیه، `warning` و `error` را چاپ می کند
+- `warning` - فقط پیام های `warning` و `error` را چاپ می کند
+- `error` - فقط پیام `error` را چاپ می کند
+- `none` - چیزی چاپ نمی شود
 
 <a id="log-output">**logOutput**</a> `string`
 
-It's possible to define html container where you want to see your logs. This is useful when testing on mobile devices and when you want to see logs directly on the screen (recommended only for testing)
+خود را ببینید تعریف کنید. این در هنگام تست بر روی دستگاه های تلفن همراه و زمانی که می خواهید گزارش ها را مستقیماً روی صفحه مشاهده کنید مفید است (فقط برای تست توصیه می شود).
+
+مثال:
+
+```html
+<div id="log"></div>
+```
+
+```js
+Adtrace.initSdk({
+  // other initialisation options go here
+  logOutput: '#log', // optional
+});
+```
+
 
 <a id="namespace">**namespace**</a> `string`
 
-A custom namespace for SDK data storage. If there are multiple applications on the same domain to allow SDK distinguish storages and don't mix the data up each application should use it's own namespace.
+یک namespace سفارشی برای ذخیره سازی داده های SDK. اگر چندین برنامه در یک دامنه وجود داشته باشد به SDK اجازه می دهد تا حافظه های ذخیره سازی را متمایز کند و داده ها را با هم مخلوط نکند، هر برنامه باید از فضای نام خود استفاده کند.
 
-Please note it's possible to set custom namespace for existing storage with default name, all data will be preserved and moved to the custom namespace. Once custom namespace is set it's not possible to rename it without data loss.
+لطفاً توجه داشته باشید که امکان تنظیم namespace برای فضای ذخیره سازی شده موجود با نام پیش فرض بدون از دست دادن داده وجود دارد. اما پس از تغییر namespace، تغییر نام آن بدون از دست دادن داده ممکن نیست.
 
 <a id="set-external-device-id">**externalDeviceId**</a> `string`
 
-An external device identifier is a custom value that you can assign to a device or user. They can help you to recognize users across sessions and platforms. They can also help you to deduplicate installs by user so that a user isn't counted as multiple new installs.
+شناسه دستگاه خارجی یک مقدار سفارشی است که می توانید به یک دستگاه یا کاربر اختصاص دهید. آنها می توانند به شما کمک کنند تا کاربران را در سشن‌ها و پلتفرم‌ها شناسایی کنید.
+آنها همچنین می‌توانند به شما کمک کنند تا نصب‌های کاربر تکراری کاربر را تشخیص دهید تا یک کاربر به عنوان چندین نصب جدید حساب نشود.
 
-You can also use an external device ID as a custom identifier for a device. This can be useful if you use these identifiers elsewhere and want to keep continuity.
 
 ```js
-Adjust.initSdk({
+Adtrace.initSdk({
   // other initialisation options go here
   externalDeviceId: 'YOUR_EXTERNAL_DEVICE_ID', // optional
 });
@@ -132,7 +142,9 @@ Adjust.initSdk({
 
 ## <a id="event-tracking">Event tracking</a>
 
-You can use adtrace to track events. Lets say you want to track every tap on a particular button. You would create a new event token in your [dashboard], which has an associated event token - looking something like `abc123`. In order to track this event from your web app, you should do following:
+شما می توانید از ادتریس برای ردیابی رویدادها استفاده کنید. بیایید بگوییم که می خواهید هر ضربه روی یک دکمه خاص را ردیابی کنید. شما می‌توانید یک نشانه رویداد جدید در [داشبورد] خود ایجاد کنید که دارای یک نشانه رویداد مرتبط است - چیزی شبیه «abc123». 
+
+برای ردیابی این رویداد از برنامه وب خود، باید موارد زیر را انجام دهید:
 
 ```js
 Adtrace.trackEvent({
@@ -140,16 +152,16 @@ Adtrace.trackEvent({
 })
 ```
 
-Make sure to track event only after you [initialize](#initialization) the Adtrace SDK.
-Here is the full list of available parameters for the `trackEvent` method:
+مطمئن شوید که ردیابی رویداد را فقط پس از[مقداردهی اولیه](#initialization) SDK ادتریس انجام دهید.
+در اینجا لیست کامل پارامترهای موجود برای روش `trackEvent` آمده است:
 
-### Mandatory params
+### پارامترهای اجباری 
 
 <a id="event-token">**eventToken**</a> `string`
 
-Track event method requires this parameter, make sure to provide valid event token
+متد `trackEvent` به این پارامتر نیاز دارد، مطمئن شوید که`eventToken` معتبری ارائه می‌کنید.
 
-### Optional params
+### پارامترهای اختیاری 
 
 <a id="revenue">**revenue**</a> `number`
 
@@ -318,7 +330,7 @@ Adtrace.switchBackToOnlineMode();
 
 ## <a id="stop-restart-sdk">Stop/Restart SDK</a>
 
-It's possible to completely stop the SDK from running in certain situations. 
+It's possible to completely stop the SDK from running in certain situations.
 This means that SDK will stop tracking sessions and events and in general will stop working entirely.
 But it's possible to restart it after some time. Here are available methods for this functionality:
 
@@ -345,7 +357,7 @@ Adtrace.restart();
 
 ## <a id="gdpr-forget-me">GDPR Forget Me</a>
 
-There is functionality available to GDPR Forget particular user. This will notify our backend behind the scene and will stop Adjust SDK from running. 
+There is functionality available to GDPR Forget particular user. This will notify our backend behind the scene and will stop Adjust SDK from running.
 There is one method available for this:
 
 <a id="gdpr-forge-me">**gdprForgetMe**</a>
