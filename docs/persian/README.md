@@ -9,7 +9,7 @@
 * [اپلیکیشن مثال](#example-app)
 * [نصب و راه اندازی](#installation)
 * [مقداردهی اولیه](#initialization)
-* [Event tracking](#event-tracking)
+* [ردیابی رویداد](#event-tracking)
 * [پارامتر های سراسری  کالبک](#global-callback-parameters)
 * [پارامتر های سراسری  پارتنر](#global-partner-parameters)
 * [حالت آفلاین / آنلاین](#offline-online-mode)
@@ -140,9 +140,9 @@ Adtrace.initSdk({
 });
 ```
 
-## <a id="event-tracking">Event tracking</a>
+## <a id="event-tracking">ردیابی رویداد</a>
 
-شما می توانید از ادتریس برای ردیابی رویدادها استفاده کنید. بیایید بگوییم که می خواهید هر ضربه روی یک دکمه خاص را ردیابی کنید. شما می‌توانید یک نشانه رویداد جدید در [داشبورد] خود ایجاد کنید که دارای یک نشانه رویداد مرتبط است - چیزی شبیه «abc123». 
+شما می توانید از ادتریس برای ردیابی رویدادها استفاده کنید. بیایید بگوییم که می خواهید هر ضربه روی یک دکمه خاص را ردیابی کنید. شما می‌توانید یک نشانه رویداد جدید در [پنل][dashboard] خود ایجاد کنید که دارای یک نشانه رویداد مرتبط است - چیزی شبیه «abc123». 
 
 برای ردیابی این رویداد از برنامه وب خود، باید موارد زیر را انجام دهید:
 
@@ -165,13 +165,14 @@ Adtrace.trackEvent({
 
 <a id="revenue">**revenue**</a> `number`
 
-In case you want to attach revenue to an event (for example you would like to track some purchase that happened inside your web app) then you need to provide positive value for this param. It's also mandatory to provide [`currency`](#currency) param described in the next block
+
+در صورتی که می‌خواهید درآمد را به یک رویداد اختصاص دهید (مثلاً می‌خواهید خریدی را که در داخل برنامه وب شما اتفاق افتاده است ردیابی کنید) باید ارزش مثبتی برای این پارامتر ارائه دهید. همچنین ارائه پارامتر [`currency`](#currency) که در بلوک بعدی توضیح داده شده است، الزامی است.
 
 <a id="currency">**currency**</a> `string`
 
-You need to provide this param if you want to track revenue event. Please use valid currency code like `EUR`, `USD` and so on
+اگر می‌خواهید رویداد درآمد را ردیابی کنید، باید این پارامتر را ارائه دهید. لطفاً از کد ارز معتبر مانند "ًّIRR"، "USD" و غیره استفاده کنید
 
-Example:
+مثال:
 
 ```js
 Adtrace.trackEvent({
@@ -181,15 +182,13 @@ Adtrace.trackEvent({
 })
 ```
 
-When you set a currency token, adtrace will automatically convert the incoming revenues into a reporting revenue of your choice. Read more about [currency conversion here][currency-conversion].
-
-You can read more about revenue and event tracking in the [event tracking guide](https://help.adjust.com/tracking/revenue-events).
-
 <a id="callback-params">**callbackParams**</a> `array`
 
-You can register a callback URL for your events in your [dashboard]. We will send a GET request to that URL whenever the event is tracked. You can add callback parameters to that event by adding `callbackParams` parameter to the map object passed to `trackEvent` method. We will then append these parameters to your callback URL.
+شما می‌توانید یک callback URL برای رویدادهای خود در [پنل][dashboard] خود ثبت کنید. هر زمان که رویدادی ردیابی شود، یک درخواست GET به آن URL ارسال می کنیم. شما می‌توانید با افزودن پارامتر «callbackParams» به آبجکت ارسال شده به متد «trackEvent»، پارامترهای callback URL را به آن رویداد اضافه کنید. سپس این پارامترها به callback URL شما اضافه خواهد شد.
 
-For example, suppose you have registered the URL `https://www.mydomain.com/callback` then track an event like this:
+برای مثال، فرض کنید
+URL «https://www.mydomain.com/callback»
+را ثبت کرده‌اید، سپس رویدادی مانند این را ردیابی کنید:
 
 ```js
 Adtrace.trackEvent({
@@ -201,13 +200,11 @@ Adtrace.trackEvent({
 })
 ```
 
-In that case we would track the event and send a request to:
+در این صورت ما رویداد را ردیابی می کنیم و درخواستی را به آدرس زیر ارسال می کنیم:
 
-    https://www.mydomain.com/callback?key=value&foo=bar
+https://www.mydomain.com/callback?key=value&foo=bar
 
-Please note that we don't store any of your custom parameters, but only append them to your callbacks, thus without a callback they will not be saved nor sent to you.
-
-You can read more about using URL callbacks, including a full list of available values, in our [callbacks guide][callbacks-guide].
+لطفاً توجه داشته باشید که ما هیچ یک از پارامترهای سفارشی شما را ذخیره نمی‌کنیم، بلکه فقط آنها را به تماس‌های شما اضافه می‌کنیم، بنابراین بدون پاسخ به تماس، ذخیره نمی‌شوند و برای شما ارسال نمی‌شوند.
 
 <a id="partner-params">**partnerParams**</a> `array`
 

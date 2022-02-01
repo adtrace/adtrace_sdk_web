@@ -157,7 +157,7 @@ In case you want to attach revenue to an event (for example you would like to tr
 
 <a id="currency">**currency**</a> `string`
 
-You need to provide this param if you want to track revenue event. Please use valid currency code like `EUR`, `USD` and so on
+You need to provide this param if you want to track revenue event. Please use valid currency code like `IRR`, `USD` and so on
 
 Example:
 
@@ -169,15 +169,9 @@ Adtrace.trackEvent({
 })
 ```
 
-When you set a currency token, adtrace will automatically convert the incoming revenues into a reporting revenue of your choice. Read more about [currency conversion here][currency-conversion].
-
-You can read more about revenue and event tracking in the [event tracking guide](https://help.adjust.com/tracking/revenue-events).
-
 <a id="callback-params">**callbackParams**</a> `array`
 
 You can register a callback URL for your events in your [dashboard]. We will send a GET request to that URL whenever the event is tracked. You can add callback parameters to that event by adding `callbackParams` parameter to the map object passed to `trackEvent` method. We will then append these parameters to your callback URL.
-
-For example, suppose you have registered the URL `https://www.mydomain.com/callback` then track an event like this:
 
 ```js
 Adtrace.trackEvent({
