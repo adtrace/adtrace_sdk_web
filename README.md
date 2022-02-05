@@ -16,7 +16,6 @@ Read this in other languages: [English][en-readme], [Persian][fa-readme]
 * [Stop/Restart SDK](#stop-restart-sdk)
 * [GDPR Forget Me](#gdpr-forget-me)
 * [Marketing Opt-out](#marketing-opt-out)
-* [License](#license)
 
 ## <a id="example-app">Example apps</a>
 
@@ -369,38 +368,10 @@ Example:
 Adtrace.disableThirdPartySharing();
 ```
 
-## <a id="license">License</a>
-
-MIT License
-
-Copyright (c) 2022 Adtrace
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
 
 [adtrace.io]:   https://adtrace.io
 [dashboard]:    https://panel.adtrace.io
 [example-app]:  src/demo.html
-
-[callbacks-guide]:      https://help.adjust.com/manage-data/raw-data-exports/callbacks
-[special-partners]:     https://help.adjust.com/dashboard/integrated-partners
-[currency-conversion]:  https://help.adjust.com/tracking/revenue-events/currency-conversion
 
 [en-readme]:  README.md
 [fa-readme]:  docs/persian/README.md

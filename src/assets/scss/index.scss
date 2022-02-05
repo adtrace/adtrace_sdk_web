@@ -55,14 +55,14 @@ h1 {
   }
 }
 
-.adjust-logo {
+.adtrace-logo {
   $logoImgSize: $logoSize - 12px;
   display: block;
   float: left;
   width: $logoSize;
   height: $logoSize;
   margin-right: 5px;
-  background-image: url("../images/adjust-logo.png");
+  background-image: url("../images/adtrace.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: $logoImgSize $logoImgSize;

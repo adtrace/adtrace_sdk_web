@@ -1,7 +1,7 @@
 {
-  "name": "@adjustcom/adjust-web-sdk",
-  "version": "5.2.1",
-  "description": "This is the guide to the Javascript SDK of Adjust™ for web sites or web apps. You can read more about Adjust™ at [adjust.com].",
+  "name": "etedadi2",
+  "version": "2.0.1",
+  "description": "Web SDK of Adtrace",
   "scripts": {
     "build:demo": "webpack --mode production --config webpack.demo.config.js",
     "build:sdk": "webpack --config webpack.sdk.config.js",
@@ -16,12 +16,12 @@
     "test:coverage": "TZ=UTC jest --coverage",
     "test:all": "npm-run-all test lint flow",
     "flow": "flow status --quiet",
-    "prepublishOnly": "npm run test:all"
+    "prepublishOnly": ""
   },
-  "main": "dist/adjust-latest.js",
-  "types": "dist/adjust-latest.d.ts",
+  "main": "dist/adtrace-latest.js",
+  "types": "dist/adtrace-latest.d.ts",
   "keywords": [],
-  "author": "Adjust GmbH",
+  "author": "Adtrace",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.12.13",
@@ -77,18 +77,18 @@
     "doc": "docs"
   },
   "files": [
-    "dist/adjust-latest.d.ts",
-    "dist/adjust-latest.js",
-    "dist/adjust-latest.min.js",
+    "dist/adtrace-latest.d.ts",
+    "dist/adtrace-latest.js",
+    "dist/adtrace-latest.min.js",
     "docs/**/*",
     "CHANGELOG.md"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adjust/web_sdk.git"
+    "url": "git+https://github.com/adtrace/adtrace_sdk_web.git"
   },
   "bugs": {
-    "url": "https://github.com/adjust/web_sdk/issues"
+    "url": "https://github.com/adtrace/adtrace_sdk_web/issues"
   },
-  "homepage": "https://github.com/adjust/web_sdk#readme"
+  "homepage": "https://github.com/adtrace/adtrace_sdk_web#readme"
 }
