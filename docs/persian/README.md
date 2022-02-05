@@ -37,11 +37,11 @@ SDK ادتریس تحت تمام تعاریف ماژول قرار دارد، ب�
 همچنین امکان نصب sdk ما از طریق NPM وجود دارد:
 
 ```
-npm install @adjustcom/adjust-web-sdk --save
+npm install web-adtrace-test --save
 ```
 و سپس آن را وارد کنید:
 ```
-import Adtrace from "@adjustcom/adjust-web-sdk"
+import Adtrace from "web-adtrace-test"
 ```
 
 ## <a id="initialization">مقداردهی اولیه</a>
@@ -359,7 +359,7 @@ There is one method available for this:
 
 <a id="gdpr-forge-me">**gdprForgetMe**</a>
 
-This method will stop Adtrace SDK from running and will notify adjust backend that user wants to be GDPR forgotten.
+This method will stop Adtrace SDK from running and will notify adtrace backend that user wants to be GDPR forgotten.
 Once this method is run it's not possible to restart Adtrace SDK anymore.
 
 Example:
@@ -367,8 +367,6 @@ Example:
 ```js
 Adtrace.gdprForgetMe();
 ```
-
-You can find more details [here](https://help.adjust.com/manage-data/data-privacy/gdpr)
 
 ## <a id="marketing-opt-out">Marketing Opt-out</a>
 
@@ -413,9 +411,6 @@ SOFTWARE.
 [dashboard]:    https://panel.adtrace.io
 [example-app]:  src/demo.html
 
-[callbacks-guide]:      https://help.adjust.com/manage-data/raw-data-exports/callbacks
-[special-partners]:     https://help.adjust.com/dashboard/integrated-partners
-[currency-conversion]:  https://help.adjust.com/tracking/revenue-events/currency-conversion
 
 [en-readme]:  README.md
 [fa-readme]:  docs/persian/README.md

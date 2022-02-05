@@ -37,11 +37,11 @@ The Adtrace Web SDK should be loaded only once per page and it should be initiat
 It's also possible to install our sdk through NPM:
 
 ```
-npm install @adjustcom/adjust-web-sdk --save
+npm install web-adtrace-test --save
 ```
 and import that :
 ```
-import Adtrace from "@adjustcom/adjust-web-sdk"
+import Adtrace from "web-adtrace-test"
 ```
 
 ## <a id="initialization">Initialization</a>
@@ -343,7 +343,7 @@ There is one method available for this:
 
 <a id="gdpr-forge-me">**gdprForgetMe**</a>
 
-This method will stop Adtrace SDK from running and will notify adjust backend that user wants to be GDPR forgotten.
+This method will stop Adtrace SDK from running and will notify adtrace backend that user wants to be GDPR forgotten.
 Once this method is run it's not possible to restart Adtrace SDK anymore.
 
 Example:
@@ -352,7 +352,6 @@ Example:
 Adtrace.gdprForgetMe();
 ```
 
-You can find more details [here](https://help.adjust.com/manage-data/data-privacy/gdpr)
 
 ## <a id="marketing-opt-out">Marketing Opt-out</a>
 

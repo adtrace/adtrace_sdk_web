@@ -1,3 +1,3 @@
 export default {
-  namespace: 'adjust-sdk-demo'
+  namespace: 'adtrace-sdk-demo'
 }
