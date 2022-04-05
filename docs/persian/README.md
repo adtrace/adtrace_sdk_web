@@ -186,8 +186,8 @@ Adtrace.trackEvent({
 
 شما می‌توانید یک callback URL برای رویدادهای خود در [پنل][dashboard] خود ثبت کنید. هر زمان که رویدادی ردیابی شود، یک درخواست GET به آن URL ارسال می کنیم. شما می‌توانید با افزودن پارامتر «callbackParams» به آبجکت ارسال شده به متد «trackEvent»، پارامترهای callback URL را به آن رویداد اضافه کنید. سپس این پارامترها به callback URL شما اضافه خواهد شد.
 
-برای مثال، فرض کنید
-URL «https://www.mydomain.com/callback»
+ برای مثال، فرض کنید URL
+ «https://www.mydomain.com/callback»
 را ثبت کرده‌اید، سپس رویدادی مانند این را ردیابی کنید:
 
 ```js
