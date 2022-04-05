@@ -6,7 +6,6 @@ import {
   type GlobalParamsT,
   type CustomErrorT,
   type ActivityStateMapT,
-  type SmartBannerOptionsT
 } from './types'
 import Config from './config'
 import Storage from './storage/storage'
@@ -18,15 +17,15 @@ import {start, clear as identityClear, destroy as identityDestroy} from './ident
 import {add, remove, removeAll, clear as globalParamsClear} from './global-params'
 import {check as attributionCheck, destroy as attributionDestroy} from './attribution'
 import {disable, restore, status} from './disable'
-import {check as gdprForgetCheck, forget, disable as gdprDisable, finish as gdprDisableFinish, destroy as gdprForgetDestroy} from './gdpr-forget-device'
-import {check as sharingDisableCheck, optOut as sharingOptOut, disable as sharingDisable, finish as sharingDisableFinish} from './third-party-sharing'
+import {check as gdprForgetCheck, finish as gdprDisableFinish, destroy as gdprForgetDestroy} from './gdpr-forget-device'
+import {check as sharingDisableCheck, finish as sharingDisableFinish} from './third-party-sharing'
 import {register as listenersRegister, destroy as listenersDestroy} from './listeners'
 import {delay, flush, destroy as schedulerDestroy} from './scheduler'
 import event from './event'
 import sdkClick from './sdk-click'
 import ActivityState from './activity-state'
 import { STORAGE_TYPES } from './constants'
-import { SmartBanner } from './smart-banner/smart-banner'
+
 
 type InitConfigT = $ReadOnly<{|...InitOptionsT, ...LogOptionsT|}>
 
@@ -201,31 +200,31 @@ function restart (): void {
  * Disable sdk and send GDPR-Forget-Me request
  */
 function gdprForgetMe (): void {
-  let done = forget()
-
-  if (!done) {
-    return
-  }
-
-  done = gdprDisable()
-
-  if (done && Config.isInitialised()) {
-    _pause()
-  }
+  // let done = forget()
+  //
+  // if (!done) {
+  //   return
+  // }
+  //
+  // done = gdprDisable()
+  //
+  // if (done && Config.isInitialised()) {
+  //   _pause()
+  // }
 }
 
 /**
  * Disable third party sharing
  */
 function disableThirdPartySharing (): void {
-  _preCheck('disable third-party sharing', _handleDisableThirdPartySharing, {
-    schedule: true,
-    stopBeforeInit: false
-  })
+  // _preCheck('disable third-party sharing', _handleDisableThirdPartySharing, {
+  //   schedule: true,
+  //   stopBeforeInit: false
+  // })
 }
 
-function initSmartBanner ({ webToken, logLevel }: SmartBannerOptionsT): void {
-  SmartBanner.init(webToken, logLevel)
+function initSmartBanner () {
+
 }
 
 /**
@@ -233,15 +232,7 @@ function initSmartBanner ({ webToken, logLevel }: SmartBannerOptionsT): void {
  *
  * @private
  */
-function _handleDisableThirdPartySharing (): void {
-  let done = sharingOptOut()
 
-  if (!done) {
-    return
-  }
-
-  sharingDisable()
-}
 
 /**
  * Handle GDPR-Forget-Me response
