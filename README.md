@@ -336,37 +336,6 @@ Adtrace.restart();
 ``` 
 
 
-## <a id="gdpr-forget-me">GDPR Forget Me</a>
-
-There is functionality available to GDPR Forget particular user. This will notify our backend behind the scene and will stop Adjust SDK from running. 
-There is one method available for this:
-
-<a id="gdpr-forge-me">**gdprForgetMe**</a>
-
-This method will stop Adtrace SDK from running and will notify adtrace backend that user wants to be GDPR forgotten.
-Once this method is run it's not possible to restart Adtrace SDK anymore.
-
-Example:
-
-```js
-Adtrace.gdprForgetMe();
-```
-
-
-## <a id="marketing-opt-out">Marketing Opt-out</a>
-
-There is functionality for the Marketing Opt-out, which is disabling third-party sharing ability. This will notify our backed in the same manner as it does for GDPR Forget me.
-
-There is one method available for this:
-
-<a id="disable-third-party-sharing">**disableThirdPartySharing**</a>
-
-Example:
-
-```js
-Adtrace.disableThirdPartySharing();
-```
-
 
 [adtrace.io]:   https://adtrace.io
 [dashboard]:    https://panel.adtrace.io

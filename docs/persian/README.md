@@ -7,13 +7,13 @@
 ## فهرست مطالب 
 
 * [اپلیکیشن مثال](#example-app)
-* [نصب و راه اندازی](#installation)
+* [نصب و راه‌اندازی](#installation)
 * [مقداردهی اولیه](#initialization)
 * [ردیابی رویداد](#event-tracking)
-* [پارامتر های سراسری  کالبک](#global-callback-parameters)
-* [پارامتر های سراسری  پارتنر](#global-partner-parameters)
+* [پارامتر های سراسری کالبک](#global-callback-parameters)
+* [پارامتر های سراسری پارتنر](#global-partner-parameters)
 * [حالت آفلاین / آنلاین](#offline-online-mode)
-* [توقف / راه اندازی مجدد SDK](#stop-restart-sdk)
+* [توقف / راه‌اندازی مجدد SDK](#stop-restart-sdk)
 * [GDPR مرا فراموش کن](#gdpr-forget-me)
 * [انصراف از بازاریابی](#marketing-opt-out)
 * [لایسنس](#license)
@@ -208,8 +208,8 @@ https://www.mydomain.com/callback?key=value&foo=bar
 
 <a id="partner-params">**partnerParams**</a> `array`
 
-You can also add parameters to be transmitted to network partners, which have been activated in your Adjust dashboard.
-This works similarly to the callback parameters mentioned above, but can be added by adding `partnerParams` parameter to the map object passed to `trackEvent` method:
+همچنین می توانید پارامترهایی را برای انتقال به network partners اضافه کنید که در داشبورد Adtrace شما فعال شده اند.
+این به طور مشابه با callback parameters ذکر شده در بالا عمل می کند، اما می توان با افزودن پارامتر «partnerParams» به آبجکت ارسال شده به متد «trackEvent» اضافه کرد:
 
 ```js
 Adtrace.trackEvent({
@@ -221,21 +221,15 @@ Adtrace.trackEvent({
 })
 ```
 
-You can read more about special partners and these integrations in our [guide to special partners][special-partners].
-
-<a id="deduplication-id">**deduplicationId**</a> `string`
-
-It's possible to provide event deduplication id in order to avoid tracking duplicated events. Deduplication list limit is set in initialization configuration as described [above](#event-deduplication-list-limit)
-
 ## <a id="global-callback-parameters">Global callback parameters</a>
 
-There are several methods available for global callback parameters like adding, removing and clearing them. Here is the list of each available method:
+چندین روش برای پارامترهای پاسخ به تماس سراسری مانند افزودن، حذف و پاک کردن آنها وجود دارد. در اینجا لیستی از هر روش موجود است:
 
 <a id="add-global-callback-parameters">**addGlobalCallbackParameters**</a>
 
-It's possible to add global callback parameters, which will be appended automatically to each session and event request. Note that callback params passed directly to `trackEvent` method will override existing global callback params. This method accepts an `array` is the same format as for [`callbackParams`](#callback-params) parameter from `trackEvent` method
+امکان افزودن callback parameters سراری وجود دارد که به طور خودکار به هر  درخواست سشن و  رویداد اضافه می شود. توجه داشته باشید که callback params مستقیماً به متد «TrackEvent» ارسال می‌شوند، callback params سراسری موجود را لغو می‌کنند. این متد یک «آرایه» با همان قالب پارامتر ['callbackParams'] (#callback-params) از متد «trackEvent» را می‌پذیرد.
 
-Example:
+مثال:
 
 ```js
 Adtrace.addGlobalCallbackParameters([
@@ -246,9 +240,9 @@ Adtrace.addGlobalCallbackParameters([
 
 <a id="remove-global-callback-parameter">**removeGlobalCallbackParameter**</a>
 
-To remove particular callback parameter use this method by providing the key of a global callback param which needs to be removed
+برای حذف callback parameter جزیی، از این متد با ارائه کلید یک global callback param که باید حذف شود، استفاده کنید
 
-Example:
+مثال:
 
 ```js
 Adtrace.removeGlobalCallbackParameter('key1');
@@ -256,9 +250,9 @@ Adtrace.removeGlobalCallbackParameter('key1');
 
 <a id="clear-global-callback-parameters">**clearGlobalCallbackParameters**</a>
 
-In order to clear all global callback parameters simply call this method
+به منظور پاک کردن تمام پارامترهای پاسخ به تماس سراسری، به سادگی این روش را فراخوانی کنید
 
-Example:
+مثال:
 
 ```js
 Adtrace.clearGlobalCallbackParameters();
@@ -266,14 +260,11 @@ Adtrace.clearGlobalCallbackParameters();
 
 ## <a id="global-partner-parameters">Global partner parameters</a>
 
-It's possible to add, remove and clear global partner parameters in the similar way as for [global callback parameters](#global-callback-parameters). Here is the list of each available method:
-
-
 <a id="add-global-parnter-parameters">**addGlobalPartnerParameters**</a>
 
-It's possible to add global partner parameters, which will be appended automatically to each session and event request. Note that partner params passed directly to `trackEvent` method will override existing global partner params. This method accepts an `array` is the same format as for [`partnerParams`](#partner-params) parameter from `trackEvent` method
+این امکان وجود دارد که partner parameters  سراسری را اضافه کنید، که به طور خودکار به هر درخواست سشن و رویداد اضافه می شود. توجه داشته باشید که partner parameter هایی که مستقیماً به متد "trackEvent" ارسال می شوند،global partner parameter های موجود را لغو می کنند. این متد یک «آرایه» را با همان قالب پارامتر [«partnerParams»](#partner-params) از متد «trackEvent» می‌پذیرد.
 
-Example:
+مثال:
 
 ```js
 Adtrace.addGlobalPartnerParameters([
@@ -283,10 +274,9 @@ Adtrace.addGlobalPartnerParameters([
 ```
 
 <a id="remove-global-partner-parameter">**removeGlobalPartnerParameter**</a>
+برای حذف callback parameter  جزیی، از این متد با ارائه کلید یک callback param سراسری که باید حذف شود، استفاده کنید
 
-To remove particular partner parameter use this method by providing the key of a global partner param which needs to be removed
-
-Example:
+مثال:
 
 ```js
 Adtrace.removeGlobalPartnerParameter('key1');
@@ -294,9 +284,9 @@ Adtrace.removeGlobalPartnerParameter('key1');
 
 <a id="clear-global-partner-parameters">**clearGlobalPartnerParameters**</a>
 
-In order to clear all global partner parameters simply call this method
+برای پاک کردن تمام partner parameters سراسری، به سادگی این روش را فراخوانی کنید
 
-Example:
+مثال:
 
 ```js
 Adtrace.clearGlobalPartnerParameters();
@@ -304,14 +294,14 @@ Adtrace.clearGlobalPartnerParameters();
 
 ## <a id="offline-online-mode">Offline/Online mode</a>
 
-By default when initiated Adtrace SDK is always in online mode. But you can put it into offline mode if you want to pause all network requests such as tracking events and sessions (although initial session will ignore this mode and will be sent anyway).
-There are two methods available to swich on and off the offline mode:
+به طور پیش فرض زمانی که SDK ادتریس شروع می شود همیشه در حالت آنلاین است. اما اگر می‌خواهید تمام درخواست‌های شبکه را متوقف کنید، می‌توانید آن را در حالت آفلاین قرار دهید (اگرچه نشست اولیه این حالت را نادیده می‌گیرد و به هر حال ارسال خواهد شد).
+دو روش برای روشن و خاموش کردن حالت آفلاین وجود دارد:
 
 <a id="switch-to-offline-mode">**switchToOfflineMode**</a>
 
-This method will put the Adtrace SDK into offline mode
+این روش SDK ادتریس را در حالت آفلاین قرار می دهد
 
-Example:
+مثال:
 
 ```js
 Adtrace.switchToOfflineMode();
@@ -319,7 +309,7 @@ Adtrace.switchToOfflineMode();
 
 <a id="switch-back-to-online-mode">**switchBackToOnlineMode**</a>
 
-This method will put the Adtrace SDK back to online mode
+این روش SDK ادتریس را به حالت آنلاین برمی گرداند
 
 ```js
 Adtrace.switchBackToOnlineMode();
@@ -327,15 +317,15 @@ Adtrace.switchBackToOnlineMode();
 
 ## <a id="stop-restart-sdk">Stop/Restart SDK</a>
 
-It's possible to completely stop the SDK from running in certain situations.
-This means that SDK will stop tracking sessions and events and in general will stop working entirely.
-But it's possible to restart it after some time. Here are available methods for this functionality:
+در شرایط خاص می توان به طور کامل از اجرای SDK جلوگیری کرد.
+این بدان معنی است که SDK ردیابی نشست‌ها و رویدادها را متوقف می کند و به طور کلی کار نمی کند.
+اما امکان راه اندازی مجدد آن پس از مدتی وجود دارد. در اینجا متدهای های موجود برای این عملکرد وجود دارد:
 
 <a id="stop">**stop**</a>
 
-This will stop running Adjust SDK
+با این کار اجرای SDK ادتریس متوقف می شود
 
-Example:
+مثال:
 
 ```js
 Adtrace.stop();
@@ -343,68 +333,13 @@ Adtrace.stop();
 
 <a id="restart">**restart**</a>
 
-This will restart Adtrace SDK
+با این کار SDK ادتریس مجددا راه‌اندازی می شود
 
-Example:
+مثال:
 
 ```js
 Adtrace.restart();
-``` 
-
-
-## <a id="gdpr-forget-me">GDPR Forget Me</a>
-
-There is functionality available to GDPR Forget particular user. This will notify our backend behind the scene and will stop Adjust SDK from running.
-There is one method available for this:
-
-<a id="gdpr-forge-me">**gdprForgetMe**</a>
-
-This method will stop Adtrace SDK from running and will notify adtrace backend that user wants to be GDPR forgotten.
-Once this method is run it's not possible to restart Adtrace SDK anymore.
-
-Example:
-
-```js
-Adtrace.gdprForgetMe();
 ```
-
-## <a id="marketing-opt-out">Marketing Opt-out</a>
-
-There is functionality for the Marketing Opt-out, which is disabling third-party sharing ability. This will notify our backed in the same manner as it does for GDPR Forget me.
-
-There is one method available for this:
-
-<a id="disable-third-party-sharing">**disableThirdPartySharing**</a>
-
-Example:
-
-```js
-Adtrace.disableThirdPartySharing();
-```
-
-## <a id="license">License</a>
-
-MIT License
-
-Copyright (c) 2022 Adtrace
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 
 
 [adtrace.io]:   https://adtrace.io
