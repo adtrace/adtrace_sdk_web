@@ -3,7 +3,7 @@ import './assets/scss/index.scss'
 import main from './demo/main'
 
 const appConfig = {
-  appToken: 'l8czd4os6ww0',
+  appToken: 'gjs8vqf88gai',
   environment: 'production', // production or sandbox
   logLevel: 'verbose', // none, error, info, verbose
   logOutput: '#log',
@@ -15,7 +15,7 @@ const appConfig = {
 }
 
 const basicEventConfig = {
-  eventToken: 'c8qws5',
+  eventToken: 'm91e4d',
   // deduplicationId: 'YOUR_EVENT_DEDUPLICATION_ID'
   // revenue: YOUR_REVENUE_VALUE,
   // currency: 'YOUR_CURRENCY',

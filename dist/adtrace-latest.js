@@ -2140,7 +2140,7 @@ function isEmptyEntry(value
 |}*/
 var Globals = {
   namespace: "adtrace-sdk" || false,
-  version: "2.0.1" || false,
+  version: "2.0.4" || false,
   env: "production"
 };
 /* harmony default export */ var globals = (Globals);
@@ -10555,16 +10555,6 @@ function main_continue(activityState
 
   run({
     cleanUp: true
-  });
-  return watch().then(function () {
-    _isInitialising = false;
-    _isStarted = true;
-
-    if (isInstalled) {
-      _handleSdkInstalled();
-
-      third_party_sharing_check();
-    }
   });
 }
 /**
