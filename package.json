@@ -1,5 +1,5 @@
 {
-  "name": "etedadi2",
+  "name": "web-adtrace-test",
   "version": "2.0.4",
   "description": "Web SDK of Adtrace",
   "scripts": {
@@ -85,10 +85,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adtrace/adtrace_sdk_web.git"
+    "url": "git+https://github.com/etedadi/web-adtrace-test.git"
   },
   "bugs": {
-    "url": "https://github.com/adtrace/adtrace_sdk_web/issues"
+    "url": "https://github.com/etedadi/web-adtrace-test/issues"
   },
-  "homepage": "https://github.com/adtrace/adtrace_sdk_web#readme"
+  "homepage": "https://github.com/etedadi/web-adtrace-test#readme"
 }
