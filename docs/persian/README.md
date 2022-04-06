@@ -14,9 +14,7 @@
 * [پارامتر های سراسری پارتنر](#global-partner-parameters)
 * [حالت آفلاین / آنلاین](#offline-online-mode)
 * [توقف / راه‌اندازی مجدد SDK](#stop-restart-sdk)
-* [GDPR مرا فراموش کن](#gdpr-forget-me)
-* [انصراف از بازاریابی](#marketing-opt-out)
-* [لایسنس](#license)
+
 
 ## <a id="example-app">اپلیکیشن مثال</a>
 
