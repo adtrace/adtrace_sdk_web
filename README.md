@@ -14,8 +14,6 @@ Read this in other languages: [English][en-readme], [Persian][fa-readme]
 * [Global partner parameters](#global-partner-parameters)
 * [Offline/Online mode](#offline-online-mode)
 * [Stop/Restart SDK](#stop-restart-sdk)
-* [GDPR Forget Me](#gdpr-forget-me)
-* [Marketing Opt-out](#marketing-opt-out)
 
 ## <a id="example-app">Example apps</a>
 
