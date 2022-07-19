@@ -342,7 +342,7 @@ Adtrace.restart();
 
 [adtrace.io]:   https://adtrace.io
 [dashboard]:    https://panel.adtrace.io
-[example-app]:  src/demo.html
+[example-app]:  ../demo.html
 
 
 [en-readme]:  src/README.md
