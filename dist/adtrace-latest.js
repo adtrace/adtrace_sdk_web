@@ -10372,6 +10372,22 @@ function restart()
     _start(main_options);
   }
 }
+
+function session()
+/*: void*/
+{
+  var isInstalled = activity_state.current.installed;
+  watch().then(function () {
+    _isInitialising = false;
+    _isStarted = true;
+
+    if (isInstalled) {
+      _handleSdkInstalled();
+
+      third_party_sharing_check();
+    }
+  });
+}
 /**
  * Disable sdk and send GDPR-Forget-Me request
  */
@@ -10703,6 +10719,7 @@ var Adtrace = {
   switchBackToOnlineMode: switchBackToOnlineMode,
   stop: stop,
   restart: restart,
+  session: session,
   gdprForgetMe: gdprForgetMe,
   disableThirdPartySharing: disableThirdPartySharing,
   initSmartBanner: initSmartBanner,

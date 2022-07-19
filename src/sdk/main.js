@@ -196,6 +196,22 @@ function restart (): void {
   }
 }
 
+
+
+function session (): void {
+  const isInstalled = ActivityState.current.installed
+  sessionWatch()
+    .then(() => {
+      _isInitialising = false
+      _isStarted = true
+
+      if (isInstalled) {
+        _handleSdkInstalled()
+        sharingDisableCheck()
+      }
+    })
+}
+
 /**
  * Disable sdk and send GDPR-Forget-Me request
  */
@@ -352,16 +368,6 @@ function _continue (activityState: ActivityStateMapT): Promise<void> {
 
   queueRun({cleanUp: true})
 
-  return sessionWatch()
-    .then(() => {
-      _isInitialising = false
-      _isStarted = true
-
-      if (isInstalled) {
-        _handleSdkInstalled()
-        sharingDisableCheck()
-      }
-    })
 }
 
 /**
@@ -493,6 +499,7 @@ const Adtrace = {
   switchBackToOnlineMode,
   stop,
   restart,
+  session,
   gdprForgetMe,
   disableThirdPartySharing,
   initSmartBanner,
