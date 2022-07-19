@@ -11,6 +11,7 @@ import switchToOffineModeInit from './switch-to-offline-mode/switch-to-offline-m
 import switchBackToOnlineModeInit from './switch-back-to-online-mode/switch-back-to-online-mode'
 import stopInit from './stop/stop'
 import restartInit from './restart/restart'
+import session from './session/session'
 import gdprForgetMeInit from './gdpr-forget-me/gdpr-forget-me'
 import disableThirdPartySharingInit from './disable-third-party-sharing/disable-third-party-sharing'
 
@@ -28,6 +29,7 @@ function init (defaultAppConfig, defaultEventConfig) {
   switchBackToOnlineModeInit()
   stopInit()
   restartInit()
+  session()
   gdprForgetMeInit()
   disableThirdPartySharingInit()
 }
