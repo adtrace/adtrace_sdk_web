@@ -342,9 +342,9 @@ Adtrace.restart();
 
 [adtrace.io]:   https://adtrace.io
 [dashboard]:    https://panel.adtrace.io
-[example-app]:  ../demo.html
+[example-app]:  src/demo.html
 
 
-[en-readme]:  src/README.md
+[en-readme]:  ./README.md
 [fa-readme]:  docs/persian/README.md
 
