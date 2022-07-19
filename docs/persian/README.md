@@ -345,6 +345,6 @@ Adtrace.restart();
 [example-app]:  src/demo.html
 
 
-[en-readme]:  ./README.md
+[en-readme]:  src/README.md
 [fa-readme]:  docs/persian/README.md
 

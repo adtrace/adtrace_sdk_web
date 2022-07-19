@@ -23,7 +23,7 @@ You can check how our SDK can be used in the web app by checking [example app][e
 
 This SDK can be used to track installs, sessions and events. Simply add the Adtrace Web SDK to your web app.
 
-Our sdk is exposed under all module definitions, so it works under CommonJS and AMD environments and is also available through global `Adtrace` when imported through script tag in HTML.
+Our SDK is exposed under all module definitions, so it works under CommonJS and AMD environments and is also available through global `Adtrace` when imported through script tag in HTML.
 
 To load the Adtrace Web SDK paste the following snippet into the `<head>` tag:
 ```html
