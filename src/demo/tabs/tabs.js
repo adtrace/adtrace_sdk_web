@@ -1,7 +1,7 @@
 import {hyphenToCamelCase} from '../utils'
 import {getItem, setItem, clear} from '../storage'
 import {write} from '../log'
-import Adjust from '../../sdk/main'
+import Adtrace from '../../sdk/main'
 
 const _ui = {}
 const _form = {}
@@ -76,8 +76,8 @@ function _handleSave (e) {
     _ui.submitButton.disabled = false
 
     _handleTab({target: {id: 'log-tab'}})
-    Adjust.__testonly__.destroy()
-    Adjust.initSdk({
+    Adtrace.__testonly__.destroy()
+    Adtrace.initSdk({
       ...appConfig,
       attributionCallback: _handleAttributionChange
     })
@@ -97,7 +97,7 @@ function _handleReset () {
 
   _setJson(appConfig)
   clear()
-  Adjust.__testonly__.clearDatabase()
+  Adtrace.__testonly__.clearDatabase()
     .catch(error => {
       write('There was an error while attempting to delete the storage, please refresh')
       throw error
@@ -119,11 +119,11 @@ function _handleAttributionChange (e, result) {
 function _prepareForm () {
   const appConfig = getItem('appConfig') || {..._defaultAppConfig}
 
-  Adjust.initSdk({
+  Adtrace.initSdk({
     ...appConfig,
     attributionCallback: _handleAttributionChange
   })
-  Adjust.initSmartBanner({
+  Adtrace.initSmartBanner({
     webToken: '77170eewyww0',
     logLevel: 'verbose'
   })
@@ -143,7 +143,7 @@ function _prepareForm () {
 }
 
 function _setJson (appConfig) {
-  _ui.appConfigJson.textContent = `Adjust.initSdk(${JSON.stringify(appConfig, undefined, 2)})`
+  _ui.appConfigJson.textContent = `Adtrace.initSdk(${JSON.stringify(appConfig, undefined, 2)})`
 }
 
 export default init

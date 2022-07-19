@@ -105,14 +105,9 @@ function ownKeys(object, enumerableOnly) {
 
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
-
-    if (enumerableOnly) {
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-
-    keys.push.apply(keys, symbols);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
   }
 
   return keys;
@@ -120,26 +115,18 @@ function ownKeys(object, enumerableOnly) {
 
 function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+      defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
   }
 
   return target;
 }
 
-module.exports = _objectSpread2;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _objectSpread2, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 1 */
@@ -157,8 +144,7 @@ function _slicedToArray(arr, i) {
   return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
 }
 
-module.exports = _slicedToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 2 */
@@ -179,8 +165,7 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-module.exports = _defineProperty;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 3 */
@@ -1378,8 +1363,7 @@ function _toConsumableArray(arr) {
   return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
 }
 
-module.exports = _toConsumableArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _toConsumableArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 5 */
@@ -1391,8 +1375,7 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 
-module.exports = _classCallCheck;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 6 */
@@ -1411,11 +1394,13 @@ function _defineProperties(target, props) {
 function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
   return Constructor;
 }
 
-module.exports = _createClass;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _createClass, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 7 */
@@ -1432,8 +1417,7 @@ function _unsupportedIterableToArray(o, minLen) {
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
 }
 
-module.exports = _unsupportedIterableToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 8 */
@@ -1449,8 +1433,7 @@ function _arrayLikeToArray(arr, len) {
   return arr2;
 }
 
-module.exports = _arrayLikeToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 9 */
@@ -1477,8 +1460,7 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 
-module.exports = _objectWithoutProperties;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _objectWithoutProperties, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 10 */
@@ -1487,25 +1469,14 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  }
-
-  return _typeof(obj);
+  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(obj);
 }
 
-module.exports = _typeof;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 11 */
@@ -1526,8 +1497,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-module.exports = _objectWithoutPropertiesLoose;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 12 */
@@ -1753,8 +1723,7 @@ function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
 
-module.exports = _arrayWithHoles;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 15 */
@@ -1790,8 +1759,7 @@ function _iterableToArrayLimit(arr, i) {
   return _arr;
 }
 
-module.exports = _iterableToArrayLimit;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 16 */
@@ -1801,8 +1769,7 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-module.exports = _nonIterableRest;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 17 */
@@ -1814,8 +1781,7 @@ function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) return arrayLikeToArray(arr);
 }
 
-module.exports = _arrayWithoutHoles;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 18 */
@@ -1825,8 +1791,7 @@ function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 
-module.exports = _iterableToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _iterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 19 */
@@ -1836,8 +1801,7 @@ function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-module.exports = _nonIterableSpread;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _nonIterableSpread, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 20 */
@@ -2064,10 +2028,14 @@ function reducer
 /*:: <K extends string, T>*/
 (acc
 /*: Record<K, T>*/
-, _ref)
+, _ref
+/*:: */
+)
 /*: Record<K, T>*/
 {
-  var _ref2 = slicedToArray_default()(_ref, 2),
+  var _ref2 = slicedToArray_default()(_ref
+  /*:: */
+  , 2),
       key = _ref2[0],
       value = _ref2[1];
 
@@ -2839,8 +2807,12 @@ function _flipStoreNames(obj
 {
   var flippedConfigs
   /*: Array<[ShortStoreNames, StoreConfigurationFlipped]>*/
-  = entries(obj).map(function (_ref3) {
-    var _ref4 = slicedToArray_default()(_ref3, 2),
+  = entries(obj).map(function (_ref3
+  /*:: */
+  ) {
+    var _ref4 = slicedToArray_default()(_ref3
+    /*:: */
+    , 2),
         name = _ref4[0],
         options = _ref4[1];
 
@@ -2889,8 +2861,12 @@ function _flipScheme(storeName
 , fieldsScheme
 /*: StoreFields*/
 ) {
-  return entries(fieldsScheme).map(function (_ref5) {
-    var _ref6 = slicedToArray_default()(_ref5, 2),
+  return entries(fieldsScheme).map(function (_ref5
+  /*:: */
+  ) {
+    var _ref6 = slicedToArray_default()(_ref5
+    /*:: */
+    , 2),
         key = _ref6[0],
         scheme = _ref6[1];
 
@@ -2907,8 +2883,12 @@ function _prepareLeft()
 {
   var storesOptions
   /*: Array<[StoreNames, StoreOptionsOptionalKey]>*/
-  = entries(storage_scheme).map(function (_ref7) {
-    var _ref8 = slicedToArray_default()(_ref7, 2),
+  = entries(storage_scheme).map(function (_ref7
+  /*:: */
+  ) {
+    var _ref8 = slicedToArray_default()(_ref7
+    /*:: */
+    , 2),
         storeName = _ref8[0],
         store = _ref8[1];
 
@@ -3919,7 +3899,9 @@ function unsubscribe(id
     var _ref2 = slicedToArray_default()(_ref, 2),
         callbacks = _ref2[1];
 
-    return callbacks.some(function (callback
+    return callbacks.some(function
+      /*:: <T>*/
+    (callback
     /*: CallbackT<T>*/
     , i
     /*: number*/
@@ -4670,15 +4652,21 @@ var indexeddb_IndexedDBWrapper = /*#__PURE__*/function () {
 
   }, {
     key: "getTransactionStore",
-    value: function getTransactionStore(_ref7, reject
+    value: function getTransactionStore(_ref7
+    /*:: */
+    , reject
     /*: (reason: Event) => void*/
     , db
     /*: IDBDatabase*/
     )
     /*: Transaction*/
     {
-      var storeName = _ref7.storeName,
-          mode = _ref7.mode;
+      var storeName = _ref7
+      /*:: */
+      .storeName,
+          mode = _ref7
+      /*:: */
+      .mode;
       var transaction
       /*: IDBTransaction*/
       = db.transaction([storeName], mode);
@@ -4811,16 +4799,26 @@ var indexeddb_IndexedDBWrapper = /*#__PURE__*/function () {
 
   }, {
     key: "initRequest",
-    value: function initRequest(_ref8)
+    value: function initRequest(_ref8
+    /*:: */
+    )
     /*: Promise<Maybe<StoredRecord | StoredRecordId>>*/
     {
       var _this6 = this;
 
-      var storeName = _ref8.storeName,
-          _ref8$target = _ref8.target,
+      var storeName = _ref8
+      /*:: */
+      .storeName,
+          _ref8$target = _ref8
+      /*:: */
+      .target,
           target = _ref8$target === void 0 ? null : _ref8$target,
-          action = _ref8.action,
-          _ref8$mode = _ref8.mode,
+          action = _ref8
+      /*:: */
+      .action,
+          _ref8$mode = _ref8
+      /*:: */
+      .mode,
           mode = _ref8$mode === void 0 ? AccessMode.readonly : _ref8$mode;
       return this.open().then(function () {
         return new indexeddb_Promise(function (resolve, reject) {
@@ -4864,15 +4862,25 @@ var indexeddb_IndexedDBWrapper = /*#__PURE__*/function () {
 
   }, {
     key: "initBulkRequest",
-    value: function initBulkRequest(_ref9)
+    value: function initBulkRequest(_ref9
+    /*:: */
+    )
     /*: Promise<Array<StoredRecord | StoredRecordId>>*/
     {
       var _this7 = this;
 
-      var storeName = _ref9.storeName,
-          target = _ref9.target,
-          action = _ref9.action,
-          _ref9$mode = _ref9.mode,
+      var storeName = _ref9
+      /*:: */
+      .storeName,
+          target = _ref9
+      /*:: */
+      .target,
+          action = _ref9
+      /*:: */
+      .action,
+          _ref9$mode = _ref9
+      /*:: */
+      .mode,
           mode = _ref9$mode === void 0 ? AccessMode.readwrite : _ref9$mode;
 
       if (!target || target && !target.length) {
@@ -4931,18 +4939,30 @@ var indexeddb_IndexedDBWrapper = /*#__PURE__*/function () {
 
   }, {
     key: "openCursor",
-    value: function openCursor(_ref10)
+    value: function openCursor(_ref10
+    /*:: */
+    )
     /*: Promise<Array<StoredRecord | StoredRecordId>>*/
     {
       var _this8 = this;
 
-      var storeName = _ref10.storeName,
-          action = _ref10.action,
-          _ref10$range = _ref10.range,
+      var storeName = _ref10
+      /*:: */
+      .storeName,
+          action = _ref10
+      /*:: */
+      .action,
+          _ref10$range = _ref10
+      /*:: */
+      .range,
           range = _ref10$range === void 0 ? null : _ref10$range,
-          _ref10$firstOnly = _ref10.firstOnly,
+          _ref10$firstOnly = _ref10
+      /*:: */
+      .firstOnly,
           firstOnly = _ref10$firstOnly === void 0 ? false : _ref10$firstOnly,
-          _ref10$mode = _ref10.mode,
+          _ref10$mode = _ref10
+      /*:: */
+      .mode,
           mode = _ref10$mode === void 0 ? AccessMode.readonly : _ref10$mode;
       return this.open().then(function () {
         return new indexeddb_Promise(function (resolve, reject) {
@@ -5509,16 +5529,24 @@ var localstorage_LocalStorageWrapper = /*#__PURE__*/function () {
     key: "initRequest",
     value: function initRequest
     /*:: <T>*/
-    (_ref5, action
+    (_ref5
+    /*:: */
+    , action
     /*: Action<T>*/
     )
     /*: Promise<T>*/
     {
       var _this = this;
 
-      var storeName = _ref5.storeName,
-          id = _ref5.id,
-          item = _ref5.item;
+      var storeName = _ref5
+      /*:: */
+      .storeName,
+          id = _ref5
+      /*:: */
+      .id,
+          item = _ref5
+      /*:: */
+      .item;
       var options = scheme_map.right[convertStoreName(storeName, Direction.right)];
       return this.open().then(function (open) {
         if (open.status === 'error') {
@@ -6402,8 +6430,12 @@ function _augment()
 {
   var methods
   /*: Array<[MethodName, StorageMethod]>*/
-  = entries(_methods).map(function (_ref) {
-    var _ref2 = slicedToArray_default()(_ref, 2),
+  = entries(_methods).map(function (_ref
+  /*:: */
+  ) {
+    var _ref2 = slicedToArray_default()(_ref
+    /*:: */
+    , 2),
         methodName = _ref2[0],
         method = _ref2[1];
 
@@ -6889,10 +6921,14 @@ function _getErrorResponse(xhr
  */
 
 
-function _encodeParam(_ref3)
+function _encodeParam(_ref3
+/*:: */
+)
 /*: string*/
 {
-  var _ref4 = slicedToArray_default()(_ref3, 2),
+  var _ref4 = slicedToArray_default()(_ref3
+  /*:: */
+  , 2),
       key = _ref4[0],
       value = _ref4[1];
 
@@ -6956,8 +6992,12 @@ function _encodeParams(params
     });
   };
 
-  var allParams = entries(objectSpread2_default()(objectSpread2_default()(objectSpread2_default()({}, sdk_config.getBaseParams()), defaultParams), params)).map(function (_ref5) {
-    var _ref6 = slicedToArray_default()(_ref5, 2),
+  var allParams = entries(objectSpread2_default()(objectSpread2_default()(objectSpread2_default()({}, sdk_config.getBaseParams()), defaultParams), params)).map(function (_ref5
+  /*:: */
+  ) {
+    var _ref6 = slicedToArray_default()(_ref5
+    /*:: */
+    , 2),
         key = _ref6[0],
         value = _ref6[1];
 
@@ -6989,9 +7029,15 @@ function _encodeParams(params
  */
 
 
-function _handleReadyStateChange(reject, resolve, _ref11) {
-  var xhr = _ref11.xhr,
-      url = _ref11.url;
+function _handleReadyStateChange(reject, resolve, _ref11
+/*:: */
+) {
+  var xhr = _ref11
+  /*:: */
+  .xhr,
+      url = _ref11
+  /*:: */
+  .url;
 
   if (xhr.readyState !== 4) {
     return;
@@ -7022,16 +7068,24 @@ function _handleReadyStateChange(reject, resolve, _ref11) {
  */
 
 
-function _prepareUrlAndParams(_ref12, defaultParams
+function _prepareUrlAndParams(_ref12
+/*:: */
+, defaultParams
 /*: DefaultParamsT*/
 , baseUrlsMap
 /*: BaseUrlsMap*/
 )
 /*: {fullUrl: string, encodedParams: string}*/
 {
-  var url = _ref12.url,
-      method = _ref12.method,
-      params = _ref12.params;
+  var url = _ref12
+  /*:: */
+  .url,
+      method = _ref12
+  /*:: */
+  .method,
+      params = _ref12
+  /*:: */
+  .params;
 
   var encodedParams = _encodeParams(params, defaultParams);
 
@@ -7081,17 +7135,25 @@ function _prepareHeaders(xhr
  */
 
 
-function _buildXhr(_ref15, defaultParams
+function _buildXhr(_ref15
+/*:: */
+, defaultParams
 /*: DefaultParamsT*/
 , baseUrlsMap
 /*: BaseUrlsMap*/
 )
 /*: Promise<HttpSuccessResponseT | HttpErrorResponseT>*/
 {
-  var url = _ref15.url,
-      _ref15$method = _ref15.method,
+  var url = _ref15
+  /*:: */
+  .url,
+      _ref15$method = _ref15
+  /*:: */
+  .method,
       method = _ref15$method === void 0 ? 'GET' : _ref15$method,
-      _ref15$params = _ref15.params,
+      _ref15$params = _ref15
+  /*:: */
+  .params,
       params = _ref15$params === void 0 ? {} : _ref15$params;
 
   var _prepareUrlAndParams2 = _prepareUrlAndParams({
@@ -7655,13 +7717,23 @@ var request_Request = function Request() {
    */
 
 
-  function _prepareParams(_ref2)
+  function _prepareParams(_ref2
+  /*:: */
+  )
   /*: void*/
   {
-    var url = _ref2.url,
-        method = _ref2.method,
-        params = _ref2.params,
-        continueCb = _ref2.continueCb;
+    var url = _ref2
+    /*:: */
+    .url,
+        method = _ref2
+    /*:: */
+    .method,
+        params = _ref2
+    /*:: */
+    .params,
+        continueCb = _ref2
+    /*:: */
+    .continueCb;
 
     if (url) {
       _url = url;
@@ -7723,11 +7795,17 @@ var request_Request = function Request() {
    */
 
 
-  function _prepareRequest(_ref3)
+  function _prepareRequest(_ref3
+  /*:: */
+  )
   /*: Promise<HttpSuccessResponseT | HttpErrorResponseT>*/
   {
-    var wait = _ref3.wait,
-        retrying = _ref3.retrying;
+    var wait = _ref3
+    /*:: */
+    .wait,
+        retrying = _ref3
+    /*:: */
+    .retrying;
     _wait = wait ? _prepareWait(wait) : _wait;
 
     if (_skip(wait)) {
@@ -8094,13 +8172,19 @@ var _logMessages = function _logMessages(reason
  */
 
 
-function _disable(_ref, expectedAction
+function _disable(_ref
+/*:: */
+, expectedAction
 /*: 'start' | 'finish'*/
 )
 /*: boolean*/
 {
-  var reason = _ref.reason,
-      pending = _ref.pending;
+  var reason = _ref
+  /*:: */
+  .reason,
+      pending = _ref
+  /*:: */
+  .pending;
   var disabled = getDisabled() || {};
   var action = expectedAction === 'start' && disabled.pending ? 'start' : 'finish';
   var shouldNotStart = expectedAction === 'start' && disabled.reason;
@@ -8587,10 +8671,18 @@ function _persist(url)
  */
 
 
-function push(_ref) {
-  var url = _ref.url,
-      method = _ref.method,
-      params = _ref.params;
+function push(_ref
+/*:: */
+) {
+  var url = _ref
+  /*:: */
+  .url,
+      method = _ref
+  /*:: */
+  .method,
+      params = _ref
+  /*:: */
+  .params;
 
   var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
       auto = _ref2.auto,
@@ -9253,11 +9345,17 @@ function _stopTimer()
  */
 
 
-function session_prepareParams(_ref)
+function session_prepareParams(_ref
+/*:: */
+)
 /*: SessionRequestParamsT*/
 {
-  var callbackParams = _ref.callbackParams,
-      partnerParams = _ref.partnerParams;
+  var callbackParams = _ref
+  /*:: */
+  .callbackParams,
+      partnerParams = _ref
+  /*:: */
+  .partnerParams;
   return {
     callbackParams: callbackParams.length ? convertToMap(callbackParams) : null,
     partnerParams: partnerParams.length ? convertToMap(partnerParams) : null
@@ -9356,11 +9454,17 @@ var _whitelist
  * @private
  */
 
-function _isSame(_ref)
+function _isSame(_ref
+/*:: */
+)
 /*: boolean*/
 {
-  var adid = _ref.adid,
-      attribution = _ref.attribution;
+  var adid = _ref
+  /*:: */
+  .adid,
+      attribution = _ref
+  /*:: */
+  .attribution;
   var oldAttribution = activity_state.current.attribution || {};
 
   var anyDifferent = attribution && _whitelist.some(function (k) {
@@ -9379,12 +9483,18 @@ function _isSame(_ref)
  */
 
 
-function _isValid(_ref2)
+function _isValid(_ref2
+/*:: */
+)
 /*: boolean*/
 {
-  var _ref2$adid = _ref2.adid,
+  var _ref2$adid = _ref2
+  /*:: */
+  .adid,
       adid = _ref2$adid === void 0 ? '' : _ref2$adid,
-      _ref2$attribution = _ref2.attribution,
+      _ref2$attribution = _ref2
+  /*:: */
+  .attribution,
       attribution = _ref2$attribution === void 0 ? {} : _ref2$attribution;
   return !!adid && !!intersection(_whitelist, Object.keys(attribution)).length;
 }
@@ -9907,11 +10017,17 @@ function _getRevenue(revenue
 
 function event_prepareParams(params
 /*: EventParamsT*/
-, _ref)
+, _ref
+/*:: */
+)
 /*: EventRequestParamsT*/
 {
-  var callbackParams = _ref.callbackParams,
-      partnerParams = _ref.partnerParams;
+  var callbackParams = _ref
+  /*:: */
+  .callbackParams,
+      partnerParams = _ref
+  /*:: */
+  .partnerParams;
   var globalParams = {};
 
   var baseParams = objectSpread2_default()({

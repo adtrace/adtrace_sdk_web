@@ -1,8 +1,8 @@
-import Adjust from '../../sdk/main'
+import Adtrace from '../../sdk/main'
 import SimpleAction from '../simple-action'
 
 function init () {
-  SimpleAction('gdpr', Adjust.gdprForgetMe)()
+  SimpleAction('gdpr', Adtrace.gdprForgetMe)()
 }
 
 export default init

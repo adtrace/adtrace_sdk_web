@@ -29,12 +29,12 @@ const _disableReason = (reason: ReasonT) => reason === REASON_GDPR ? 'GDPR disab
  */
 const _logMessages = (reason: ReasonT) => ({
   start: {
-    inProgress: `Adjust SDK ${_disableReason(reason)} process has already started`,
-    done: `Adjust SDK ${_disableReason(reason)} process is now started`
+    inProgress: `Adtrace SDK ${_disableReason(reason)} process has already started`,
+    done: `Adtrace SDK ${_disableReason(reason)} process is now started`
   },
   finish: {
-    inProgress: `Adjust SDK ${_disableReason(reason)} process has already finished`,
-    done: `Adjust SDK ${_disableReason(reason)} process is now finished`
+    inProgress: `Adtrace SDK ${_disableReason(reason)} process has already finished`,
+    done: `Adtrace SDK ${_disableReason(reason)} process is now finished`
   }
 })
 
@@ -96,16 +96,16 @@ function restore (): boolean {
   const disabled = getDisabled() || {}
 
   if (disabled.reason === REASON_GDPR) {
-    Logger.log('Adjust SDK is disabled due to GDPR-Forget-Me request and it can not be re-enabled')
+    Logger.log('Adtrace SDK is disabled due to GDPR-Forget-Me request and it can not be re-enabled')
     return false
   }
 
   if (!disabled.reason) {
-    Logger.log('Adjust SDK is already enabled')
+    Logger.log('Adtrace SDK is already enabled')
     return false
   }
 
-  Logger.log('Adjust SDK has been enabled')
+  Logger.log('Adtrace SDK has been enabled')
 
   setDisabled(null)
 

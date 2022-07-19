@@ -1,8 +1,8 @@
-import Adjust from '../../sdk/main'
+import Adtrace from '../../sdk/main'
 import SimpleAction from '../simple-action'
 
 function init () {
-  SimpleAction('cleargpp', Adjust.clearGlobalPartnerParameters)()
+  SimpleAction('cleargpp', Adtrace.clearGlobalPartnerParameters)()
 }
 
 export default init

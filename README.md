@@ -73,7 +73,7 @@ This param accepts function, and it's a callback function for the attribution ch
 
 Example:
 ```js
-Adjust.initSdk({
+Adtrace.initSdk({
   // ... other params go here, including mandatory ones
   attributionCallback: function (e, attribution) {
     // e: internal event name, can be ignored
@@ -121,7 +121,7 @@ An external device identifier is a custom value that you can assign to a device 
 You can also use an external device ID as a custom identifier for a device. This can be useful if you use these identifiers elsewhere and want to keep continuity.
 
 ```js
-Adjust.initSdk({
+Adtrace.initSdk({
   // other initialisation options go here
   externalDeviceId: 'YOUR_EXTERNAL_DEVICE_ID', // optional
 });
@@ -129,7 +129,7 @@ Adjust.initSdk({
 
 ## <a id="event-tracking">Event tracking</a>
 
-You can use adtrace to track events. Lets say you want to track every tap on a particular button. You would create a new event token in your [dashboard], which has an associated event token - looking something like `abc123`. In order to track this event from your web app, you should do following:
+You can use adtrace to track events. Lets say you want to track every tap on a particular button. You would create a new event token in your [panel], which has an associated event token - looking something like `abc123`. In order to track this event from your web app, you should do following:
 
 ```js
 Adtrace.trackEvent({
@@ -168,7 +168,7 @@ Adtrace.trackEvent({
 
 <a id="callback-params">**callbackParams**</a> `array`
 
-You can register a callback URL for your events in your [dashboard]. We will send a GET request to that URL whenever the event is tracked. You can add callback parameters to that event by adding `callbackParams` parameter to the map object passed to `trackEvent` method. We will then append these parameters to your callback URL.
+You can register a callback URL for your events in your [panel]. We will send a GET request to that URL whenever the event is tracked. You can add callback parameters to that event by adding `callbackParams` parameter to the map object passed to `trackEvent` method. We will then append these parameters to your callback URL.
 
 ```js
 Adtrace.trackEvent({
@@ -190,7 +190,7 @@ You can read more about using URL callbacks, including a full list of available 
 
 <a id="partner-params">**partnerParams**</a> `array`
 
-You can also add parameters to be transmitted to network partners, which have been activated in your Adjust dashboard.
+You can also add parameters to be transmitted to network partners, which have been activated in your Adtrace panel.
 This works similarly to the callback parameters mentioned above, but can be added by adding `partnerParams` parameter to the map object passed to `trackEvent` method:
 
 ```js
@@ -315,7 +315,7 @@ But it's possible to restart it after some time. Here are available methods for 
 
 <a id="stop">**stop**</a>
 
-This will stop running Adjust SDK
+This will stop running Adtrace SDK
 
 Example:
 
@@ -336,7 +336,7 @@ Adtrace.restart();
 
 
 [adtrace.io]:   https://adtrace.io
-[dashboard]:    https://panel.adtrace.io
+[panel]:    https://panel.adtrace.io
 [example-app]:  src/demo.html
 
 [en-readme]:  README.md

@@ -14,9 +14,9 @@ type ThirdPartySharingStatusT = 'pending' | 'on' | 'off'
  * @private
  */
 const _logMessages = {
-  running: 'Adjust SDK is running pending third-party sharing opt-out request',
-  delayed: 'Adjust SDK will run third-party sharing opt-out request after initialisation',
-  pending: 'Adjust SDK already queued third-party sharing opt-out request',
+  running: 'Adtrace SDK is running pending third-party sharing opt-out request',
+  delayed: 'Adtrace SDK will run third-party sharing opt-out request after initialisation',
+  pending: 'Adtrace SDK already queued third-party sharing opt-out request',
   off: 'Third-party sharing opt-out is already done',
   start: {
     inProgress: 'Third-party sharing opt-out has already started',

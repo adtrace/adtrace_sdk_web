@@ -1,4 +1,4 @@
-import Adjust from '../../sdk/main'
+import Adtrace from '../../sdk/main'
 import {getItem, setItem} from '../storage'
 import KeyValueParams from '../key-value-params/key-value-params'
 
@@ -61,7 +61,7 @@ function _handleSave (e) {
     _disabled = false
     _ui.submitButton.classList.remove('loading')
     _ui.submitButton.disabled = false
-    Adjust.trackEvent(eventConfig)
+    Adtrace.trackEvent(eventConfig)
   }, 1000)
 }
 
@@ -81,7 +81,7 @@ function _handleTrackEvent () {
     _disabled = false
     _ui.trackEventButton.classList.remove('loading')
     _ui.trackEventButton.disabled = false
-    Adjust.trackEvent(eventConfig)
+    Adtrace.trackEvent(eventConfig)
   }, 1000)
 }
 
@@ -113,7 +113,7 @@ function _prepareForm () {
 }
 
 function _setJson (eventConfig) {
-  _ui.eventConfigJson.textContent = `Adjust.trackEvent(${JSON.stringify(eventConfig, undefined, 2)})`
+  _ui.eventConfigJson.textContent = `Adtrace.trackEvent(${JSON.stringify(eventConfig, undefined, 2)})`
 }
 
 export default init

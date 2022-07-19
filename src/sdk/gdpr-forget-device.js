@@ -26,10 +26,10 @@ const _request = Request({
  * @private
  */
 const _logMessages = {
-  running: 'Adjust SDK is running pending GDPR Forget Me request',
-  pending: 'Adjust SDK will run GDPR Forget Me request after initialisation',
-  paused: 'Adjust SDK is already prepared to send GDPR Forget Me request',
-  off: 'Adjust SDK is already disabled'
+  running: 'Adtrace SDK is running pending GDPR Forget Me request',
+  pending: 'Adtrace SDK will run GDPR Forget Me request after initialisation',
+  paused: 'Adtrace SDK is already prepared to send GDPR Forget Me request',
+  off: 'Adtrace SDK is already disabled'
 }
 
 /**

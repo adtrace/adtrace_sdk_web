@@ -25,5 +25,5 @@
 - Added disable third party sharing option.
 
 #### Changed
-- Switched to using exposed single instance instead of initiating it manually with the `new` (`Adjust.initSdk(YOUR_CONFIG)`).
+- Switched to using exposed single instance instead of initiating it manually with the `new` (`Adtrace.initSdk(YOUR_CONFIG)`).
 - Automated session tracking, method `trackSession` is no longer available.
