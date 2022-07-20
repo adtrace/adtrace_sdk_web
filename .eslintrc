@@ -16,8 +16,8 @@
   "plugins": ["flowtype"],
   "globals": {
     "Promise": true,
-    "__ADJUST__NAMESPACE": true,
-    "__ADJUST__SDK_VERSION": true,
+    "__Adtrace__NAMESPACE": true,
+    "__Adtrace__SDK_VERSION": true,
     "Utils": true
   },
   "rules": {

@@ -2097,9 +2097,9 @@ function isEmptyEntry(value
 
 
 // CONCATENATED MODULE: ./src/sdk/globals.js
-/*:: declare var __ADJUST__NAMESPACE: string*/
+/*:: declare var __Adtrace__NAMESPACE: string*/
 
-/*:: declare var __ADJUST__SDK_VERSION: string*/
+/*:: declare var __Adtrace__SDK_VERSION: string*/
 
 /*:: declare var process: {|
   env: {|
@@ -8152,12 +8152,12 @@ var _logMessages = function _logMessages(reason
 ) {
   return {
     start: {
-      inProgress: "Adjust SDK ".concat(disable_disableReason(reason), " process has already started"),
-      done: "Adjust SDK ".concat(disable_disableReason(reason), " process is now started")
+      inProgress: "Adtrace SDK ".concat(disable_disableReason(reason), " process has already started"),
+      done: "Adtrace SDK ".concat(disable_disableReason(reason), " process is now started")
     },
     finish: {
-      inProgress: "Adjust SDK ".concat(disable_disableReason(reason), " process has already finished"),
-      done: "Adjust SDK ".concat(disable_disableReason(reason), " process is now finished")
+      inProgress: "Adtrace SDK ".concat(disable_disableReason(reason), " process has already finished"),
+      done: "Adtrace SDK ".concat(disable_disableReason(reason), " process is now finished")
     }
   };
 };
@@ -8253,16 +8253,16 @@ function restore()
   var disabled = getDisabled() || {};
 
   if (disabled.reason === REASON_GDPR) {
-    logger.log('Adjust SDK is disabled due to GDPR-Forget-Me request and it can not be re-enabled');
+    logger.log('Adtrace SDK is disabled due to GDPR-Forget-Me request and it can not be re-enabled');
     return false;
   }
 
   if (!disabled.reason) {
-    logger.log('Adjust SDK is already enabled');
+    logger.log('Adtrace SDK is already enabled');
     return false;
   }
 
-  logger.log('Adjust SDK has been enabled');
+  logger.log('Adtrace SDK has been enabled');
   setDisabled(null);
   return true;
 }
@@ -8395,7 +8395,7 @@ function identity_start()
   if (_starting) {
     return identity_Promise.reject({
       interrupted: true,
-      message: 'Adjust SDK start already in progress'
+      message: 'Adtrace SDK start already in progress'
     });
   }
 
@@ -9644,10 +9644,10 @@ var gdpr_forget_device_request = request({
 
 
 var gdpr_forget_device_logMessages = {
-  running: 'Adjust SDK is running pending GDPR Forget Me request',
-  pending: 'Adjust SDK will run GDPR Forget Me request after initialisation',
-  paused: 'Adjust SDK is already prepared to send GDPR Forget Me request',
-  off: 'Adjust SDK is already disabled'
+  running: 'Adtrace SDK is running pending GDPR Forget Me request',
+  pending: 'Adtrace SDK will run GDPR Forget Me request after initialisation',
+  paused: 'Adtrace SDK is already prepared to send GDPR Forget Me request',
+  off: 'Adtrace SDK is already disabled'
 };
 /**
  * Request GDPR-Forget-Me in order to disable sdk
@@ -9741,9 +9741,9 @@ function gdpr_forget_device_destroy()
  * @private
  */
 var third_party_sharing_logMessages = {
-  running: 'Adjust SDK is running pending third-party sharing opt-out request',
-  delayed: 'Adjust SDK will run third-party sharing opt-out request after initialisation',
-  pending: 'Adjust SDK already queued third-party sharing opt-out request',
+  running: 'Adtrace SDK is running pending third-party sharing opt-out request',
+  delayed: 'Adtrace SDK will run third-party sharing opt-out request after initialisation',
+  pending: 'Adtrace SDK already queued third-party sharing opt-out request',
   off: 'Third-party sharing opt-out is already done',
   start: {
     inProgress: 'Third-party sharing opt-out has already started',

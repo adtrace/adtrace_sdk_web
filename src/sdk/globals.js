@@ -1,6 +1,6 @@
 // @flow
-declare var __ADJUST__NAMESPACE: string
-declare var __ADJUST__SDK_VERSION: string
+declare var __Adtrace__NAMESPACE: string
+declare var __Adtrace__SDK_VERSION: string
 declare var process: {|
   env: {|
     NODE_ENV: 'development' | 'production' | 'test'
@@ -8,8 +8,8 @@ declare var process: {|
 |}
 
 const Globals = {
-  namespace: __ADJUST__NAMESPACE || 'adtrace-sdk',
-  version: __ADJUST__SDK_VERSION || '5.0.0',
+  namespace: __Adtrace__NAMESPACE || 'adtrace-sdk',
+  version: __Adtrace__SDK_VERSION || '5.0.0',
   env: process.env.NODE_ENV
 }
 

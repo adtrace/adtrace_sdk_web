@@ -28,8 +28,8 @@ module.exports = () => ({
   },
   plugins: [
     new webpack.DefinePlugin({
-      __ADJUST__NAMESPACE: JSON.stringify(namespace),
-      __ADJUST__SDK_VERSION: JSON.stringify(version)
+      __Adtrace__NAMESPACE: JSON.stringify(namespace),
+      __Adtrace__SDK_VERSION: JSON.stringify(version)
     }),
     new FlowWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin()
