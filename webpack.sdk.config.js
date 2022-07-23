@@ -47,19 +47,6 @@ module.exports = () => ({
       use: 'babel-loader',
       test: /\.(js|ts)$/,
       exclude: /node_modules/
-    }, {
-      test: /\.module\.s?css$/,
-      use: [
-        { loader: 'style-loader' },
-        {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-            localIdentName: 'adtrace-smart-banner__[hash:base64]',
-          },
-        },
-        { loader: 'sass-loader' }
-      ]
     }]
   }
 })

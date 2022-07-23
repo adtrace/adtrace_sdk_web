@@ -175,8 +175,8 @@ Adtrace.trackEvent({
 ```js
 Adtrace.trackEvent({
   // ... other params go here, including mandatory ones
-  revenue: 110,
-  currency: 'EUR'
+  revenue: 10000,
+  currency: "IRR"
 })
 ```
 

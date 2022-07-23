@@ -1,4 +1,4 @@
-### Version 5.2.1 (16th September 2021)
+### Version 2.0.0 (1th August 2022)
 #### Fixed
 - Fixed top-level Typescript declarations.
 - Added Typescript support.
@@ -22,7 +22,7 @@
 - Added ability to define default tracker through configuration.
 - Added traffic redirection possibility.
 - Added event deduplication.
-- Added disable third party sharing option.
+
 
 #### Changed
 - Switched to using exposed single instance instead of initiating it manually with the `new` (`Adtrace.initSdk(YOUR_CONFIG)`).

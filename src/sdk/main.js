@@ -368,6 +368,17 @@ function _continue (activityState: ActivityStateMapT): Promise<void> {
 
   queueRun({cleanUp: true})
 
+  return sessionWatch()
+    .then(() => {
+      _isInitialising = false
+      _isStarted = true
+
+      if (isInstalled) {
+        _handleSdkInstalled()
+        sharingDisableCheck()
+      }
+    })
+
 }
 
 /**

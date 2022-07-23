@@ -62,19 +62,6 @@ module.exports = () => ({
         { loader: 'sass-loader' }
       ]
     }, {
-      test: /\.module\.s?css$/,
-      use: [
-        MiniCssExtractPlugin.loader,
-        {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-            localIdentName: 'adtrace-smart-banner-[local]__[hash:base64:5]',
-          }
-        },
-        { loader: 'sass-loader' }
-      ]
-    }, {
       test: /\.html$/,
       use: [
         {
