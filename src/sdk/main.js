@@ -120,12 +120,12 @@ function addGlobalCallbackParameters (params: Array<GlobalParamsT>): void {
 }
 
 /**
- * Add global partner parameters
+ * Add global value parameters
  *
  * @param {Array} params
  */
-function addGlobalPartnerParameters (params: Array<GlobalParamsT>): void {
-  _preCheck('add global partner parameters', () => add(params, 'partner'))
+function addGlobalValueParameters (params: Array<GlobalParamsT>): void {
+  _preCheck('add global value parameters', () => add(params, 'value'))
 }
 
 /**
@@ -138,12 +138,12 @@ function removeGlobalCallbackParameter (key: string): void {
 }
 
 /**
- * Remove global partner parameter by key
+ * Remove global value parameter by key
  *
  * @param {string} key
  */
-function removeGlobalPartnerParameter (key: string): void {
-  _preCheck('remove global partner parameter', () => remove(key, 'partner'))
+function removeGlobalValueParameter (key: string): void {
+  _preCheck('remove global value parameter', () => remove(key, 'value'))
 }
 
 /**
@@ -154,10 +154,10 @@ function clearGlobalCallbackParameters (): void {
 }
 
 /**
- * Remove all global partner parameters
+ * Remove all global value parameters
  */
-function clearGlobalPartnerParameters (): void {
-  _preCheck('remove all global partner parameters', () => removeAll('partner'))
+function clearGlobalValueParameters (): void {
+  _preCheck('remove all global value parameters', () => removeAll('value'))
 }
 
 /**
@@ -501,11 +501,11 @@ const Adtrace = {
   initSdk,
   trackEvent,
   addGlobalCallbackParameters,
-  addGlobalPartnerParameters,
+  addGlobalValueParameters,
   removeGlobalCallbackParameter,
-  removeGlobalPartnerParameter,
+  removeGlobalValueParameter,
   clearGlobalCallbackParameters,
-  clearGlobalPartnerParameters,
+  clearGlobalValueParameters,
   switchToOfflineMode,
   switchBackToOnlineMode,
   stop,

@@ -2573,7 +2573,7 @@ var _queueScheme
         revenue: 're',
         currency: 'cu',
         callbackParams: 'cp',
-        partnerParams: 'pp'
+        valueParams: 'pp'
       }
     }
   }
@@ -2642,7 +2642,7 @@ var _globalParamsScheme
       key: 't',
       values: {
         callback: 1,
-        partner: 2
+        value: 2
       }
     }
   }
@@ -8908,7 +8908,7 @@ import { type GlobalParamsT, type GlobalParamsMapT } from './types';*/
 
 
 
-/*:: type TypeT = 'callback' | 'partner'*/
+/*:: type TypeT = 'callback' | 'value'*/
 
 /*:: type KeysT = [string, TypeT]*/
 
@@ -8930,7 +8930,7 @@ var global_params_storeName = 'globalParams';
 
 var global_params_error = {
   short: 'No type provided',
-  long: 'Global parameter type not provided, `callback` or `partner` types are available'
+  long: 'Global parameter type not provided, `callback` or `value` types are available'
 };
 /**
  * Omit type parameter from the collection
@@ -8953,7 +8953,7 @@ function _omitType(params)
   });
 }
 /**
- * Get callback and partner global parameters
+ * Get callback and value global parameters
  *
  * @returns {Promise}
  */
@@ -8962,19 +8962,19 @@ function _omitType(params)
 function get()
 /*: Promise<GlobalParamsMapT>*/
 {
-  return global_params_Promise.all([storage_storage.filterBy(global_params_storeName, 'callback'), storage_storage.filterBy(global_params_storeName, 'partner')]).then(function (_ref2) {
+  return global_params_Promise.all([storage_storage.filterBy(global_params_storeName, 'callback'), storage_storage.filterBy(global_params_storeName, 'value')]).then(function (_ref2) {
     var _ref3 = slicedToArray_default()(_ref2, 2),
         callbackParams = _ref3[0],
-        partnerParams = _ref3[1];
+        valueParams = _ref3[1];
 
     return {
       callbackParams: _omitType(callbackParams),
-      partnerParams: _omitType(partnerParams)
+      valueParams: _omitType(valueParams)
     };
   });
 }
 /**
- * Add global parameters, either callback or partner params
+ * Add global parameters, either callback or value params
  *
  * @param {Array} params
  * @param {string} type
@@ -9339,7 +9339,7 @@ function _stopTimer()
  * Prepare parameters for the session tracking
  *
  * @param {Array} callbackParams
- * @param {Array} partnerParams
+ * @param {Array} valueParams
  * @returns {Object}
  * @private
  */
@@ -9353,12 +9353,12 @@ function session_prepareParams(_ref
   var callbackParams = _ref
   /*:: */
   .callbackParams,
-      partnerParams = _ref
+      valueParams = _ref
   /*:: */
-  .partnerParams;
+  .valueParams;
   return {
     callbackParams: callbackParams.length ? convertToMap(callbackParams) : null,
-    partnerParams: partnerParams.length ? convertToMap(partnerParams) : null
+    valueParams: valueParams.length ? convertToMap(valueParams) : null
   };
 }
 /**
@@ -10007,9 +10007,9 @@ function _getRevenue(revenue
  * @param {number=} params.revenue
  * @param {string=} params.currency
  * @param {Array=} params.callbackParams
- * @param {Array=} params.partnerParams
+ * @param {Array=} params.valueParams
  * @param {Array} callbackParams
- * @param {Array} partnerParams
+ * @param {Array} valueParams
  * @returns {Object}
  * @private
  */
@@ -10025,9 +10025,9 @@ function event_prepareParams(params
   var callbackParams = _ref
   /*:: */
   .callbackParams,
-      partnerParams = _ref
+      valueParams = _ref
   /*:: */
-  .partnerParams;
+  .valueParams;
   var globalParams = {};
 
   var baseParams = objectSpread2_default()({
@@ -10038,16 +10038,16 @@ function event_prepareParams(params
   /*: GlobalKeyValueParamsT*/
   = objectSpread2_default()(objectSpread2_default()({}, convertToMap(callbackParams)), convertToMap(params.callbackParams));
 
-  var eventPartnerParams
+  var eventValueParams
   /*: GlobalKeyValueParamsT*/
-  = objectSpread2_default()(objectSpread2_default()({}, convertToMap(partnerParams)), convertToMap(params.partnerParams));
+  = objectSpread2_default()(objectSpread2_default()({}, convertToMap(valueParams)), convertToMap(params.valueParams));
 
   if (!isEmpty(eventCallbackParams)) {
     globalParams.callbackParams = eventCallbackParams;
   }
 
-  if (!isEmpty(eventPartnerParams)) {
-    globalParams.partnerParams = eventPartnerParams;
+  if (!isEmpty(eventValueParams)) {
+    globalParams.valueParams = eventValueParams;
   }
 
   return objectSpread2_default()(objectSpread2_default()({}, baseParams), globalParams);
@@ -10365,19 +10365,19 @@ function addGlobalCallbackParameters(params
   });
 }
 /**
- * Add global partner parameters
+ * Add global value parameters
  *
  * @param {Array} params
  */
 
 
-function addGlobalPartnerParameters(params
+function addGlobalValueParameters(params
 /*: Array<GlobalParamsT>*/
 )
 /*: void*/
 {
-  _preCheck('add global partner parameters', function () {
-    return add(params, 'partner');
+  _preCheck('add global value parameters', function () {
+    return add(params, 'value');
   });
 }
 /**
@@ -10397,19 +10397,19 @@ function removeGlobalCallbackParameter(key
   });
 }
 /**
- * Remove global partner parameter by key
+ * Remove global value parameter by key
  *
  * @param {string} key
  */
 
 
-function removeGlobalPartnerParameter(key
+function removeGlobalValueParameter(key
 /*: string*/
 )
 /*: void*/
 {
-  _preCheck('remove global partner parameter', function () {
-    return remove(key, 'partner');
+  _preCheck('remove global value parameter', function () {
+    return remove(key, 'value');
   });
 }
 /**
@@ -10425,15 +10425,15 @@ function clearGlobalCallbackParameters()
   });
 }
 /**
- * Remove all global partner parameters
+ * Remove all global value parameters
  */
 
 
-function clearGlobalPartnerParameters()
+function clearGlobalValueParameters()
 /*: void*/
 {
-  _preCheck('remove all global partner parameters', function () {
-    return removeAll('partner');
+  _preCheck('remove all global value parameters', function () {
+    return removeAll('value');
   });
 }
 /**
@@ -10836,11 +10836,11 @@ var Adtrace = {
   initSdk: initSdk,
   trackEvent: trackEvent,
   addGlobalCallbackParameters: addGlobalCallbackParameters,
-  addGlobalPartnerParameters: addGlobalPartnerParameters,
+  addGlobalValueParameters: addGlobalValueParameters,
   removeGlobalCallbackParameter: removeGlobalCallbackParameter,
-  removeGlobalPartnerParameter: removeGlobalPartnerParameter,
+  removeGlobalValueParameter: removeGlobalValueParameter,
   clearGlobalCallbackParameters: clearGlobalCallbackParameters,
-  clearGlobalPartnerParameters: clearGlobalPartnerParameters,
+  clearGlobalValueParameters: clearGlobalValueParameters,
   switchToOfflineMode: switchToOfflineMode,
   switchBackToOnlineMode: switchBackToOnlineMode,
   stop: stop,

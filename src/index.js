@@ -23,7 +23,7 @@ const basicEventConfig = {
   //   {key: 'YOUR_KEY_1', value: 'YOUR_VALUE_1'},
   //   {key: 'YOUR_KEY_2', value: 'YOUR_VALUE_2'}
   // ],
-  // partnerParams: [
+  // valueParams: [
   //   {key: 'YOUR_KEY_1', value: 'YOUR_VALUE_1'},
   //   {key: 'YOUR_KEY_2', value: 'YOUR_VALUE_2'}
   // ]

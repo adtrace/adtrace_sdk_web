@@ -11,7 +11,7 @@
 * [مقداردهی اولیه](#initialization)
 * [ردیابی رویداد](#event-tracking)
 * [پارامتر های سراسری کالبک](#global-callback-parameters)
-* [پارامتر های سراسری پارتنر](#global-partner-parameters)
+* [پارامتر های سراسری پارتنر](#global-value-parameters)
 * [حالت آفلاین / آنلاین](#offline-online-mode)
 * [توقف / راه‌اندازی مجدد SDK](#stop-restart-sdk)
 
@@ -204,15 +204,15 @@ https://www.mydomain.com/callback?key=value&foo=bar
 
 لطفاً توجه داشته باشید که ما هیچ یک از پارامترهای سفارشی شما را ذخیره نمی‌کنیم، بلکه فقط آنها را به تماس‌های شما اضافه می‌کنیم، بنابراین بدون پاسخ به تماس، ذخیره نمی‌شوند و برای شما ارسال نمی‌شوند.
 
-<a id="partner-params">**partnerParams**</a> `array`
+<a id="value-params">**valueParams**</a> `array`
 
-همچنین می توانید پارامترهایی را برای انتقال به network partners اضافه کنید که در داشبورد Adtrace شما فعال شده اند.
-این به طور مشابه با callback parameters ذکر شده در بالا عمل می کند، اما می توان با افزودن پارامتر «partnerParams» به آبجکت ارسال شده به متد «trackEvent» اضافه کرد:
+همچنین می توانید پارامترهایی را برای انتقال به network values اضافه کنید که در داشبورد Adtrace شما فعال شده اند.
+این به طور مشابه با callback parameters ذکر شده در بالا عمل می کند، اما می توان با افزودن پارامتر «valueParams» به آبجکت ارسال شده به متد «trackEvent» اضافه کرد:
 
 ```js
 Adtrace.trackEvent({
   // ... other params go here, including mandatory ones
-  partnerParams: [
+  valueParams: [
     {key: 'key', value: 'value'}, 
     {key: 'foo', value: 'bar'}
   ]
@@ -256,38 +256,38 @@ Adtrace.removeGlobalCallbackParameter('key1');
 Adtrace.clearGlobalCallbackParameters();
 ```
 
-## <a id="global-partner-parameters">Global partner parameters</a>
+## <a id="global-value-parameters">Global value parameters</a>
 
-<a id="add-global-parnter-parameters">**addGlobalPartnerParameters**</a>
+<a id="add-global-parnter-parameters">**addGlobalValueParameters**</a>
 
-این امکان وجود دارد که partner parameters  سراسری را اضافه کنید، که به طور خودکار به هر درخواست سشن و رویداد اضافه می شود. توجه داشته باشید که partner parameter هایی که مستقیماً به متد "trackEvent" ارسال می شوند،global partner parameter های موجود را لغو می کنند. این متد یک «آرایه» را با همان قالب پارامتر [«partnerParams»](#partner-params) از متد «trackEvent» می‌پذیرد.
+این امکان وجود دارد که value parameters  سراسری را اضافه کنید، که به طور خودکار به هر درخواست سشن و رویداد اضافه می شود. توجه داشته باشید که value parameter هایی که مستقیماً به متد "trackEvent" ارسال می شوند،global value parameter های موجود را لغو می کنند. این متد یک «آرایه» را با همان قالب پارامتر [«valueParams»](#value-params) از متد «trackEvent» می‌پذیرد.
 
 مثال:
 
 ```js
-Adtrace.addGlobalPartnerParameters([
+Adtrace.addGlobalValueParameters([
   {key: 'key1', value: 'value1'},
   {key: 'key2', value: 'value2'}
 ]);
 ```
 
-<a id="remove-global-partner-parameter">**removeGlobalPartnerParameter**</a>
+<a id="remove-global-value-parameter">**removeGlobalValueParameter**</a>
 برای حذف callback parameter  جزیی، از این متد با ارائه کلید یک callback param سراسری که باید حذف شود، استفاده کنید
 
 مثال:
 
 ```js
-Adtrace.removeGlobalPartnerParameter('key1');
+Adtrace.removeGlobalValueParameter('key1');
 ```
 
-<a id="clear-global-partner-parameters">**clearGlobalPartnerParameters**</a>
+<a id="clear-global-value-parameters">**clearGlobalValueParameters**</a>
 
-برای پاک کردن تمام partner parameters سراسری، به سادگی این روش را فراخوانی کنید
+برای پاک کردن تمام value parameters سراسری، به سادگی این روش را فراخوانی کنید
 
 مثال:
 
 ```js
-Adtrace.clearGlobalPartnerParameters();
+Adtrace.clearGlobalValueParameters();
 ```
 
 ## <a id="offline-online-mode">Offline/Online mode</a>

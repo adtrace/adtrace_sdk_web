@@ -15,7 +15,7 @@
 - Added retry mechanism for failed attribution requests.
 - Added HTTP request queueing with retry mechanism.
 - Added usage of **indexedDB** with **localStorage** as a fallback.
-- Added global callback and partner parameters, along with removal of previously set ones.
+- Added global callback and value parameters, along with removal of previously set ones.
 - Added offline mode.
 - Added possibility to set the log level on init and optionally specify log container.
 - Added SDK stop and restart possibility.

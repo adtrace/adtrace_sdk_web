@@ -11,7 +11,7 @@ Read this in other languages: [English][en-readme], [Persian][fa-readme]
 * [Initialization](#initialization)
 * [Event tracking](#event-tracking)
 * [Global callback parameters](#global-callback-parameters)
-* [Global partner parameters](#global-partner-parameters)
+* [Global value parameters](#global-value-parameters)
 * [Offline/Online mode](#offline-online-mode)
 * [Stop/Restart SDK](#stop-restart-sdk)
 
@@ -188,22 +188,22 @@ Please note that we don't store any of your custom parameters, but only append t
 
 You can read more about using URL callbacks, including a full list of available values, in our [callbacks guide][callbacks-guide].
 
-<a id="partner-params">**partnerParams**</a> `array`
+<a id="value-params">**valueParams**</a> `array`
 
-You can also add parameters to be transmitted to network partners, which have been activated in your Adtrace panel.
-This works similarly to the callback parameters mentioned above, but can be added by adding `partnerParams` parameter to the map object passed to `trackEvent` method:
+You can also add parameters to be transmitted to network values, which have been activated in your Adtrace panel.
+This works similarly to the callback parameters mentioned above, but can be added by adding `valueParams` parameter to the map object passed to `trackEvent` method:
 
 ```js
 Adtrace.trackEvent({
   // ... other params go here, including mandatory ones
-  partnerParams: [
+  valueParams: [
     {key: 'key', value: 'value'}, 
     {key: 'foo', value: 'bar'}
   ]
 })
 ```
 
-You can read more about special partners and these integrations in our [guide to special partners][special-partners].
+You can read more about special values and these integrations in our [guide to special values][special-values].
 
 <a id="deduplication-id">**deduplicationId**</a> `string`
 
@@ -246,42 +246,42 @@ Example:
 Adtrace.clearGlobalCallbackParameters();
 ```
 
-## <a id="global-partner-parameters">Global partner parameters</a>
+## <a id="global-value-parameters">Global value parameters</a>
 
-It's possible to add, remove and clear global partner parameters in the similar way as for [global callback parameters](#global-callback-parameters). Here is the list of each available method:
+It's possible to add, remove and clear global value parameters in the similar way as for [global callback parameters](#global-callback-parameters). Here is the list of each available method:
 
 
-<a id="add-global-parnter-parameters">**addGlobalPartnerParameters**</a>
+<a id="add-global-parnter-parameters">**addGlobalValueParameters**</a>
 
-It's possible to add global partner parameters, which will be appended automatically to each session and event request. Note that partner params passed directly to `trackEvent` method will override existing global partner params. This method accepts an `array` is the same format as for [`partnerParams`](#partner-params) parameter from `trackEvent` method
+It's possible to add global value parameters, which will be appended automatically to each session and event request. Note that value params passed directly to `trackEvent` method will override existing global value params. This method accepts an `array` is the same format as for [`valueParams`](#value-params) parameter from `trackEvent` method
 
 Example:
 
 ```js
-Adtrace.addGlobalPartnerParameters([
+Adtrace.addGlobalValueParameters([
   {key: 'key1', value: 'value1'},
   {key: 'key2', value: 'value2'}
 ]);
 ```
 
-<a id="remove-global-partner-parameter">**removeGlobalPartnerParameter**</a>
+<a id="remove-global-value-parameter">**removeGlobalValueParameter**</a>
 
-To remove particular partner parameter use this method by providing the key of a global partner param which needs to be removed
+To remove particular value parameter use this method by providing the key of a global value param which needs to be removed
 
 Example:
 
 ```js
-Adtrace.removeGlobalPartnerParameter('key1');
+Adtrace.removeGlobalValueParameter('key1');
 ```
 
-<a id="clear-global-partner-parameters">**clearGlobalPartnerParameters**</a>
+<a id="clear-global-value-parameters">**clearGlobalValueParameters**</a>
 
-In order to clear all global partner parameters simply call this method
+In order to clear all global value parameters simply call this method
 
 Example:
 
 ```js
-Adtrace.clearGlobalPartnerParameters();
+Adtrace.clearGlobalValueParameters();
 ```
 
 ## <a id="offline-online-mode">Offline/Online mode</a>

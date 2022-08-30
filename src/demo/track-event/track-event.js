@@ -9,7 +9,7 @@ let _disabled = false
 let _timeoutId = null
 
 let _eventCallbackParams = null
-let _eventPartnerParams = null
+let _eventValueParams = null
 
 function init (defaultEventConfig = {}) {
   _defaultEventConfig = {...defaultEventConfig}
@@ -39,13 +39,13 @@ function _handleSave (e) {
   _ui.submitButton.disabled = true
 
   const callbackParams = _eventCallbackParams.query()
-  const partnerParams = _eventPartnerParams.query()
+  const valueParams = _eventValueParams.query()
   const initial = {}
   if (callbackParams.length) {
     initial.callbackParams = callbackParams
   }
-  if (partnerParams.length) {
-    initial.partnerParams = partnerParams
+  if (valueParams.length) {
+    initial.valueParams = valueParams
   }
 
   const eventConfig = Object.keys(_form)
@@ -102,10 +102,10 @@ function _prepareForm () {
   _form.deduplicationId = _ui.eventConfigForm.querySelector('#deduplication-id')
 
   _eventCallbackParams = KeyValueParams('event-callback-params', eventConfig.callbackParams)
-  _eventPartnerParams = KeyValueParams('event-partner-params', eventConfig.partnerParams)
+  _eventValueParams = KeyValueParams('event-value-params', eventConfig.valueParams)
 
   _eventCallbackParams.init()
-  _eventPartnerParams.init()
+  _eventValueParams.init()
 
   Object.keys(_form).map(key => _form[key].value = eventConfig[key] || '')
 
