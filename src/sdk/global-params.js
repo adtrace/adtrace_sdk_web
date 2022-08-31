@@ -50,7 +50,7 @@ function get (): Promise<GlobalParamsMapT> {
   ]).then(([callbackParams, valueParams]) => {
     return {
       callbackParams: _omitType(callbackParams),
-      valueParams: _omitType(valueParams)
+      eventValueParams: _omitType(valueParams)
     }
   })
 }

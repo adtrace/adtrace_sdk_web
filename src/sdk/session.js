@@ -216,10 +216,10 @@ function _stopTimer (): void {
  * @returns {Object}
  * @private
  */
-function _prepareParams ({callbackParams, valueParams}: $ReadOnly<GlobalParamsMapT>): SessionRequestParamsT {
+function _prepareParams ({callbackParams, eventValueParams}: $ReadOnly<GlobalParamsMapT>): SessionRequestParamsT {
   return {
     callbackParams: callbackParams.length ? convertToMap(callbackParams) : null,
-    valueParams: valueParams.length ? convertToMap(valueParams) : null
+    valueParams: eventValueParams.length ? convertToMap(eventValueParams) : null
   }
 }
 

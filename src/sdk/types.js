@@ -140,7 +140,7 @@ export type GlobalParamsT = {|
 
 export type GlobalParamsMapT = {
   callbackParams: Array<GlobalParamsT>,
-  valueParams: Array<GlobalParamsT>
+  eventValueParams: Array<GlobalParamsT>
 }
 
 export type EventParamsT = {|
@@ -149,7 +149,7 @@ export type EventParamsT = {|
   currency?: string,
   deduplicationId?: string,
   callbackParams?: Array<GlobalParamsT>,
-  valueParams?: Array<GlobalParamsT>
+  eventValueParams?: Array<GlobalParamsT>
 |}
 
 export type BaseParamsT = $ReadOnly<$Shape<{

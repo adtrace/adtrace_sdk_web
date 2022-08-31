@@ -8969,7 +8969,7 @@ function get()
 
     return {
       callbackParams: _omitType(callbackParams),
-      valueParams: _omitType(valueParams)
+      eventValueParams: _omitType(valueParams)
     };
   });
 }
@@ -9353,12 +9353,12 @@ function session_prepareParams(_ref
   var callbackParams = _ref
   /*:: */
   .callbackParams,
-      valueParams = _ref
+      eventValueParams = _ref
   /*:: */
-  .valueParams;
+  .eventValueParams;
   return {
     callbackParams: callbackParams.length ? convertToMap(callbackParams) : null,
-    valueParams: valueParams.length ? convertToMap(valueParams) : null
+    valueParams: eventValueParams.length ? convertToMap(eventValueParams) : null
   };
 }
 /**
@@ -10007,9 +10007,9 @@ function _getRevenue(revenue
  * @param {number=} params.revenue
  * @param {string=} params.currency
  * @param {Array=} params.callbackParams
- * @param {Array=} params.valueParams
+ * @param {Array=} params.eventValueParams
  * @param {Array} callbackParams
- * @param {Array} valueParams
+ * @param {Array} eventValueParams
  * @returns {Object}
  * @private
  */
@@ -10025,9 +10025,9 @@ function event_prepareParams(params
   var callbackParams = _ref
   /*:: */
   .callbackParams,
-      valueParams = _ref
+      eventValueParams = _ref
   /*:: */
-  .valueParams;
+  .eventValueParams;
   var globalParams = {};
 
   var baseParams = objectSpread2_default()({
@@ -10038,16 +10038,16 @@ function event_prepareParams(params
   /*: GlobalKeyValueParamsT*/
   = objectSpread2_default()(objectSpread2_default()({}, convertToMap(callbackParams)), convertToMap(params.callbackParams));
 
-  var eventValueParams
+  var eventValueParams2
   /*: GlobalKeyValueParamsT*/
-  = objectSpread2_default()(objectSpread2_default()({}, convertToMap(valueParams)), convertToMap(params.valueParams));
+  = objectSpread2_default()(objectSpread2_default()({}, convertToMap(eventValueParams)), convertToMap(params.eventValueParams));
 
   if (!isEmpty(eventCallbackParams)) {
     globalParams.callbackParams = eventCallbackParams;
   }
 
   if (!isEmpty(eventValueParams)) {
-    globalParams.valueParams = eventValueParams;
+    globalParams.eventValueParams = eventValueParams2;
   }
 
   return objectSpread2_default()(objectSpread2_default()({}, baseParams), globalParams);

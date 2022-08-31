@@ -39,13 +39,13 @@ function _handleSave (e) {
   _ui.submitButton.disabled = true
 
   const callbackParams = _eventCallbackParams.query()
-  const valueParams = _eventValueParams.query()
+  const eventValueParams = _eventValueParams.query()
   const initial = {}
   if (callbackParams.length) {
     initial.callbackParams = callbackParams
   }
-  if (valueParams.length) {
-    initial.valueParams = valueParams
+  if (eventValueParams.length) {
+    initial.eventValueParams = eventValueParams
   }
 
   const eventConfig = Object.keys(_form)

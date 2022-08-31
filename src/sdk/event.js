@@ -60,13 +60,13 @@ function _getRevenue (revenue: number | void, currency: string | void): RevenueT
  * @param {number=} params.revenue
  * @param {string=} params.currency
  * @param {Array=} params.callbackParams
- * @param {Array=} params.valueParams
+ * @param {Array=} params.eventValueParams
  * @param {Array} callbackParams
- * @param {Array} valueParams
+ * @param {Array} eventValueParams
  * @returns {Object}
  * @private
  */
-function _prepareParams (params: EventParamsT, {callbackParams, valueParams}: $ReadOnly<GlobalParamsMapT>): EventRequestParamsT {
+function _prepareParams (params: EventParamsT, {callbackParams, eventValueParams}: $ReadOnly<GlobalParamsMapT>): EventRequestParamsT {
   const globalParams = {}
   const baseParams = {
     eventToken: params.eventToken,
@@ -77,9 +77,9 @@ function _prepareParams (params: EventParamsT, {callbackParams, valueParams}: $R
     ...convertToMap(callbackParams),
     ...convertToMap(params.callbackParams)
   }
-  const eventValueParams: GlobalKeyValueParamsT = {
-    ...convertToMap(valueParams),
-    ...convertToMap(params.valueParams)
+  const eventValueParams2: GlobalKeyValueParamsT = {
+    ...convertToMap(eventValueParams),
+    ...convertToMap(params.eventValueParams)
   }
 
   if (!isEmpty(eventCallbackParams)) {
@@ -87,7 +87,7 @@ function _prepareParams (params: EventParamsT, {callbackParams, valueParams}: $R
   }
 
   if (!isEmpty(eventValueParams)) {
-    globalParams.valueParams = eventValueParams
+    globalParams.eventValueParams = eventValueParams2
   }
 
   return {...baseParams, ...globalParams}
