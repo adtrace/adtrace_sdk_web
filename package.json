@@ -1,6 +1,7 @@
 {
   "name": "web-adtrace-test",
-  "version": "2.0.6",
+  "version": "2.0.9",
+  "private": false,
   "description": "Web SDK of Adtrace",
   "scripts": {
     "build:demo": "webpack --mode production --config webpack.demo.config.js",
