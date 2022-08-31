@@ -212,7 +212,7 @@ function _stopTimer (): void {
  * Prepare parameters for the session tracking
  *
  * @param {Array} callbackParams
- * @param {Array} valueParams
+ * @param {Array} eventValueParams
  * @returns {Object}
  * @private
  */
