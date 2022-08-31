@@ -52,19 +52,19 @@ declare namespace Adtrace {
      * without a callback they will not be saved nor sent to you. */
     callbackParams?: Array<GlobalParams>;
 
-    /** Optional. You can also add parameters to be transmitted to network partners, which have been activated in your
+    /** Optional. You can also add parameters to be transmitted to network values, which have been activated in your
      * Adtrace dashboard. This works similarly to the callback parameters.
      *
      * @example
      * Adtrace.trackEvent({
      *   // ... other params go here, including mandatory ones
-     *   partnerParams: [
+     *   eventValueParams: [
      *     {key: 'key', value: 'value'},
      *     {key: 'foo', value: 'bar'}
      *   ]
      * })
      * */
-    partnerParams?: Array<GlobalParams>;
+    eventValueParams?: Array<GlobalParams>;
   }
 
   type LogLevel = 'none' | 'error' | 'warning' | 'info' | 'verbose'
@@ -175,12 +175,12 @@ declare namespace Adtrace {
    *     {key: 'some-key-2', value: 'some-value-2'},
    *     {key: 'key1', value: 'new-value1'}
    *   ],
-   *   partnerParams: [
+   *   eventValueParams: [
    *     {key: 'key-1', value: 'new-value-1'},
-   *     {key: 'some-partner-key-1', value: 'some-partner-value-1'},
+   *     {key: 'some-value-key-1', value: 'some-value-value-1'},
    *     {key: 'key-2', value: 'new-value-2'},
-   *     {key: 'some-partner-key-2', value: 'some-partner-value-2'},
-   *     {key: 'some-partner-key-1', value: 'some-partner-value-3'}
+   *     {key: 'some-value-key-2', value: 'some-value-value-2'},
+   *     {key: 'some-value-key-1', value: 'some-value-value-3'}
    *   ]
    * });
    */
@@ -203,20 +203,20 @@ declare namespace Adtrace {
   function addGlobalCallbackParameters(params: Array<GlobalParams>): void
 
   /**
-   * Add global partner parameters
+   * Add global value parameters
    *
-   * Global partner parameters will be appended automatically to each session and event request. Note that partner
-   * params passed directly to `trackEvent` method will override existing global partner params.
+   * Global value parameters will be appended automatically to each session and event request. Note that value
+   * params passed directly to `trackEvent` method will override existing global value params.
    *
    * @example
-   * Adtrace.addGlobalPartnerParameters([
+   * Adtrace.addGlobalValueParameters([
    *   {key: 'key1', value: 'value1'},
    *   {key: 'key2', value: 'value2'}
    * ]);
    *
    * @param {Array} params
    */
-  function addGlobalPartnerParameters(params: Array<GlobalParams>): void
+  function addGlobalValueParameters(params: Array<GlobalParams>): void
 
   /**
    * Remove global callback parameter by key
@@ -232,17 +232,17 @@ declare namespace Adtrace {
   function removeGlobalCallbackParameter(key: string): void
 
   /**
-   * Remove global partner parameter by key
+   * Remove global value parameter by key
    *
-   * To remove particular partner parameter use this method by providing the key of a global partner param which needs
+   * To remove particular value parameter use this method by providing the key of a global value param which needs
    * to be removed.
    *
    * @example
-   * Adtrace.removeGlobalPartnerParameter('key1');
+   * Adtrace.removeGlobalValueParameter('key1');
    *
    * @param {string} key
    */
-  function removeGlobalPartnerParameter(key: string): void
+  function removeGlobalValueParameter(key: string): void
 
   /**
    * Remove all global callback parameters
@@ -250,9 +250,9 @@ declare namespace Adtrace {
   function clearGlobalCallbackParameters(): void
 
   /**
-   * Remove all global partner parameters
+   * Remove all global value parameters
    */
-  function clearGlobalPartnerParameters(): void
+  function clearGlobalValueParameters(): void
 
   /**
    * Switch offline mode
@@ -278,53 +278,6 @@ declare namespace Adtrace {
    */
   function restart(): void
 
-  /**
-   * Disable sdk and send GDPR-Forget-Me request
-   *
-   * This method will stop Adtrace SDK from running and will notify Adtrace backend that user wants to be GDPR forgotten.
-   * Once this method is run it's not possible to restart Adtrace SDK anymore.
-   */
-  function gdprForgetMe(): void
-
-  /**
-   * Disable third party sharing
-   *
-   * Marketing Opt-out, which is disabling third-party sharing ability. This method will notify our backed in the same
-   * manner as it does for GDPR Forget me.
-   */
-  function disableThirdPartySharing(): void
-
-  interface SmartBannerOptions {
-
-    /** Web token to initialise Smart Banner */
-    webToken: string;
-
-    /** Optional. Logging level used by SDK instance. By default this param is set to `error`. We highly recommend that
-     * you use `verbose` when testing in order to see precise logs and to make sure integration is done properly.
-     * Here are more details about each log level:
-     * - `verbose` - will print detailed messages in case of certain actions
-     * - `info` - will print only basic info messages, warnings and errors
-     * - `warning` - will print only warning and error messages
-     * - `error` - will print only error message
-     * - `none` - won't print anything
-     */
-    logLevel?: LogLevel;
-  }
-
-  /**
-   * Initiate Smart Banner.
-   *
-   * This method gets Smart Banner data and creates Smart Banner UI.
-   *
-   * @param {SmartBannerOptions} options Options to initiate Smart Banner.
-   *
-   * @example
-   * Adtrace.initSmartBanner({
-   *   webToken: 'YOUR_WEB_TOKEN',
-   *   logLevel: 'verbose'
-   * });
-   */
-  function initSmartBanner(options: SmartBannerOptions): void
 
 }
 

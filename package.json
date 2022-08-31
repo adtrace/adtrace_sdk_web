@@ -1,6 +1,6 @@
 {
   "name": "web-adtrace-test",
-  "version": "2.0.9",
+  "version": "2.0.11",
   "private": false,
   "description": "Web SDK of Adtrace",
   "scripts": {
