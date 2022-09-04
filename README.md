@@ -2,7 +2,6 @@
 
 This is the guide to the Javascript SDK of Adtrace™ for web sites or web apps. You can read more about Adtrace™ at [adtrace.io].
 
-Read this in other languages: [English][en-readme], [Persian][fa-readme]
 
 ## Table of contents
 
@@ -188,15 +187,15 @@ Please note that we don't store any of your custom parameters, but only append t
 
 You can read more about using URL callbacks, including a full list of available values, in our [callbacks guide][callbacks-guide].
 
-<a id="value-params">**valueParams**</a> `array`
+<a id="value-params">**eventValueParams**</a> `array`
 
 You can also add parameters to be transmitted to network values, which have been activated in your Adtrace panel.
-This works similarly to the callback parameters mentioned above, but can be added by adding `valueParams` parameter to the map object passed to `trackEvent` method:
+This works similarly to the callback parameters mentioned above, but can be added by adding `eventValueParams` parameter to the map object passed to `trackEvent` method:
 
 ```js
 Adtrace.trackEvent({
   // ... other params go here, including mandatory ones
-  valueParams: [
+  eventValueParams: [
     {key: 'key', value: 'value'}, 
     {key: 'foo', value: 'bar'}
   ]

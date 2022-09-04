@@ -204,15 +204,14 @@ https://www.mydomain.com/callback?key=value&foo=bar
 
 لطفاً توجه داشته باشید که ما هیچ یک از پارامترهای سفارشی شما را ذخیره نمی‌کنیم، بلکه فقط آنها را به تماس‌های شما اضافه می‌کنیم، بنابراین بدون پاسخ به تماس، ذخیره نمی‌شوند و برای شما ارسال نمی‌شوند.
 
-<a id="value-params">**valueParams**</a> `array`
+<a id="value-params">**eventValueParams**</a> `array`
 
-همچنین می توانید پارامترهایی را برای انتقال به network values اضافه کنید که در داشبورد Adtrace شما فعال شده اند.
-این به طور مشابه با callback parameters ذکر شده در بالا عمل می کند، اما می توان با افزودن پارامتر «valueParams» به آبجکت ارسال شده به متد «trackEvent» اضافه کرد:
+این  به طور مشابه با callback parameters ذکر شده در بالا عمل می کند، اما می توان با افزودن پارامتر «eventValueParams» به آبجکت ارسال شده به متد «trackEvent» اضافه کرد:
 
 ```js
 Adtrace.trackEvent({
   // ... other params go here, including mandatory ones
-  valueParams: [
+  eventValueParams: [
     {key: 'key', value: 'value'}, 
     {key: 'foo', value: 'bar'}
   ]
