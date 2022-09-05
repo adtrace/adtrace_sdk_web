@@ -1231,9 +1231,9 @@ var Promise$1 = function () {
   /**
     `finally` will be invoked regardless of the promise's fate just as native
     try/catch/finally behaves
-  
+
     Synchronous example:
-  
+
     ```js
     findAuthor() {
       if (Math.random() > 0.5) {
@@ -1241,7 +1241,7 @@ var Promise$1 = function () {
       }
       return new Author();
     }
-  
+
     try {
       return findAuthor(); // succeed or fail
     } catch(error) {
@@ -1251,9 +1251,9 @@ var Promise$1 = function () {
       // doesn't affect the return value
     }
     ```
-  
+
     Asynchronous example:
-  
+
     ```js
     findAuthor().catch(function(reason){
       return findOtherAuther();
@@ -1261,7 +1261,7 @@ var Promise$1 = function () {
       // author was either found, or not
     });
     ```
-  
+
     @method finally
     @param {Function} callback
     @return {Promise}
@@ -2108,7 +2108,7 @@ function isEmptyEntry(value
 |}*/
 var Globals = {
   namespace: "adtrace-sdk" || false,
-  version: "2.0.7" || false,
+  version: "2.1.0" || false,
   env: "production"
 };
 /* harmony default export */ var globals = (Globals);
@@ -2301,7 +2301,7 @@ var Logger = {
 
 
 
-/*:: // 
+/*:: //
 import { type BaseParamsT, type CustomConfigT, type InitOptionsT, type BaseParamsListT, type BaseParamsMandatoryListT, type CustomConfigListT } from './types';*/
 
 
@@ -3389,7 +3389,7 @@ function timePassed(d1
 // CONCATENATED MODULE: ./src/sdk/activity-state.js
 
 
-/*:: // 
+/*:: //
 import { type UrlT, type ActivityStateMapT, type CommonRequestParams } from './types';*/
 
 
@@ -6549,7 +6549,7 @@ function storage_init(dbName
 
 
 var default_params_Promise = typeof Promise === 'undefined' ? __webpack_require__(3).Promise : Promise;
-/*:: // 
+/*:: //
 import { type NavigatorT, type CreatedAtT, type SentAtT, type WebUuidT, type TrackEnabledT, type PlatformT, type LanguageT, type MachineTypeT, type QueueSizeT, type DefaultParamsT } from './types';*/
 
 
@@ -6828,7 +6828,7 @@ function urlStrategyRetries
 
 
 var http_Promise = typeof Promise === 'undefined' ? __webpack_require__(3).Promise : Promise;
-/*:: // 
+/*:: //
 import { type UrlT, type DefaultParamsT, type HttpSuccessResponseT, type HttpErrorResponseT, type HttpRequestParamsT, type ErrorCodeT } from './types';*/
 
 
@@ -7284,7 +7284,7 @@ function http(options
   });
 }
 // CONCATENATED MODULE: ./src/sdk/backoff.js
-/*:: // 
+/*:: //
 import { type BackOffStrategyT } from './types';*/
 
 /**
@@ -7353,7 +7353,7 @@ function backOff(attempts
 // CONCATENATED MODULE: ./src/sdk/listeners.js
 
 
-/*:: // 
+/*:: //
 import { type DocumentT } from './types';*/
 
 /*:: type EventCbT = (e: Event) => void*/
@@ -7524,7 +7524,7 @@ function listeners_destroy()
 
 
 var request_Promise = typeof Promise === 'undefined' ? __webpack_require__(3).Promise : Promise;
-/*:: // 
+/*:: //
 import { type HttpSuccessResponseT, type HttpErrorResponseT, type HttpContinueCbT, type BackOffStrategyT, type WaitT, type UrlT, type MethodT, type RequestParamsT, type HttpRequestParamsT } from './types';*/
 
 
@@ -8295,7 +8295,7 @@ function disable_status()
 
 
 var identity_Promise = typeof Promise === 'undefined' ? __webpack_require__(3).Promise : Promise;
-/*:: // 
+/*:: //
 import { type ActivityStateMapT } from './types';*/
 
 
@@ -8518,7 +8518,7 @@ function identity_destroy()
 
 
 var queue_Promise = typeof Promise === 'undefined' ? __webpack_require__(3).Promise : Promise;
-/*:: // 
+/*:: //
 import { type HttpSuccessResponseT, type HttpErrorResponseT, type HttpFinishCbT, type WaitT, type UrlT, type MethodT, type RequestParamsT, type ActivityStateMapT } from './types';*/
 
 
@@ -8901,7 +8901,7 @@ function queue_destroy()
 
 
 var global_params_Promise = typeof Promise === 'undefined' ? __webpack_require__(3).Promise : Promise;
-/*:: // 
+/*:: //
 import { type GlobalParamsT, type GlobalParamsMapT } from './types';*/
 
 
@@ -9097,7 +9097,7 @@ function global_params_clear()
 
 // CONCATENATED MODULE: ./src/sdk/session.js
 var session_Promise = typeof Promise === 'undefined' ? __webpack_require__(3).Promise : Promise;
-/*:: // 
+/*:: //
 import { type DocumentT, type HttpSuccessResponseT, type HttpErrorResponseT, type GlobalParamsMapT, type SessionRequestParamsT } from './types';*/
 
 
@@ -9412,7 +9412,7 @@ function _checkSession()
 
 
 var attribution_Promise = typeof Promise === 'undefined' ? __webpack_require__(3).Promise : Promise;
-/*:: // 
+/*:: //
 import { type HttpSuccessResponseT, type HttpErrorResponseT, type HttpFinishCbT, type HttpRetryCbT, type AttributionStateT, type AttributionWhiteListT, type ActivityStateMapT, type AttributionMapT } from './types';*/
 
 
@@ -9944,7 +9944,7 @@ function scheduler_destroy()
 
 
 var event_Promise = typeof Promise === 'undefined' ? __webpack_require__(3).Promise : Promise;
-/*:: // 
+/*:: //
 import { type EventParamsT, type EventRequestParamsT, type GlobalParamsMapT, type GlobalKeyValueParamsT } from './types';*/
 
 
@@ -10164,7 +10164,7 @@ function event_event(params
   });
 }
 // CONCATENATED MODULE: ./src/sdk/sdk-click.js
-/*:: // 
+/*:: //
 import { type SdkClickRequestParamsT } from './types';*/
 
 
@@ -10226,7 +10226,7 @@ function sdkClick()
 var _excluded = ["logLevel", "logOutput"];
 
 var main_Promise = typeof Promise === 'undefined' ? __webpack_require__(3).Promise : Promise;
-/*:: // 
+/*:: //
 import { type InitOptionsT, type LogOptionsT, type EventParamsT, type GlobalParamsT, type CustomErrorT, type ActivityStateMapT } from './types';*/
 
 
