@@ -1,8 +1,8 @@
-import Adjust from '../../sdk/main'
+import Adtrace from '../../sdk/main'
 import SimpleAction from '../simple-action'
 
 function init () {
-  SimpleAction('stop', Adjust.stop)()
+  SimpleAction('stop', Adtrace.stop)()
 }
 
 export default init

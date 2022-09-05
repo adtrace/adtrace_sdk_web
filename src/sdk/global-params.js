@@ -4,7 +4,7 @@ import Storage from './storage/storage'
 import Logger from './logger'
 import {convertToMap, intersection} from './utilities'
 
-type TypeT = 'callback' | 'partner'
+type TypeT = 'callback' | 'value'
 type KeysT = [string, TypeT]
 type KeysArrayT = Array<KeysT>
 
@@ -24,7 +24,7 @@ const _storeName = 'globalParams'
  */
 const _error = {
   short: 'No type provided',
-  long: 'Global parameter type not provided, `callback` or `partner` types are available'
+  long: 'Global parameter type not provided, `callback` or `value` types are available'
 }
 
 /**
@@ -39,24 +39,24 @@ function _omitType (params): Array<GlobalParamsT> {
 }
 
 /**
- * Get callback and partner global parameters
+ * Get callback and value global parameters
  *
  * @returns {Promise}
  */
 function get (): Promise<GlobalParamsMapT> {
   return Promise.all([
     Storage.filterBy(_storeName, 'callback'),
-    Storage.filterBy(_storeName, 'partner')
-  ]).then(([callbackParams, partnerParams]) => {
+    Storage.filterBy(_storeName, 'value')
+  ]).then(([callbackParams, valueParams]) => {
     return {
       callbackParams: _omitType(callbackParams),
-      partnerParams: _omitType(partnerParams)
+      eventValueParams: _omitType(valueParams)
     }
   })
 }
 
 /**
- * Add global parameters, either callback or partner params
+ * Add global parameters, either callback or value params
  *
  * @param {Array} params
  * @param {string} type

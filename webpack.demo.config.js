@@ -34,8 +34,8 @@ module.exports = () => ({
       chunkFilename: '[id].css'
     }),
     new webpack.DefinePlugin({
-      __ADJUST__NAMESPACE: JSON.stringify(namespace),
-      __ADJUST__SDK_VERSION: JSON.stringify(version)
+      __Adtrace__NAMESPACE: JSON.stringify(namespace),
+      __Adtrace__SDK_VERSION: JSON.stringify(version)
     }),
     new FlowWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin()
@@ -59,19 +59,6 @@ module.exports = () => ({
       use: [
         MiniCssExtractPlugin.loader,
         { loader: 'css-loader', },
-        { loader: 'sass-loader' }
-      ]
-    }, {
-      test: /\.module\.s?css$/,
-      use: [
-        MiniCssExtractPlugin.loader,
-        {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-            localIdentName: 'adtrace-smart-banner-[local]__[hash:base64:5]',
-          }
-        },
         { loader: 'sass-loader' }
       ]
     }, {

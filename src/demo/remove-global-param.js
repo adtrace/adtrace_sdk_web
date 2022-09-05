@@ -1,4 +1,4 @@
-import Adjust from '../sdk/main'
+import Adtrace from '../sdk/main'
 import {debounce} from './utils'
 
 const RemoveGlobalParam = (id, handleName) => {
@@ -40,7 +40,7 @@ const RemoveGlobalParam = (id, handleName) => {
       _disabled = false
       _ui.submitButton.classList.remove('loading')
       _ui.submitButton.disabled = false
-      Adjust[_handleName](value)
+      Adtrace[_handleName](value)
 
       _handleToggle()
       _ui.input.value = ''
@@ -54,7 +54,7 @@ const RemoveGlobalParam = (id, handleName) => {
   }
 
   function _handleChange (e = {target: {value: ''}}) {
-    _ui.json.textContent = `Adjust.${_handleName}(${e.target.value})`
+    _ui.json.textContent = `Adtrace.${_handleName}(${e.target.value})`
   }
 
   return init

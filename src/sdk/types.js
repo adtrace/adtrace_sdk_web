@@ -54,12 +54,12 @@ export type EventRequestParamsT = {|
   revenue?: string,
   currency?: string,
   callbackParams?: ?GlobalKeyValueParamsT,
-  partnerParams?: ?GlobalKeyValueParamsT
+  valueParams?: ?GlobalKeyValueParamsT
 |}
 
 export type SessionRequestParamsT = {|
   callbackParams?: ?GlobalKeyValueParamsT,
-  partnerParams?: ?GlobalKeyValueParamsT
+  valueParams?: ?GlobalKeyValueParamsT
 |}
 
 export type SdkClickRequestParamsT = {|
@@ -140,7 +140,7 @@ export type GlobalParamsT = {|
 
 export type GlobalParamsMapT = {
   callbackParams: Array<GlobalParamsT>,
-  partnerParams: Array<GlobalParamsT>
+  eventValueParams: Array<GlobalParamsT>
 }
 
 export type EventParamsT = {|
@@ -149,7 +149,7 @@ export type EventParamsT = {|
   currency?: string,
   deduplicationId?: string,
   callbackParams?: Array<GlobalParamsT>,
-  partnerParams?: Array<GlobalParamsT>
+  eventValueParams?: Array<GlobalParamsT>
 |}
 
 export type BaseParamsT = $ReadOnly<$Shape<{

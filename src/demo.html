@@ -54,12 +54,12 @@
       {key: 'some-key-2', value: 'some-value-2'},
       {key: 'key1', value: 'new-value1'}
     ],
-    partnerParams: [
+    valueParams: [
       {key: 'key-1', value: 'new-value-1'},
-      {key: 'some-partner-key-1', value: 'some-partner-value-1'},
+      {key: 'some-value-key-1', value: 'some-value-value-1'},
       {key: 'key-2', value: 'new-value-2'},
-      {key: 'some-partner-key-2', value: 'some-partner-value-2'},
-      {key: 'some-partner-key-1', value: 'some-partner-value-3'}
+      {key: 'some-value-key-2', value: 'some-value-value-2'},
+      {key: 'some-value-key-1', value: 'some-value-value-3'}
     ]
   });
   */
@@ -75,10 +75,10 @@
   */
 
   /**
-   * addGlobalPartnerParameters: add global partner parameters
+   * addGlobalValueParameters: add global value parameters
    */
   /*
-  Adtrace.addGlobalPartnerParameters([
+  Adtrace.addGlobalValueParameters([
     {key: 'key-1', value: 'value-1'},
     {key: 'key-2', value: 'value-2'},
     {key: 'key-3', value: 'value-3'}
@@ -93,10 +93,10 @@
   */
 
   /**
-   * removeGlobalPartnerParameter: remove global partner parameters
+   * removeGlobalValueParameter: remove global value parameters
    */
   /*
-  Adtrace.removeGlobalPartnerParameter('key-1');
+  Adtrace.removeGlobalValueParameter('key-1');
   */
 
   /**
@@ -107,10 +107,10 @@
   */
 
   /**
-   * clearGlobalPartnerParameters: clear all global partner parameters
+   * clearGlobalValueParameters: clear all global value parameters
    */
   /*
-  Adtrace.clearGlobalPartnerParameters();
+  Adtrace.clearGlobalValueParameters();
   */
 
   /**
@@ -141,19 +141,7 @@
   Adtrace.restart();
   */
 
-  /**
-   * gdprForgetMe: initiate GDPR forget me request
-   */
-  /*
-  Adtrace.gdprForgetMe();
-  */
 
-  /**
-   * disableThirdPartySharing: initiate marketing opt-out request
-   */
-  /*
-  Adtrace.disableThirdPartySharing();
-  */
 </script>
 </body>
 </html>

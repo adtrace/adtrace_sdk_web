@@ -74,7 +74,7 @@ function _intercept (stored: ActivityStateMapT): InterceptT {
  */
 function start (): Promise<ActivityStateMapT> {
   if (_starting) {
-    return Promise.reject({interrupted: true, message: 'Adjust SDK start already in progress'})
+    return Promise.reject({interrupted: true, message: 'Adtrace SDK start already in progress'})
   }
   _starting = true
 

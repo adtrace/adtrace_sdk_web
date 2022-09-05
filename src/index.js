@@ -3,7 +3,7 @@ import './assets/scss/index.scss'
 import main from './demo/main'
 
 const appConfig = {
-  appToken: 'gjs8vqf88gai',
+  appToken: 'anykmem88j9x',
   environment: 'production', // production or sandbox
   logLevel: 'verbose', // none, error, info, verbose
   logOutput: '#log',
@@ -23,7 +23,7 @@ const basicEventConfig = {
   //   {key: 'YOUR_KEY_1', value: 'YOUR_VALUE_1'},
   //   {key: 'YOUR_KEY_2', value: 'YOUR_VALUE_2'}
   // ],
-  // partnerParams: [
+  // valueParams: [
   //   {key: 'YOUR_KEY_1', value: 'YOUR_VALUE_1'},
   //   {key: 'YOUR_KEY_2', value: 'YOUR_VALUE_2'}
   // ]

@@ -1,8 +1,8 @@
-import Adjust from '../../sdk/main'
+import Adtrace from '../../sdk/main'
 import SimpleAction from '../simple-action'
 
 function init () {
-  SimpleAction('cleargcp', Adjust.clearGlobalCallbackParameters)()
+  SimpleAction('cleargcp', Adtrace.clearGlobalCallbackParameters)()
 }
 
 export default init

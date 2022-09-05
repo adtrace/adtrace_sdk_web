@@ -1,4 +1,4 @@
-import Adjust from '../sdk/main'
+import Adtrace from '../sdk/main'
 import KeyValueParams from './key-value-params/key-value-params'
 
 const AddGlobalParams = (id, handleName) => {
@@ -42,7 +42,7 @@ const AddGlobalParams = (id, handleName) => {
       _disabled = false
       _ui.submitButton.classList.remove('loading')
       _ui.submitButton.disabled = false
-      Adjust[_handleName](params)
+      Adtrace[_handleName](params)
 
       _handleToggle()
       _params.reset()
@@ -56,7 +56,7 @@ const AddGlobalParams = (id, handleName) => {
   }
 
   function _handleChange () {
-    _ui.json.textContent = `Adjust.${_handleName}(${JSON.stringify(_params.query(), undefined, 2)})`
+    _ui.json.textContent = `Adtrace.${_handleName}(${JSON.stringify(_params.query(), undefined, 2)})`
   }
 
   return init

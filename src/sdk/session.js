@@ -212,14 +212,14 @@ function _stopTimer (): void {
  * Prepare parameters for the session tracking
  *
  * @param {Array} callbackParams
- * @param {Array} partnerParams
+ * @param {Array} eventValueParams
  * @returns {Object}
  * @private
  */
-function _prepareParams ({callbackParams, partnerParams}: $ReadOnly<GlobalParamsMapT>): SessionRequestParamsT {
+function _prepareParams ({callbackParams, eventValueParams}: $ReadOnly<GlobalParamsMapT>): SessionRequestParamsT {
   return {
     callbackParams: callbackParams.length ? convertToMap(callbackParams) : null,
-    partnerParams: partnerParams.length ? convertToMap(partnerParams) : null
+    valueParams: eventValueParams.length ? convertToMap(eventValueParams) : null
   }
 }
 

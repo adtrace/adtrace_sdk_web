@@ -33,7 +33,7 @@ pipeline {
       }
 
       steps {
-        sh "rsync -e 'ssh -o StrictHostKeyChecking=no' -va --rsync-path='mkdir -p /home/dashboard/web-sdk-demo/current/public/ && rsync' --delete ./demo/ dashboard@jenkins-2.adtrace.io://home/dashboard/web-sdk-demo/current/public/"
+        sh "rsync -e 'ssh -o StrictHostKeyChecking=no' -va --rsync-path='mkdir -p /home/panel/web-sdk-demo/current/public/ && rsync' --delete ./demo/ panel@jenkins-2.adtrace.io://home/panel/web-sdk-demo/current/public/"
       }
     }
   }

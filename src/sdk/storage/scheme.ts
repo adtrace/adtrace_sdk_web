@@ -118,7 +118,7 @@ const _queueScheme: StoreOptions = {
         revenue: 're',
         currency: 'cu',
         callbackParams: 'cp',
-        partnerParams: 'pp'
+        valueParams: 'pp'
       }
     }
   }
@@ -185,7 +185,7 @@ const _globalParamsScheme: StoreOptions = {
       key: 't',
       values: {
         callback: 1,
-        partner: 2
+        value: 2
       }
     }
   }

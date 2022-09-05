@@ -28,8 +28,8 @@ module.exports = () => ({
   },
   plugins: [
     new webpack.DefinePlugin({
-      __ADJUST__NAMESPACE: JSON.stringify(namespace),
-      __ADJUST__SDK_VERSION: JSON.stringify(version)
+      __Adtrace__NAMESPACE: JSON.stringify(namespace),
+      __Adtrace__SDK_VERSION: JSON.stringify(version)
     }),
     new FlowWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin()
@@ -47,19 +47,6 @@ module.exports = () => ({
       use: 'babel-loader',
       test: /\.(js|ts)$/,
       exclude: /node_modules/
-    }, {
-      test: /\.module\.s?css$/,
-      use: [
-        { loader: 'style-loader' },
-        {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-            localIdentName: 'adtrace-smart-banner__[hash:base64]',
-          },
-        },
-        { loader: 'sass-loader' }
-      ]
     }]
   }
 })
