@@ -1,3 +1,10 @@
+<p align="center"><a href="https://adtrace.io" target="_blank" rel="noopener noreferrer"><img width="100" src="https://adtrace.io/fa/wp-content/uploads/2020/09/cropped-logo-sign-07-1.png" alt="Adtrace logo"></a></p>
+
+<p align="center">
+  <a href='https://www.npmjs.com/package/web-adtrace'><img src='https://img.shields.io/npm/v/web-adtrace.svg'></a>
+  <a href='https://opensource.org/licenses/MIT'><img src='https://img.shields.io/badge/License-MIT-green.svg'></a>
+</p>
+
 ## Summary
 
 This is the guide to the Javascript SDK of Adtrace™ for web sites or web apps. You can read more about Adtrace™ at [adtrace.io].
@@ -34,11 +41,11 @@ The Adtrace Web SDK should be loaded only once per page and it should be initiat
 It's also possible to install our sdk through NPM:
 
 ```
-npm install web-adtrace-test --save
+npm install web-adtrace --save
 ```
 and import that :
 ```
-import Adtrace from "web-adtrace-test"
+import Adtrace from "web-adtrace"
 ```
 
 ## <a id="initialization">Initialization</a>
