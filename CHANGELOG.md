@@ -1,4 +1,4 @@
-### Version 2.1.0 (1th August 2022)
+### Version 2.1.1 (1th August 2022)
 #### Fixed
 - Fixed top-level Typescript declarations.
 - Added Typescript support.

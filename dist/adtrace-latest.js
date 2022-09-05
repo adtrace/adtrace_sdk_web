@@ -2108,7 +2108,7 @@ function isEmptyEntry(value
 |}*/
 var Globals = {
   namespace: "adtrace-sdk" || false,
-  version: "2.1.0" || false,
+  version: "2.1.1" || false,
   env: "production"
 };
 /* harmony default export */ var globals = (Globals);
