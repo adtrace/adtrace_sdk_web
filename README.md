@@ -168,7 +168,7 @@ Example:
 Adtrace.trackEvent({
   // ... other params go here, including mandatory ones
   revenue: 10,
-  currency: 'USD'
+  currency: 'Toman'
 })
 ```
 
