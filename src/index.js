@@ -1,0 +1,34 @@
+/* eslint-disable */
+import './assets/scss/index.scss'
+import main from './demo/main'
+
+const appConfig = {
+  appToken: 'anykmem88j9x',
+  environment: 'production', // production or sandbox
+  logLevel: 'verbose', // none, error, info, verbose
+  logOutput: '#log',
+  // defaultTracker: 'YOUR_DEFAULT_TRACKER',
+  // externalDeviceId: 'YOUR_EXTERNAL_DEVICE_ID',
+  // customUrl: 'YOUR_CUSTOM_URL',
+  // eventDeduplicationListLimit: 'YOUR_EVENT_DEDUPLICATION_LIST_LIMIT',
+  // namespace: 'YOUR_CUSTOM_STORAGE_NAMESPACE'
+}
+
+const basicEventConfig = {
+  eventToken: 'm91e4d',
+  // deduplicationId: 'YOUR_EVENT_DEDUPLICATION_ID'
+  // revenue: YOUR_REVENUE_VALUE,
+  // currency: 'YOUR_CURRENCY',
+  // callbackParams: [
+  //   {key: 'YOUR_KEY_1', value: 'YOUR_VALUE_1'},
+  //   {key: 'YOUR_KEY_2', value: 'YOUR_VALUE_2'}
+  // ],
+  // valueParams: [
+  //   {key: 'YOUR_KEY_1', value: 'YOUR_VALUE_1'},
+  //   {key: 'YOUR_KEY_2', value: 'YOUR_VALUE_2'}
+  // ]
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  main(appConfig, basicEventConfig)
+})

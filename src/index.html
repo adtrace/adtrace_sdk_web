@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adtrace Web SDK</title>
+</head>
+<body class="flex-box-column">
+<div class="main flex-box-column flex-one">
+  <div class="content flex-one flex-box-column">
+    <div class="flex-auto">
+      <h1><i class="adtrace-logo"></i> <span>Web SDK Demo</span></h1>
+      ${require('./demo/tabs/tabs.html')}
+    </div>
+
+    <div class="actions flex-one">
+      ${require('./demo/track-event/track-event.html')}
+      ${require('./demo/add-global-callback-params/add-global-callback-params.html')}
+      ${require('./demo/add-global-value-params/add-global-value-params.html')}
+      ${require('./demo/remove-global-callback-param/remove-global-callback-param.html')}
+      ${require('./demo/remove-global-value-param/remove-global-value-param.html')}
+      ${require('./demo/clear-global-callback-params/clear-global-callback-params.html')}
+      ${require('./demo/clear-global-value-params/clear-global-value-params.html')}
+      ${require('./demo/switch-to-offline-mode/switch-to-offline-mode.html')}
+      ${require('./demo/switch-back-to-online-mode/switch-back-to-online-mode.html')}
+      ${require('./demo/stop/stop.html')}
+      ${require('./demo/restart/restart.html')}
+<!--      ${require('./demo/session/session.html')}-->
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
