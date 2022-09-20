@@ -120,19 +120,6 @@ A custom namespace for SDK data storage. If there are multiple applications on t
 
 Please note it's possible to set custom namespace for existing storage with default name, all data will be preserved and moved to the custom namespace. Once custom namespace is set it's not possible to rename it without data loss.
 
-<a id="set-external-device-id">**externalDeviceId**</a> `string`
-
-An external device identifier is a custom value that you can assign to a device or user. They can help you to recognize users across sessions and platforms. They can also help you to deduplicate installs by user so that a user isn't counted as multiple new installs.
-
-You can also use an external device ID as a custom identifier for a device. This can be useful if you use these identifiers elsewhere and want to keep continuity.
-
-```js
-Adtrace.initSdk({
-  // other initialisation options go here
-  externalDeviceId: 'YOUR_EXTERNAL_DEVICE_ID', // optional
-});
-```
-
 ## <a id="event-tracking">Event tracking</a>
 
 You can use adtrace to track events. Lets say you want to track every tap on a particular button. You would create a new event token in your [panel], which has an associated event token - looking something like `abc123`. In order to track this event from your web app, you should do following:
