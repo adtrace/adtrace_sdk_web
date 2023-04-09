@@ -5,10 +5,14 @@
 
 <div class="tab active" id="log-tab-container">
   <pre class="log" id="log"></pre>
+
+  <div class="fab fab-clear" id="log-tab-clear-button" title="Clear log">
+    <img src="assets/images/trash-bin.svg" />
+  </div>
 </div>
 
 <div class="tab" id="app-config-tab-container">
-  <div class="flex-box-column h-auto">
+  <div class="flex-box-column">
     <form class="flex-two" id="app-config-form">
       <div class="flex-box-row">
         <div class="flex-one">
@@ -32,8 +36,9 @@
 
           <div class="form-row">
             <label for="external-device-id">External Device Id</label>
-            <input type="text" min="0" id="external-device-id">
+            <input type="text" id="external-device-id">
           </div>
+
         </div>
 
         <div class="flex-one">
@@ -63,11 +68,15 @@
             <input type="number" min="0" id="event-deduplication-list-limit" placeholder="default is 10">
           </div>
 
-          <div class="form-row inline-actions">
-            <button type="submit">Save and re-init</button>
-            <button type="button" class="remove" id="reset">Reset</button>
-          </div>
         </div>
+      </div>
+      <hr/>
+
+      <div class="inline-actions">
+        <button type="submit" title="Calls Adtrace.initSdk()">Re-init SDK</button>
+        <button type="button" id="restore-default-config" title="Restores default config">Reset config</button>
+        <button type="button" class="remove" id="reset"
+          title="Removes SDK stored data and calls Adtrace.initSdk()">Reset</button>
       </div>
     </form>
 
