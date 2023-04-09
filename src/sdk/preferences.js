@@ -82,31 +82,6 @@ function setDisabled (value: ?SdkDisabledT): void {
   _setPreferences()
 }
 
-/**
- * Get current third-party-sharing disabled state
- *
- * @returns {Object}
- * @private
- */
-function getThirdPartySharing (): ?ThirdPartySharingDisabledT {
-  const preferences = _getPreferences()
-
-  return preferences ? preferences.thirdPartySharingDisabled : null
-}
-
-/**
- * Set current third-party-sharing disabled state
- *
- * @param {Object=} value
- * @private
- */
-function setThirdPartySharing (value: ?ThirdPartySharingDisabledT): void {
-  const thirdPartySharingDisabled = value ? {...value} : null
-
-  QuickStorage.stores[_storeName] = {..._getPreferences(), thirdPartySharingDisabled}
-
-  _setPreferences()
-}
 
 /**
  * Reload current preferences from localStorage if changed outside of current scope (e.g. tab)
@@ -136,8 +111,6 @@ function recover (): void {
 export {
   getDisabled,
   setDisabled,
-  getThirdPartySharing,
-  setThirdPartySharing,
   reload,
   recover
 }
