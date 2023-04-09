@@ -19,3 +19,11 @@ export const STORAGE_TYPES = {
   INDEXED_DB: 'indexedDB',
   LOCAL_STORAGE: 'localStorage'
 }
+
+export const ENDPOINTS = {
+  default: {
+    endpointName: 'Default',
+    app: 'https://app.adtrace.io',
+    gdpr: 'https://gdpr.adtrace.io'
+  },
+}
