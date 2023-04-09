@@ -1,8 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
-const FlowWebpackPlugin = require('flow-webpack-plugin')
+const FlowWebpackPlugin = require('flowtype-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin')
 const packageJson = require('./package.json')
 const namespace = 'adtrace-sdk'
 const version = packageJson.version
@@ -27,9 +28,10 @@ module.exports = () => ({
     })]
   },
   plugins: [
+    new ESLintPlugin(),
     new webpack.DefinePlugin({
-      __Adtrace__NAMESPACE: JSON.stringify(namespace),
-      __Adtrace__SDK_VERSION: JSON.stringify(version)
+      __ADTRACE__NAMESPACE: JSON.stringify(namespace),
+      __ADTRACE__SDK_VERSION: JSON.stringify(version)
     }),
     new FlowWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin()
@@ -39,14 +41,23 @@ module.exports = () => ({
   },
   module: {
     rules: [{
-      use: 'eslint-loader',
-      test: /\.(js|ts)$/,
-      enforce: 'pre',
-      exclude: /node_modules/
-    }, {
       use: 'babel-loader',
       test: /\.(js|ts)$/,
       exclude: /node_modules/
+    }, {
+      test: /\.module\.s?css$/,
+      use: [
+        { loader: 'style-loader' },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              localIdentName: 'adtrace-smart-banner__[hash:base64]',
+            }
+          },
+        },
+        { loader: 'sass-loader' }
+      ]
     }]
   }
 })
