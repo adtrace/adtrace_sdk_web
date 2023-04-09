@@ -1,4 +1,21 @@
-### Version 2.1.1 (1th August 2022)
+### Version 2.2.0 (April 2023)
+#### Added
+- Added a return of Promise from `trackEvent` method.
+- Added `setReferrer` method to set referrer and trigger `/sdk_click` request manually.
+- Added support of Data Residency.
+- Added sending of `deduplication_id` parameter in `event` package.
+- Added SRI feature support.
+- Added `getWebUUID` method to access SDK generated ID `web_uuid`.
+- Added `getAttribution` method to access user's current attribution information.
+
+
+#### Fixed
+- Fixed SDK state synchronization issue between multiple tabs.
+- Fixed issue which caused site not to load when cookies are blocked in browser.
+- Updated deprecated and vulnerable dependencies.
+---
+
+### Version 2.1.1 (August 2022)
 #### Fixed
 - Fixed top-level Typescript declarations.
 - Added Typescript support.

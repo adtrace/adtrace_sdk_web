@@ -1,14 +1,8 @@
-<p align="center"><a href="https://adtrace.io" target="_blank" rel="noopener noreferrer"><img width="100" src="https://adtrace.io/fa/wp-content/uploads/2020/09/cropped-logo-sign-07-1.png" alt="Adtrace logo"></a></p>
-
-<p align="center">
-  <a href='https://www.npmjs.com/package/web-adtrace'><img src='https://img.shields.io/npm/v/web-adtrace.svg'></a>
-  <a href='https://opensource.org/licenses/MIT'><img src='https://img.shields.io/badge/License-MIT-green.svg'></a>
-</p>
-
 ## Summary
 
 This is the guide to the Javascript SDK of Adtrace™ for web sites or web apps. You can read more about Adtrace™ at [adtrace.io].
 
+Read this in other languages: [English][en-readme], [Persian][fa-readme]
 
 ## Table of contents
 
@@ -20,6 +14,9 @@ This is the guide to the Javascript SDK of Adtrace™ for web sites or web apps.
 * [Global value parameters](#global-value-parameters)
 * [Offline/Online mode](#offline-online-mode)
 * [Stop/Restart SDK](#stop-restart-sdk)
+* [Get Web UUID](#getters-web-uuid)
+* [User attribution](#get-attribution)
+* [Set Referrer](#set-referrer)
 
 ## <a id="example-app">Example apps</a>
 
@@ -58,7 +55,10 @@ Adtrace.initSdk({
   environment: 'production'
 });
 ```
- 
+
+> **Important**: For proper attribution method [setReferrer](#set-referrer) should be called as close as possible to SDK initialization.
+
+
 Here is the full list of available parameters for the `initSdk` method:
 
 ### Mandatory params
@@ -120,6 +120,19 @@ A custom namespace for SDK data storage. If there are multiple applications on t
 
 Please note it's possible to set custom namespace for existing storage with default name, all data will be preserved and moved to the custom namespace. Once custom namespace is set it's not possible to rename it without data loss.
 
+<a id="set-external-device-id">**externalDeviceId**</a> `string`
+
+An external device identifier is a custom value that you can assign to a device or user. They can help you to recognize users across sessions and platforms. They can also help you to deduplicate installs by user so that a user isn't counted as multiple new installs.
+
+You can also use an external device ID as a custom identifier for a device. This can be useful if you use these identifiers elsewhere and want to keep continuity.
+
+```js
+Adtrace.initSdk({
+  // other initialisation options go here
+  externalDeviceId: 'YOUR_EXTERNAL_DEVICE_ID', // optional
+});
+```
+
 ## <a id="event-tracking">Event tracking</a>
 
 You can use adtrace to track events. Lets say you want to track every tap on a particular button. You would create a new event token in your [panel], which has an associated event token - looking something like `abc123`. In order to track this event from your web app, you should do following:
@@ -155,7 +168,7 @@ Example:
 Adtrace.trackEvent({
   // ... other params go here, including mandatory ones
   revenue: 10,
-  currency: 'Toman'
+  currency: 'USD'
 })
 ```
 
@@ -181,15 +194,15 @@ Please note that we don't store any of your custom parameters, but only append t
 
 You can read more about using URL callbacks, including a full list of available values, in our [callbacks guide][callbacks-guide].
 
-<a id="value-params">**eventValueParams**</a> `array`
+<a id="value-params">**valueParams**</a> `array`
 
 You can also add parameters to be transmitted to network values, which have been activated in your Adtrace panel.
-This works similarly to the callback parameters mentioned above, but can be added by adding `eventValueParams` parameter to the map object passed to `trackEvent` method:
+This works similarly to the callback parameters mentioned above, but can be added by adding `valueParams` parameter to the map object passed to `trackEvent` method:
 
 ```js
 Adtrace.trackEvent({
   // ... other params go here, including mandatory ones
-  eventValueParams: [
+  valueParams: [
     {key: 'key', value: 'value'}, 
     {key: 'foo', value: 'bar'}
   ]
@@ -326,6 +339,48 @@ Example:
 Adtrace.restart();
 ``` 
 
+## <a id="getters-web-uuid">Get `web_uuid`</a>
+
+To identify unique web users in Adtrace, Web SDK generates an ID known as `web_uuid` whenever it tracks first session. The ID is created per subdomain and per browser.
+The identifier follows the Universally Unique Identifier (UUID) format.
+
+To get `web_uuid` use the following method: 
+
+<a id="get-web-uuid">**getWebUUID**</a>
+
+Example:
+
+```js
+const webUUID = Adtrace.getWebUUID();
+```
+
+## <a id="getters-attribution">User attribution</a>
+
+You can access your user's current attribution information by using the following method:
+
+<a id="get-attribution">**getAttribution**</a>
+
+Example:
+
+```js
+const attribution = Adtrace.getAttribution();
+```
+
+
+## <a id="set-referrer">Setting `referrer`</a>
+You may want to set `referrer` to trigger `sdk_click` manually.
+
+To set `referrer` use the following method:
+
+<a id="set-referrer-manually">**setReferrer**</a>
+
+Example:
+
+```js
+Adtrace.setReferrer("adtrace_external_click_id%3DEXTERNAL_CLICK_ID");
+```
+
+Please note that `referrer` should be properly URL-encoded.
 
 
 [adtrace.io]:   https://adtrace.io
