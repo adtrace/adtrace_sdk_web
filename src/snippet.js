@@ -27,6 +27,8 @@
   document,
   'script',
   'https://cdn.adtrace.io/adtrace-latest.min.js',
+  'anonymous',
+  env.INTEGRITY,
   'Adtrace',
   [
     'initSdk',

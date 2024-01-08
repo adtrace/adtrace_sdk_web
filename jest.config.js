@@ -1,9 +1,11 @@
 module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
   testMatch: [
     '<rootDir>/src/sdk/**/?(*.)(spec|test).{js,ts}'
   ],
   transform: {
-    '^.+\\.(js|ts)$': 'babel-jest',
+    '^.+\\.js$': 'babel-jest',
   },
   coveragePathIgnorePatterns: [
     '<rootDir>/node_modules/',
@@ -25,7 +27,7 @@ module.exports = {
     "\.(css|scss)$": "<rootDir>/src/sdk/__mocks__/style.js"
   },
   globals: {
-    __Adtrace__NAMESPACE: 'adtrace-sdk',
-    __Adtrace__SDK_VERSION: 'TEST'
+    __ADTRACE__NAMESPACE: 'adtrace-sdk',
+    __ADTRACE__SDK_VERSION: '2.2.0'
   }
 }

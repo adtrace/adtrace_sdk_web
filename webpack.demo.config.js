@@ -1,10 +1,11 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 const TerserPlugin = require('terser-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const FlowWebpackPlugin = require('flow-webpack-plugin')
+const FlowWebpackPlugin = require('flowtype-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin')
 const webpack = require('webpack')
 const packageJson = require('./package.json')
 const namespace = 'adtrace-sdk'
@@ -19,13 +20,13 @@ module.exports = () => ({
   optimization: {
     minimizer: [
       new TerserPlugin({
-        cache: true,
         parallel: true
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new CssMinimizerPlugin()
     ]
   },
   plugins: [
+    new ESLintPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html')
     }),
@@ -34,8 +35,8 @@ module.exports = () => ({
       chunkFilename: '[id].css'
     }),
     new webpack.DefinePlugin({
-      __Adtrace__NAMESPACE: JSON.stringify(namespace),
-      __Adtrace__SDK_VERSION: JSON.stringify(version)
+      __ADTRACE__NAMESPACE: JSON.stringify(namespace),
+      __ADTRACE__SDK_VERSION: JSON.stringify(version)
     }),
     new FlowWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin()
@@ -45,11 +46,6 @@ module.exports = () => ({
   },
   module: {
     rules: [{
-      enforce: 'pre',
-      test: /\.(js|ts)$/,
-      exclude: /node_modules/,
-      use: 'eslint-loader'
-    }, {
       test: /\.(js|ts)$/,
       exclude: /node_modules/,
       use: 'babel-loader'
@@ -62,24 +58,35 @@ module.exports = () => ({
         { loader: 'sass-loader' }
       ]
     }, {
+      test: /\.module\.s?css$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              localIdentName: 'adtrace-smart-banner-[local]__[hash:base64:5]',
+            }
+          }
+        },
+        { loader: 'sass-loader' }
+      ]
+    }, {
       test: /\.html$/,
       use: [
         {
           loader: 'html-loader',
           options: {
             minimize: true,
-            interpolate: true
           }
+        },
+        {
+          loader: 'template-ejs-loader'
         }
       ]
     }, {
       test: /\.(png|jpg|gif|svg)$/,
-      use: {
-        loader: 'file-loader',
-        options: {
-          name: 'assets/images/[hash].[ext]'
-        }
-      }
+      type: 'asset/resource'
     }]
   }
 })

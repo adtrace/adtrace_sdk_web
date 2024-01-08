@@ -4,7 +4,7 @@
     "node": true,
     "jest": true
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
@@ -16,8 +16,8 @@
   "plugins": ["flowtype"],
   "globals": {
     "Promise": true,
-    "__Adtrace__NAMESPACE": true,
-    "__Adtrace__SDK_VERSION": true,
+    "__ADTRACE__NAMESPACE": true,
+    "__ADTRACE__SDK_VERSION": true,
     "Utils": true
   },
   "rules": {
@@ -51,7 +51,8 @@
         ],
         "eol-last": "error",
         "@typescript-eslint/ban-types": "warn",
-        "@typescript-eslint/explicit-module-boundary-types": "off"
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-namespace": "warn"
       }
     },
     {
@@ -66,7 +67,8 @@
         "jest/no-disabled-tests": "error",
         "jest/no-focused-tests": "error",
         "jest/no-identical-title": "error",
-        "@typescript-eslint/no-var-requires": "off"
+        "@typescript-eslint/no-var-requires": "off",
+        "jest/prefer-to-be": "warn"
       }
     }
   ]

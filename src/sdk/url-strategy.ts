@@ -1,11 +1,11 @@
 import Config from './config'
 import Logger from './logger'
+import { ENDPOINTS } from './constants'
 
 enum UrlStrategy {
   Default = 'default',
-  India = 'india',
-  China = 'china'
 }
+
 
 type EndpointName = UrlStrategy
 
@@ -14,87 +14,75 @@ type BaseUrlsMap = {
   gdpr: string;
 }
 
+function incorrectOptionIgnoredMessage(higherPriority: string, lowerPriority: string) {
+  Logger.warn(`Both ${higherPriority} and ${lowerPriority} are set in config, ${lowerPriority} will be ignored`)
+}
+
 /**
  * Returns a map of base URLs or a list of endpoint names depending on SDK configuration
  */
 function getEndpointPreference(): BaseUrlsMap | EndpointName[] {
-  const { customUrl, urlStrategy } = Config.getCustomConfig()
+  const { customUrl, urlStrategy, dataResidency } = Config.getCustomConfig()
 
   if (customUrl) { // If custom URL is set then send all requests there
+    if (dataResidency || urlStrategy) {
+      incorrectOptionIgnoredMessage('customUrl', dataResidency ? 'dataResidency' : 'urlStrategy')
+    }
+
     return { app: customUrl, gdpr: customUrl }
   }
 
-  if (urlStrategy === UrlStrategy.India) {
-    return [UrlStrategy.India, UrlStrategy.Default]
+  if (dataResidency && urlStrategy) {
+    incorrectOptionIgnoredMessage('dataResidency', 'urlStrategy')
   }
 
-  if (urlStrategy === UrlStrategy.China) {
-    return [UrlStrategy.China, UrlStrategy.Default]
+  if (dataResidency) {
+    return [dataResidency]
   }
 
-  return [UrlStrategy.Default, UrlStrategy.India, UrlStrategy.China]
+  return [UrlStrategy.Default]
 }
 
-const endpointMap: Record<UrlStrategy, BaseUrlsMap> = {
-  [UrlStrategy.Default]: {
-    app: 'https://app.adtrace.io',
-    gdpr: 'https://gdpr.adtrace.io'
-  },
-  [UrlStrategy.India]: {
-    app: 'https://app.adtrace.net.in',
-    gdpr: 'https://gdpr.adtrace.net.in'
-  },
-  [UrlStrategy.China]: {
-    app: 'https://app.adtrace.world',
-    gdpr: 'https://gdpr.adtrace.world'
-  }
+const endpointMap: Record<UrlStrategy , BaseUrlsMap> = {
+  [UrlStrategy.Default]: ENDPOINTS.default,
+
 }
 
-const endpointNiceNames: Record<UrlStrategy, string> = {
-  [UrlStrategy.Default]: 'default',
-  [UrlStrategy.India]: 'Indian',
-  [UrlStrategy.China]: 'Chinese'
+interface BaseUrlsIterator extends Iterator<BaseUrlsMap> {
+  reset: () => void;
 }
 
-/**
- * Gets the list of preferred endpoints and wraps `sendRequest` function with iterative retries until available
- * endpoint found or another error occurred.
- */
-function urlStrategyRetries<T>(
-  sendRequest: (urls: BaseUrlsMap) => Promise<T>,
-  endpoints: Record<UrlStrategy, BaseUrlsMap> = endpointMap
-): Promise<T> {
-  const preferredUrls = getEndpointPreference()
+function getPreferredUrls(endpoints: Partial<Record<UrlStrategy, BaseUrlsMap>>): BaseUrlsMap[] {
+  const preference = getEndpointPreference()
 
-  if (!Array.isArray(preferredUrls)) {
-    // There is only one endpoint
-    return sendRequest(preferredUrls)
+  if (!Array.isArray(preference)) {
+    return [preference]
   } else {
-    let attempt = 0
+    const res = preference
+      .map(strategy => endpoints[strategy] || null)
+      .filter((i): i is BaseUrlsMap => !!i)
 
-    const trySendRequest = (): Promise<T> => {
-      const endpointKey = preferredUrls[attempt++]
-      const urlsMap = endpoints[endpointKey]
-
-      return sendRequest(urlsMap)
-        .catch((reason) => {
-          if (reason.code === 'NO_CONNECTION') {
-            Logger.log(`Failed to connect ${endpointNiceNames[endpointKey]} endpoint`)
-
-            if (attempt < preferredUrls.length) {
-              Logger.log(`Trying ${endpointNiceNames[preferredUrls[attempt]]} one`)
-
-              return trySendRequest() // Trying next endpoint
-            }
-          }
-
-          // Another error occurred or we ran out of attempts, re-throw
-          throw reason
-        })
-    }
-
-    return trySendRequest()
+    return res
   }
 }
 
-export { urlStrategyRetries, UrlStrategy, BaseUrlsMap }
+function getBaseUrlsIterator(endpoints: Partial<Record<UrlStrategy, BaseUrlsMap>> = endpointMap): BaseUrlsIterator {
+  const _urls = getPreferredUrls(endpoints)
+
+  let _counter = 0
+
+  return {
+    next: () => {
+      if (_counter < _urls.length) {
+        return { value: _urls[_counter++], done: false }
+      } else {
+        return { value: undefined, done: true }
+      }
+    },
+    reset: () => {
+      _counter = 0
+    }
+  }
+}
+
+export { getBaseUrlsIterator, BaseUrlsIterator, UrlStrategy, BaseUrlsMap }

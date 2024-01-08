@@ -84,6 +84,7 @@ export type RequestParamsT = $Shape<{|
 |}>
 
 export type HttpRequestParamsT = $ReadOnly<{|
+  endpoint: string,
   url: UrlT,
   method?: MethodT,
   params: $ReadOnly<{|
@@ -160,8 +161,8 @@ export type BaseParamsT = $ReadOnly<$Shape<{
 }>>
 
 export type CustomConfigT = $ReadOnly<$Shape<{
-  urlStrategy: 'india' | 'china',
   customUrl: string,
+  urlStrategy: 'india' | 'china',
   eventDeduplicationListLimit: number,
   namespace: string
 }>>
@@ -176,7 +177,6 @@ export type InitOptionsT = $ReadOnly<$Shape<{|
   environment: $PropertyType<BaseParamsT, 'environment'>,
   defaultTracker: $PropertyType<BaseParamsT, 'defaultTracker'>,
   externalDeviceId: $PropertyType<BaseParamsT, 'externalDeviceId'>,
-  urlStrategy: $PropertyType<CustomConfigT, 'urlStrategy'>,
   customUrl: $PropertyType<CustomConfigT, 'customUrl'>,
   eventDeduplicationListLimit: $PropertyType<CustomConfigT, 'eventDeduplicationListLimit'>,
   namespace: $PropertyType<CustomConfigT, 'namespace'>,
@@ -226,11 +226,6 @@ export type MachineTypeT = {|
 
 export type QueueSizeT = {|
   queueSize: number
-|}
-
-export type SmartBannerOptionsT = {|
-  webToken: string,
-  logLevel: 'none' | 'error' | 'warning' | 'info' | 'verbose',
 |}
 
 export type DefaultParamsT = {|
