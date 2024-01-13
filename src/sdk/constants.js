@@ -26,4 +26,29 @@ export const ENDPOINTS = {
     app: 'https://app.adtrace.io',
     gdpr: 'https://gdpr.adtrace.io'
   },
+  india: {
+    endpointName: 'Indian',
+    app: 'https://app.adtrace.net.in',
+    gdpr: 'https://gdpr.adtrace.net.in'
+  },
+  china: {
+    endpointName: 'Chinese',
+    app: 'https://app.adtrace.world',
+    gdpr: 'https://gdpr.adtrace.world'
+  },
+  EU: {
+    endpointName: 'EU',
+    app: 'https://app.eu.adtrace.io',
+    gdpr: 'https://gdpr.eu.adtrace.io'
+  },
+  TR: {
+    endpointName: 'TR',
+    app: 'https://app.tr.adtrace.io',
+    gdpr: 'https://gdpr.tr.adtrace.io'
+  },
+  US: {
+    endpointName: 'US',
+    app: 'https://app.us.adtrace.io',
+    gdpr: 'https://gdpr.us.adtrace.io'
+  }
 }
