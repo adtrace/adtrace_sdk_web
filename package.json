@@ -1,8 +1,7 @@
 {
   "name": "web-adtrace",
-  "version": "2.2.0",
-  "private": false,
-  "description": "Web SDK of Adtrace",
+  "version": "2.3.0-rc",
+  "description": "This is the guide to the Javascript SDK of Adtrace™ for web sites or web apps. You can read more about Adtrace™ at [adtrace.io].",
   "scripts": {
     "build:demo": "webpack --mode production --config webpack.demo.config.js",
     "build:sdk": "webpack --config webpack.sdk.config.js",
@@ -13,12 +12,12 @@
     "start": "webpack serve --hot --mode development --config webpack.demo.config.js",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
-    "test": "",
-    "test:watch": "",
-    "test:coverage": "",
-    "test:all": "",
+    "test": "TZ=UTC jest",
+    "test:watch": "TZ=UTC jest --watchAll",
+    "test:coverage": "TZ=UTC jest --coverage",
+    "test:all": "npm-run-all test lint flow",
     "flow": "flow status --quiet",
-    "prepublishOnly": ""
+    "prepublishOnly": "npm run test:all"
   },
   "main": "dist/adtrace-latest.js",
   "types": "dist/adtrace-latest.d.ts",
