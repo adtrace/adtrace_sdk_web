@@ -4,6 +4,8 @@ This is the guide to the Javascript SDK of Adtrace™ for web sites or web apps.
 
 Read this in other languages: [English][en-readme], [Persian][fa-readme]
 
+`(SDK ONLY)`: indicates features which are only implemented in client sdk and are not functional at the moment!
+
 ## Table of contents
 
 * [Example apps](#example-app)
@@ -11,12 +13,12 @@ Read this in other languages: [English][en-readme], [Persian][fa-readme]
 * [Initialization](#initialization)
 * [Event tracking](#event-tracking)
 * [Global callback parameters](#global-callback-parameters)
-* [Global value parameters](#global-value-parameters)
 * [Offline/Online mode](#offline-online-mode)
 * [Stop/Restart SDK](#stop-restart-sdk)
-* [Get Web UUID](#getters-web-uuid)
-* [User attribution](#get-attribution)
-* [Set Referrer](#set-referrer)
+* [GDPR Forget Me](#gdpr-forget-me)
+* [Marketing Opt-out](#marketing-opt-out)
+* [Data residency](#data-residency)
+* [License](#license)
 
 ## <a id="example-app">Example apps</a>
 
@@ -54,8 +56,9 @@ Adtrace.initSdk({
   appToken: 'YOUR_APP_TOKEN',
   environment: 'production'
 });
-```
 
+Adtrace.setReferrer("some-referrer")
+```
 > **Important**: For proper attribution method [setReferrer](#set-referrer) should be called as close as possible to SDK initialization.
 
 
@@ -120,7 +123,7 @@ A custom namespace for SDK data storage. If there are multiple applications on t
 
 Please note it's possible to set custom namespace for existing storage with default name, all data will be preserved and moved to the custom namespace. Once custom namespace is set it's not possible to rename it without data loss.
 
-<a id="set-external-device-id">**externalDeviceId**</a> `string`
+<a id="set-external-device-id">**externalDeviceId** `(ONLY SDK)`</a> `string`
 
 An external device identifier is a custom value that you can assign to a device or user. They can help you to recognize users across sessions and platforms. They can also help you to deduplicate installs by user so that a user isn't counted as multiple new installs.
 
@@ -132,6 +135,10 @@ Adtrace.initSdk({
   externalDeviceId: 'YOUR_EXTERNAL_DEVICE_ID', // optional
 });
 ```
+
+> **Important**: You need to make sure this ID is **unique to the user or device** depending on your use-case. Using the same ID across different users or devices could lead to duplicated data. Talk to your Adtrace representative for more information.
+
+If you want to use the external device ID in your business analytics, you can pass it as a callback parameter. See the section on [global callback parameters](#global-callback-parameters) for more information.
 
 ## <a id="event-tracking">Event tracking</a>
 
@@ -193,6 +200,22 @@ In that case we would track the event and send a request to:
 Please note that we don't store any of your custom parameters, but only append them to your callbacks, thus without a callback they will not be saved nor sent to you.
 
 You can read more about using URL callbacks, including a full list of available values, in our [callbacks guide][callbacks-guide].
+<a id="partner-params">**partnerParams** `(SDK ONLY)`</a> `array`
+
+You can also add parameters to be transmitted to network partners, which have been activated in your Adtrace dashboard.
+This works similarly to the callback parameters mentioned above, but can be added by adding `partnerParams` parameter to the map object passed to `trackEvent` method:
+
+```js
+Adtrace.trackEvent({
+  // ... other params go here, including mandatory ones
+  partnerParams: [
+    {key: 'key', value: 'value'}, 
+    {key: 'foo', value: 'bar'}
+  ]
+})
+```
+
+You can read more about special partners and these integrations in our [guide to special partners][special-partners].
 
 <a id="value-params">**valueParams**</a> `array`
 
@@ -214,6 +237,36 @@ You can read more about special values and these integrations in our [guide to s
 <a id="deduplication-id">**deduplicationId**</a> `string`
 
 It's possible to provide event deduplication id in order to avoid tracking duplicated events. Deduplication list limit is set in initialization configuration as described [above](#event-deduplication-list-limit)
+
+### Tracking an event and redirect to an external page
+
+Sometimes you want to redirect user to an external page and track this redirect as an event. For this case to avoid redirect to happen earlier than the event was actually tracked `trackEvent` method returns a `Promise` which is fulfilled after the SDK has sent the event and received a response from the backend and rejected when some internal error happen.  
+
+> **Important** It might take pretty much time until this promise is settled so it's recommended to use a timeout.
+
+Please note that due to internal requests queue the event wouldn't be lost even if it timed out or an error happened, the SDK will preserve the event to the next time it's loaded and try to send it again.
+
+Example:
+
+```js
+Promise
+  .race([
+    Adtrace.trackEvent({
+      eventToken: 'YOUR_EVENT_TOKEN',
+      // ... other event parameters
+    }),
+    new Promise((resolve, reject) => {
+      setTimeout(() => reject('Timed out'), 2000)
+    })
+  ])
+  .catch(error => {
+    // ... 
+  })
+  .then(() => {
+    // ... perform redirect, for example 
+    window.location.href = "https://www.example.org/"
+  });
+```
 
 ## <a id="global-callback-parameters">Global callback parameters</a>
 
@@ -252,42 +305,42 @@ Example:
 Adtrace.clearGlobalCallbackParameters();
 ```
 
-## <a id="global-value-parameters">Global value parameters</a>
+## <a id="global-partner-parameters">Global partner parameters</a>
 
-It's possible to add, remove and clear global value parameters in the similar way as for [global callback parameters](#global-callback-parameters). Here is the list of each available method:
+It's possible to add, remove and clear global partner parameters in the similar way as for [global callback parameters](#global-callback-parameters). Here is the list of each available method:
 
 
-<a id="add-global-parnter-parameters">**addGlobalValueParameters**</a>
+<a id="add-global-parnter-parameters">**addGlobalPartnerParameters**</a>
 
-It's possible to add global value parameters, which will be appended automatically to each session and event request. Note that value params passed directly to `trackEvent` method will override existing global value params. This method accepts an `array` is the same format as for [`valueParams`](#value-params) parameter from `trackEvent` method
+It's possible to add global partner parameters, which will be appended automatically to each session and event request. Note that partner params passed directly to `trackEvent` method will override existing global partner params. This method accepts an `array` is the same format as for [`partnerParams`](#partner-params) parameter from `trackEvent` method
 
 Example:
 
 ```js
-Adtrace.addGlobalValueParameters([
+Adtrace.addGlobalPartnerParameters([
   {key: 'key1', value: 'value1'},
   {key: 'key2', value: 'value2'}
 ]);
 ```
 
-<a id="remove-global-value-parameter">**removeGlobalValueParameter**</a>
+<a id="remove-global-partner-parameter">**removeGlobalPartnerParameter**</a>
 
-To remove particular value parameter use this method by providing the key of a global value param which needs to be removed
+To remove particular partner parameter use this method by providing the key of a global partner param which needs to be removed
 
 Example:
 
 ```js
-Adtrace.removeGlobalValueParameter('key1');
+Adtrace.removeGlobalPartnerParameter('key1');
 ```
 
-<a id="clear-global-value-parameters">**clearGlobalValueParameters**</a>
+<a id="clear-global-partner-parameters">**clearGlobalPartnerParameters**</a>
 
-In order to clear all global value parameters simply call this method
+In order to clear all global partner parameters simply call this method
 
 Example:
 
 ```js
-Adtrace.clearGlobalValueParameters();
+Adtrace.clearGlobalPartnerParameters();
 ```
 
 ## <a id="offline-online-mode">Offline/Online mode</a>
@@ -339,6 +392,37 @@ Example:
 Adtrace.restart();
 ``` 
 
+
+## <a id="gdpr-forget-me">GDPR Forget Me `(SDK ONLY)`</a>
+
+There is functionality available to GDPR Forget particular user. This will notify our backend behind the scene and will stop Adtrace SDK from running. 
+There is one method available for this:
+
+<a id="gdpr-forge-me">**gdprForgetMe**</a>
+
+This method will stop Adtrace SDK from running and will notify Adtrace backend that user wants to be GDPR forgotten.
+Once this method is run it's not possible to restart Adtrace SDK anymore.
+
+Example:
+
+```js
+Adtrace.gdprForgetMe();
+```
+
+## <a id="marketing-opt-out">Marketing Opt-out `(SDK ONLY)`</a>
+
+There is functionality for the Marketing Opt-out, which is disabling third-party sharing ability. This will notify our backed in the same manner as it does for GDPR Forget me.
+
+There is one method available for this:
+
+<a id="disable-third-party-sharing">**disableThirdPartySharing** `(SDK ONLY)`</a>
+
+Example:
+
+```js
+Adtrace.disableThirdPartySharing();
+```
+
 ## <a id="getters-web-uuid">Get `web_uuid`</a>
 
 To identify unique web users in Adtrace, Web SDK generates an ID known as `web_uuid` whenever it tracks first session. The ID is created per subdomain and per browser.
@@ -366,11 +450,14 @@ Example:
 const attribution = Adtrace.getAttribution();
 ```
 
+> **Note** Current attribution information is only available after our backend tracks the app install and triggers the attribution callback.
+It is not possible to access a user's attribution value before the SDK has been initialized and the attribution callback has been triggered.
 
 ## <a id="set-referrer">Setting `referrer`</a>
+
 You may want to set `referrer` to trigger `sdk_click` manually.
 
-To set `referrer` use the following method:
+To set `referrer` use the following method: 
 
 <a id="set-referrer-manually">**setReferrer**</a>
 
@@ -382,11 +469,34 @@ Adtrace.setReferrer("adtrace_external_click_id%3DEXTERNAL_CLICK_ID");
 
 Please note that `referrer` should be properly URL-encoded.
 
+> **Important** For proper attribution this method should be called as close as possible to SDK initialization.
+
+## <a id="data-residency">Data residency `(SDK ONLY)`</a>
+
+The data residency feature allows you to choose the country in which Adtrace stores your data. This is useful if you are operating in a country with strict privacy requirements. When you set up data residency, Adtrace stores your data in a data center located in the region your have chosen.
+
+To set your country of data residency, pass a `dataResidency` argument in your `initSdk` call.
+
+```js
+Adtrace.initSdk({
+  "appToken": "YOUR_APP_TOKEN",
+  "environment": "production",
+  "logLevel": "verbose",
+  "dataResidency": "EU"
+})
+```
+
+The following values are accepted:
+
+- `EU` – sets the data residency region to the EU.
+- `TR` – sets the data residency region to Turkey.
+- `US` – sets the data residency region to the USA.
+
 
 [adtrace.io]:   https://adtrace.io
-[panel]:    https://panel.adtrace.io
+[dashboard]:    https://panel.adtrace.io
 [example-app]:  src/demo.html
+[sri-mdn]:      https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
 
 [en-readme]:  README.md
 [fa-readme]:  docs/persian/README.md
-
