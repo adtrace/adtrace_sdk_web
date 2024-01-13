@@ -4,8 +4,9 @@
   <meta charset=UTF-8>
   <title>Adtrace WebSDK</title>
 
-  <script type="text/javascript" src="./dist/adtrace-latest.js"></script>
-
+  <script type="text/javascript">
+    !function(t,a,e,r,s,l,d,n,o){t.Adtrace=t.Adtrace||{},t.Adtrace_q=t.Adtrace_q||[];for(var c=0;c<l.length;c++)d(t.Adtrace,t.Adtrace_q,l[c]);n=a.createElement("script"),o=a.getElementsByTagName("script")[0],n.async=!0,n.src="../dist/adtrace-latest.js",n.onload=function(){for(var a=0;a<t.Adtrace_q.length;a++)t.Adtrace[t.Adtrace_q[a][0]].apply(t.Adtrace,t.Adtrace_q[a][1]);t.Adtrace_q=[]},o.parentNode.insertBefore(n,o)}(window,document,0,0,0,["initSdk","trackEvent","addGlobalCallbackParameters","addGlobalPartnerParameters","removeGlobalCallbackParameter","removeGlobalPartnerParameter","clearGlobalCallbackParameters","clearGlobalPartnerParameters","switchToOfflineMode","switchBackToOnlineMode","stop","restart","gdprForgetMe","disableThirdPartySharing"],function(t,a,e){t[e]=function(){a.push([e,arguments])}});
+  </script>
 </head>
 <body>
 <pre id="output" style="width: 100vw; height: 100vh;"></pre>
@@ -33,17 +34,17 @@
   /**
    * trackEvent: track standard event, requires sdk instance to be initiated
    */
-  /*
+
   Adtrace.trackEvent({
     eventToken: 'YOUR_EVENT_TOKEN',
     // deduplicationId: 'YOUR_EVENT_DEDUPLICATION_ID' // optional
   });
-  */
+
 
   /**
    * trackEvent: track revenue event, requires sdk instance to be initiated
    */
-  /*
+
   Adtrace.trackEvent({
     eventToken: 'YOUR_EVENT_TOKEN',
     // deduplicationId: 'YOUR_EVENT_DEDUPLICATION_ID' // optional
@@ -54,15 +55,22 @@
       {key: 'some-key-2', value: 'some-value-2'},
       {key: 'key1', value: 'new-value1'}
     ],
-    valueParams: [
+    partnerParams: [
       {key: 'key-1', value: 'new-value-1'},
-      {key: 'some-value-key-1', value: 'some-value-value-1'},
+      {key: 'some-partner-key-1', value: 'some-partner-value-1'},
       {key: 'key-2', value: 'new-value-2'},
-      {key: 'some-value-key-2', value: 'some-value-value-2'},
-      {key: 'some-value-key-1', value: 'some-value-value-3'}
+      {key: 'some-partner-key-2', value: 'some-partner-value-2'},
+      {key: 'some-partner-key-1', value: 'some-partner-value-3'}
+    ],
+    eventValueParams: [
+      {key: 'key-1', value: 'new-value-1'},
+      {key: 'some-partner-key-1', value: 'some-partner-value-1'},
+      {key: 'key-2', value: 'new-value-2'},
+      {key: 'some-partner-key-2', value: 'some-partner-value-2'},
+      {key: 'some-partner-key-1', value: 'some-partner-value-3'}
     ]
   });
-  */
+
 
   /**
    * addGlobalCallbackParameters: add global callback parameters
@@ -75,10 +83,10 @@
   */
 
   /**
-   * addGlobalValueParameters: add global value parameters
+   * addGlobalPartnerParameters: add global partner parameters
    */
   /*
-  Adtrace.addGlobalValueParameters([
+  Adtrace.addGlobalPartnerParameters([
     {key: 'key-1', value: 'value-1'},
     {key: 'key-2', value: 'value-2'},
     {key: 'key-3', value: 'value-3'}
@@ -93,10 +101,10 @@
   */
 
   /**
-   * removeGlobalValueParameter: remove global value parameters
+   * removeGlobalPartnerParameter: remove global partner parameters
    */
   /*
-  Adtrace.removeGlobalValueParameter('key-1');
+  Adtrace.removeGlobalPartnerParameter('key-1');
   */
 
   /**
@@ -107,10 +115,10 @@
   */
 
   /**
-   * clearGlobalValueParameters: clear all global value parameters
+   * clearGlobalPartnerParameters: clear all global partner parameters
    */
   /*
-  Adtrace.clearGlobalValueParameters();
+  Adtrace.clearGlobalPartnerParameters();
   */
 
   /**
@@ -139,6 +147,20 @@
    */
   /*
   Adtrace.restart();
+  */
+
+  /**
+   * gdprForgetMe: initiate GDPR forget me request
+   */
+  /*
+  Adtrace.gdprForgetMe();
+  */
+
+  /**
+   * disableThirdPartySharing: initiate marketing opt-out request
+   */
+  /*
+  Adtrace.disableThirdPartySharing();
   */
 </script>
 </body>

@@ -2,15 +2,17 @@ import {init as logInit} from './log'
 import tabsInit from './tabs/tabs'
 import trackEventInit from './track-event/track-event'
 import addGlobalCallbackParamsInit from './add-global-callback-params/add-global-callback-params'
-import addGlobalValueParamsInit from './add-global-value-params/add-global-value-params'
+import addGlobalPartnerParamsInit from './add-global-partner-params/add-global-partner-params'
 import removeGlobalCallbackParamInit from './remove-global-callback-param/remove-global-callback-param'
-import removeGlobalValueParamInit from './remove-global-value-param/remove-global-value-param'
+import removeGlobalPartnerParamInit from './remove-global-partner-param/remove-global-partner-param'
 import clearGlobalCallbackParamsInit from './clear-global-callback-params/clear-global-callback-params'
-import clearGlobalValueParamsInit from './clear-global-value-params/clear-global-value-params'
-import switchToOfflineModeInit from './switch-to-offline-mode/switch-to-offline-mode'
+import clearGlobalPartnerParamsInit from './clear-global-partner-params/clear-global-partner-params'
+import switchToOffineModeInit from './switch-to-offline-mode/switch-to-offline-mode'
 import switchBackToOnlineModeInit from './switch-back-to-online-mode/switch-back-to-online-mode'
 import stopInit from './stop/stop'
 import restartInit from './restart/restart'
+import gdprForgetMeInit from './gdpr-forget-me/gdpr-forget-me'
+import disableThirdPartySharingInit from './disable-third-party-sharing/disable-third-party-sharing'
 import getWebUUID from './get-web-uuid/get-web-uuid'
 import getAttribution from './get-attribution/get-attribution'
 import setReferrer from './set-referrer/set-referrer'
@@ -20,15 +22,17 @@ function init (defaultAppConfig, defaultEventConfig) {
   tabsInit(defaultAppConfig)
   trackEventInit(defaultEventConfig)
   addGlobalCallbackParamsInit()
-  addGlobalValueParamsInit()
+  addGlobalPartnerParamsInit()
   removeGlobalCallbackParamInit()
-  removeGlobalValueParamInit()
+  removeGlobalPartnerParamInit()
   clearGlobalCallbackParamsInit()
-  clearGlobalValueParamsInit()
-  switchToOfflineModeInit()
+  clearGlobalPartnerParamsInit()
+  switchToOffineModeInit()
   switchBackToOnlineModeInit()
   stopInit()
   restartInit()
+  gdprForgetMeInit()
+  disableThirdPartySharingInit()
   getWebUUID()
   getAttribution()
   setReferrer()

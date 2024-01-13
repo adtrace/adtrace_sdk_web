@@ -163,19 +163,21 @@ function _prepareForm () {
     ...appConfig,
     attributionCallback: _handleAttributionChange
   })
-  // Adtrace.initSmartBanner({
-  //   ...appConfig,
-  //   webToken: 'p6o2pnb1zkzk',
-  //   logLevel: 'verbose',
-  //   onCreated: () => write('Hey, where is a Smart Banner!'),
-  //   onDismissed: () => write('Oh, you have dismissed the Smart Banner'),
-  // })
+  Adtrace.initSmartBanner({
+    ...appConfig,
+    webToken: 'p6o2pnb1zkzk',
+    logLevel: 'verbose',
+    onCreated: () => write('Hey, where is a Smart Banner!'),
+    onDismissed: () => write('Oh, you have dismissed the Smart Banner'),
+  })
 
   _form.appToken = _ui.appConfigForm.querySelector('#app-token')
   _form.environment = _ui.appConfigForm.querySelector('#environment')
   _form.defaultTracker = _ui.appConfigForm.querySelector('#default-tracker')
   _form.customUrl = _ui.appConfigForm.querySelector('#custom-url')
   _form.logLevel = _ui.appConfigForm.querySelector('#log-level')
+  _form.dataResidency = _ui.appConfigForm.querySelector('#data-residency')
+  _form.urlStrategy = _ui.appConfigForm.querySelector('#url-strategy')
   _form.logOutput = _ui.appConfigForm.querySelector('#log-output')
   _form.eventDeduplicationListLimit = _ui.appConfigForm.querySelector('#event-deduplication-list-limit')
   _form.externalDeviceId = _ui.appConfigForm.querySelector('#external-device-id')
