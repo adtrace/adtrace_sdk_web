@@ -2,7 +2,7 @@ import Adtrace from '../../sdk/main'
 import SimpleAction from '../simple-action'
 
 function init () {
-  SimpleAction('cleargpp', Adtrace.clearGlobalValueParameters)()
+  SimpleAction('gdpr', Adtrace.gdprForgetMe)()
 }
 
 export default init

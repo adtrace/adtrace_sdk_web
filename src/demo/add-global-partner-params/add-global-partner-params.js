@@ -1,7 +1,7 @@
 import AddGlobalParams from '../add-global-params'
 
 function init () {
-  AddGlobalParams('addgpp', 'addGlobalValueParameters')()
+  AddGlobalParams('addgpp', 'addGlobalPartnerParameters')()
 }
 
 export default init
