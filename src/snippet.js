@@ -1,5 +1,5 @@
 /* eslint-disable */
-(function (window, document, tag, url, sdkName, methods, placeholder, script, first) {
+(function (window, document, tag, url, corsMode, integrity, sdkName, methods, placeholder, script, first) {
 
   var queueName = sdkName + '_q';
 
@@ -14,6 +14,11 @@
   first = document.getElementsByTagName(tag)[0];
   script.async = true;
   script.src = url;
+
+  if (integrity) {
+    script.crossOrigin = corsMode;
+    script.integrity = integrity;
+  }
 
   script.onload = function () {
     for (var i = 0; i < window[queueName].length; i++) {
@@ -32,20 +37,25 @@
   'Adtrace',
   [
     'initSdk',
+    'getAttribution',
+    'getWebUUID',
+    'setReferrer',
     'trackEvent',
     'addGlobalCallbackParameters',
-    'addGlobalValueParameters',
+    'addGlobalPartnerParameters',
     'removeGlobalCallbackParameter',
-    'removeGlobalValueParameter',
+    'removeGlobalPartnerParameter',
     'clearGlobalCallbackParameters',
-    'clearGlobalValueParameters',
+    'clearGlobalPartnerParameters',
     'switchToOfflineMode',
     'switchBackToOnlineMode',
     'stop',
     'restart',
     'gdprForgetMe',
     'disableThirdPartySharing',
-    'initSmartBanner'
+    'initSmartBanner',
+    'showSmartBanner',
+    'hideSmartBanner',
   ],
   function (context, queue, methodName) {
     context[methodName] = function () {

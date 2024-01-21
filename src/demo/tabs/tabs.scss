@@ -67,9 +67,6 @@ $height: 300px;
 }
 
 .log {
-  color: $logFontColor;
-  background: $logBgColor;
-  border-color: $headerBgColor;
   padding: 10px 5px 10px 10px;
   height: 100%;
   box-sizing: border-box;
@@ -90,7 +87,7 @@ $height: 300px;
   padding: 0;
 
   & > .flex-box-row {
-    height: 100%;
+    align-items: stretch;
   }
 
   form {
@@ -99,11 +96,14 @@ $height: 300px;
 }
 
 .inline-actions {
+  display: flex;
+
   button {
     display: inline-block;
+    flex: 1 0 0%;
   }
 
-  #reset {
-    float: right;
+  :nth-child(n+2) {
+    margin-left: 10px;
   }
 }

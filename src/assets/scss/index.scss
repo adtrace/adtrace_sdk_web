@@ -39,12 +39,6 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   margin: 20px;
 }
-.h-100{
-  height: 100%;
-}
-.h-auto{
-  height: auto;
-}
 
 h1 {
   text-align: center;
@@ -62,13 +56,13 @@ h1 {
 }
 
 .adtrace-logo {
-  $logoImgSize: $logoSize + 20px;
+  $logoImgSize: $logoSize - 12px;
   display: block;
   float: left;
-  width: $logoSize + 20px;
-  height: $logoSize - 20px ;
-  margin-left: 16px;
-  background-image: url("../images/adtrace.svg");
+  width: $logoSize;
+  height: $logoSize;
+  margin-right: 5px;
+  background-image: url("../images/adtrace-logo.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: $logoImgSize $logoImgSize;
@@ -95,12 +89,12 @@ button {
   }
 
   &.remove {
-    border-color: #066ca5;
-    background-color: #066ca5;
+    border-color: #bb622c;
+    background-color: #ff812e;
     color: #fff;
 
     &:hover {
-      background-color: #066ca5;
+      background-color: #f37d2e;
     }
   }
 }

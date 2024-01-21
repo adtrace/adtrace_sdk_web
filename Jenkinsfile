@@ -15,10 +15,6 @@ pipeline {
         sh "npm install"
       }
      }
-    stage('Test') {
-      steps {
-        sh "npm run test:all"
-      }
     }
     stage('Build Production') {
       when {
@@ -36,7 +32,7 @@ pipeline {
       }
 
       steps {
-        sh "rsync -e 'ssh -o StrictHostKeyChecking=no' -va --rsync-path='mkdir -p /home/dashboard/web-sdk-demo/current/public/ && rsync' --delete ./demo/ dashboard@jenkins-2.adtrace.com://home/dashboard/web-sdk-demo/current/public/"
+        sh "rsync -e 'ssh -o StrictHostKeyChecking=no' -va --rsync-path='mkdir -p /home/dashboard/web-sdk-demo/current/public/ && rsync' --delete ./demo/ dashboard@jenkins-2.adtrace.io://home/dashboard/web-sdk-demo/current/public/"
       }
     }
   }

@@ -1,3 +1,26 @@
+### Version 2.3.1 (Jan 2024)
+#### Fixed
+- sending `sdk_click` failure in some cases.
+
+### Version 2.3.0 (Jan 2024)
+#### Added
+- Added `getWebUUID` method to access SDK generated ID `web_uuid`.
+- Added `getAttribution` method to access user's current attribution information.
+- Added Typescript support.
+- Added `setReferrer` method to set referrer and trigger `/sdk_click` request manually.
+- Added support of Data Residency.
+- Added sending of `deduplication_id` parameter in `event` package.
+- Added SmartBanner
+- Added SRI feature support.
+
+#### Fixed
+- Fixed SDK state synchronization issue between multiple tabs.
+- Fixed issue when Url Strategy ignored SDK config.
+- Updated deprecated and vulnerable dependencies.
+- Fixed issue with URL strategy retrying to send requests after SDK was disabled.
+- Fixed top-level Typescript declarations.
+
+
 ### Version 2.2.0 (April 2023)
 #### Added
 - Added a return of Promise from `trackEvent` method.

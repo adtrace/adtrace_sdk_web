@@ -36,7 +36,8 @@ export type ActivityStateMapT = $Shape<{|
   sessionCount: number,
   eventCount: number,
   installed: boolean,
-  attribution: AttributionMapT
+  attribution: AttributionMapT,
+  sdkClickSent: boolean
 |}>
 
 export type CommonRequestParams = {|
@@ -54,12 +55,13 @@ export type EventRequestParamsT = {|
   revenue?: string,
   currency?: string,
   callbackParams?: ?GlobalKeyValueParamsT,
-  valueParams?: ?GlobalKeyValueParamsT
+  partnerParams?: ?GlobalKeyValueParamsT,
+  eventValueParams?: ?{[key: string]: string}
 |}
 
 export type SessionRequestParamsT = {|
   callbackParams?: ?GlobalKeyValueParamsT,
-  valueParams?: ?GlobalKeyValueParamsT
+  partnerParams?: ?GlobalKeyValueParamsT
 |}
 
 export type SdkClickRequestParamsT = {|
@@ -141,7 +143,7 @@ export type GlobalParamsT = {|
 
 export type GlobalParamsMapT = {
   callbackParams: Array<GlobalParamsT>,
-  eventValueParams: Array<GlobalParamsT>
+  partnerParams: Array<GlobalParamsT>
 }
 
 export type EventParamsT = {|
@@ -150,6 +152,7 @@ export type EventParamsT = {|
   currency?: string,
   deduplicationId?: string,
   callbackParams?: Array<GlobalParamsT>,
+  partnerParams?: Array<GlobalParamsT>,
   eventValueParams?: Array<GlobalParamsT>
 |}
 
@@ -163,6 +166,7 @@ export type BaseParamsT = $ReadOnly<$Shape<{
 export type CustomConfigT = $ReadOnly<$Shape<{
   customUrl: string,
   urlStrategy: 'india' | 'china',
+  dataResidency: 'EU' | 'TR' | 'US',
   eventDeduplicationListLimit: number,
   namespace: string
 }>>
@@ -178,6 +182,8 @@ export type InitOptionsT = $ReadOnly<$Shape<{|
   defaultTracker: $PropertyType<BaseParamsT, 'defaultTracker'>,
   externalDeviceId: $PropertyType<BaseParamsT, 'externalDeviceId'>,
   customUrl: $PropertyType<CustomConfigT, 'customUrl'>,
+  dataResidency: $PropertyType<CustomConfigT, 'dataResidency'>,
+  urlStrategy: $PropertyType<CustomConfigT, 'urlStrategy'>,
   eventDeduplicationListLimit: $PropertyType<CustomConfigT, 'eventDeduplicationListLimit'>,
   namespace: $PropertyType<CustomConfigT, 'namespace'>,
   attributionCallback: (string, Object) => mixed
@@ -226,6 +232,12 @@ export type MachineTypeT = {|
 
 export type QueueSizeT = {|
   queueSize: number
+|}
+
+export type SmartBannerOptionsT = {|
+  webToken: string,
+  logLevel: 'none' | 'error' | 'warning' | 'info' | 'verbose',
+  dataResidency: 'EU' | 'TR' | 'US',
 |}
 
 export type DefaultParamsT = {|

@@ -9,7 +9,7 @@ declare var process: {|
 
 const Globals = {
   namespace: __ADTRACE__NAMESPACE || 'adtrace-sdk',
-  version: __ADTRACE__SDK_VERSION || '2.2.0',
+  version: __ADTRACE__SDK_VERSION || '2.3.1',
   env: process.env.NODE_ENV
 }
 
