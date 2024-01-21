@@ -15,6 +15,7 @@
 - Updated deprecated and vulnerable dependencies.
 - Fixed issue with URL strategy retrying to send requests after SDK was disabled.
 - Fixed top-level Typescript declarations.
+- sending `sdk_click` failure in some cases.
 
 
 ### Version 2.2.0 (April 2023)
