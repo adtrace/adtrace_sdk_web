@@ -428,6 +428,10 @@ function _continue (activityState: ActivityStateMapT): Promise<void> {
         _handleSdkInstalled()
         sharingDisableCheck()
       }
+    }).then(() => {
+      if (!activityState.sdkClickSent) {
+        Adtrace.setReferrer('adtrace-default-web-referrer')
+      }
     })
 }
 

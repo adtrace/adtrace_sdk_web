@@ -36,7 +36,8 @@ export type ActivityStateMapT = $Shape<{|
   sessionCount: number,
   eventCount: number,
   installed: boolean,
-  attribution: AttributionMapT
+  attribution: AttributionMapT,
+  sdkClickSent: boolean
 |}>
 
 export type CommonRequestParams = {|

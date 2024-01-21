@@ -147,6 +147,13 @@ const _activityStateScheme: StoreOptions = {
         true: 1
       }
     },
+    sdkClickSent: {
+      key: 'scs',
+      values: {
+        false: 0,
+        true: 1
+      }
+    },
     attribution: {
       key: 'at',
       keys: {
