@@ -1,6 +1,6 @@
 {
   "name": "web-adtrace",
-  "version": "2.3.0-rc",
+  "version": "2.3.0",
   "description": "This is the guide to the Javascript SDK of Adtrace™ for web sites or web apps. You can read more about Adtrace™ at [adtrace.io].",
   "scripts": {
     "build:demo": "webpack --mode production --config webpack.demo.config.js",
