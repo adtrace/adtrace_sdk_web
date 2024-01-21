@@ -56,8 +56,6 @@ Adtrace.initSdk({
   appToken: 'YOUR_APP_TOKEN',
   environment: 'production'
 });
-
-Adtrace.setReferrer("some-referrer")
 ```
 > **Important**: For proper attribution method [setReferrer](#set-referrer) should be called as close as possible to SDK initialization.
 

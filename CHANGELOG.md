@@ -1,3 +1,7 @@
+### Version 2.3.1 (Jan 2024)
+#### Fixed
+- sending `sdk_click` failure in some cases.
+
 ### Version 2.3.0 (Jan 2024)
 #### Added
 - Added `getWebUUID` method to access SDK generated ID `web_uuid`.
@@ -15,7 +19,6 @@
 - Updated deprecated and vulnerable dependencies.
 - Fixed issue with URL strategy retrying to send requests after SDK was disabled.
 - Fixed top-level Typescript declarations.
-- sending `sdk_click` failure in some cases.
 
 
 ### Version 2.2.0 (April 2023)
