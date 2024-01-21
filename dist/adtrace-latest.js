@@ -2582,6 +2582,13 @@ var _activityStateScheme /*: StoreOptions*/ = {
         true: 1
       }
     },
+    sdkClickSent: {
+      key: 'scs',
+      values: {
+        false: 0,
+        true: 1
+      }
+    },
     attribution: {
       key: 'at',
       keys: {
@@ -6898,7 +6905,8 @@ function start() /*: Promise<ActivityStateMapT>*/{
       return result.stored;
     }
     var activityState = isEmpty(activity_state.current) ? {
-      uuid: _generateUuid()
+      uuid: _generateUuid(),
+      sdkClickSent: false
     } : activity_state.current;
     return storage.addItem(identity_storeName, activityState).then(function () {
       activity_state.init(activityState);
@@ -7780,7 +7788,8 @@ function _setAttribution(result /*: HttpSuccessResponseT*/) /*: Promise<Attribut
     adid: result.adid
   });
   activity_state.current = _objectSpread2(_objectSpread2({}, activity_state.current), {}, {
-    attribution: attribution
+    attribution: attribution,
+    sdkClickSent: true
   });
   return persist().then(function () {
     publish('attribution:change', attribution);
@@ -9393,7 +9402,7 @@ import { type InitOptionsT, type LogOptionsT, type EventParamsT, type GlobalPara
 
 
 
-/*:: type InitConfigT = $ReadOnly<{|...InitOptionsT, ...LogOptionsT|}>*/
+/*:: type InitConfigT = $ReadOnly<{| ...InitOptionsT, ...LogOptionsT |}>*/
 /**
  * In-memory parameters to be used if restarting
  *
@@ -9781,6 +9790,10 @@ function main_continue(activityState /*: ActivityStateMapT*/) /*: Promise<void>*
     if (isInstalled) {
       _handleSdkInstalled();
       third_party_sharing_check();
+    }
+  }).then(function () {
+    if (!activityState.sdkClickSent) {
+      Adtrace.setReferrer('adtrace-default-web-referrer');
     }
   });
 }

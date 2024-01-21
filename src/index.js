@@ -3,8 +3,8 @@ import './assets/scss/index.scss'
 import main from './demo/main'
 
 const appConfig = {
-  appToken: 'l8czd4os6ww0',
-  environment: 'production', // production or sandbox
+  appToken: 'wzfjavr56krp',
+  environment: 'sandbox', // production or sandbox
   logLevel: 'verbose', // none, error, info, verbose
   logOutput: '#log',
   // defaultTracker: 'YOUR_DEFAULT_TRACKER',
