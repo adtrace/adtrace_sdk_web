@@ -9402,7 +9402,7 @@ import { type InitOptionsT, type LogOptionsT, type EventParamsT, type GlobalPara
 
 
 
-/*:: type InitConfigT = $ReadOnly<{| ...InitOptionsT, ...LogOptionsT |}>*/
+/*:: type InitConfigT = $ReadOnly<{|...InitOptionsT, ...LogOptionsT|}>*/
 /**
  * In-memory parameters to be used if restarting
  *
