@@ -1,3 +1,7 @@
+### Version 2.3.2 (Jan 2024)
+#### Fixed
+- `attribution` request for first open after successful `sdk_click`.
+
 ### Version 2.3.1 (Jan 2024)
 #### Fixed
 - sending `sdk_click` failure in some cases.
