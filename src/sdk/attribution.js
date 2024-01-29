@@ -87,7 +87,7 @@ function _setAttribution (result: HttpSuccessResponseT): Promise<AttributionStat
     .filter(([key]) => _whitelist.indexOf(key) !== -1)
     .reduce(reducer, {adid: result.adid})
 
-  ActivityState.current = {...ActivityState.current, attribution, sdkClickSent: true}
+  ActivityState.current = {...ActivityState.current, attribution, sdkClickSent: true, attrSent: true}
 
   return persist()
     .then(() => {

@@ -154,6 +154,13 @@ const _activityStateScheme: StoreOptions = {
         true: 1
       }
     },
+    attrSent: {
+      key: 'atsd',
+      values: {
+        false: 0,
+        true: 1
+      }
+    },
     attribution: {
       key: 'at',
       keys: {

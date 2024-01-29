@@ -87,7 +87,7 @@ function start (): Promise<ActivityStateMapT> {
       }
 
       const activityState = isEmpty(ActivityState.current)
-        ? {uuid: _generateUuid(), sdkClickSent: false}
+        ? {uuid: _generateUuid(), sdkClickSent: false, attrSent: false}
         : ActivityState.current
 
       return Storage.addItem(_storeName, activityState)

@@ -432,6 +432,10 @@ function _continue (activityState: ActivityStateMapT): Promise<void> {
       if (!activityState.sdkClickSent) {
         Adtrace.setReferrer('adtrace-default-web-referrer')
       }
+    }).then(() => {
+      if (!activityState.attrSent) {
+        attributionCheck({ask_in: 3000})
+      }
     })
 }
 
