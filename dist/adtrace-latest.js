@@ -2180,7 +2180,7 @@ function isLocalStorageSupported() /*: boolean*/{
 |}*/
 var Globals = {
   namespace: "adtrace-sdk" || 0,
-  version: "2.3.1" || 0,
+  version: "2.3.2" || 0,
   env: "production"
 };
 /* harmony default export */ const globals = (Globals);
