@@ -2589,6 +2589,13 @@ var _activityStateScheme /*: StoreOptions*/ = {
         true: 1
       }
     },
+    attrSent: {
+      key: 'atsd',
+      values: {
+        false: 0,
+        true: 1
+      }
+    },
     attribution: {
       key: 'at',
       keys: {
@@ -6906,7 +6913,8 @@ function start() /*: Promise<ActivityStateMapT>*/{
     }
     var activityState = isEmpty(activity_state.current) ? {
       uuid: _generateUuid(),
-      sdkClickSent: false
+      sdkClickSent: false,
+      attrSent: false
     } : activity_state.current;
     return storage.addItem(identity_storeName, activityState).then(function () {
       activity_state.init(activityState);
@@ -7789,7 +7797,8 @@ function _setAttribution(result /*: HttpSuccessResponseT*/) /*: Promise<Attribut
   });
   activity_state.current = _objectSpread2(_objectSpread2({}, activity_state.current), {}, {
     attribution: attribution,
-    sdkClickSent: true
+    sdkClickSent: true,
+    attrSent: true
   });
   return persist().then(function () {
     publish('attribution:change', attribution);
@@ -9794,6 +9803,12 @@ function main_continue(activityState /*: ActivityStateMapT*/) /*: Promise<void>*
   }).then(function () {
     if (!activityState.sdkClickSent) {
       Adtrace.setReferrer('adtrace-default-web-referrer');
+    }
+  }).then(function () {
+    if (!activityState.attrSent) {
+      check({
+        ask_in: 3000
+      });
     }
   });
 }
