@@ -22,7 +22,7 @@ Read this in other languages: [English][en-readme], [Persian][fa-readme]
 
 ## <a id="example-app">Example apps</a>
 
-You can check how our SDK can be used in the web app by checking [example app][example-app] in this repository.
+You can check how our SDK can be used in the web app by checking [example apps][example-apps] or [demo app][demp-app] in this repository.
 
 ## <a id="installation">Installation</a>
 
@@ -493,7 +493,8 @@ The following values are accepted:
 
 [adtrace.io]:   https://adtrace.io
 [dashboard]:    https://panel.adtrace.io
-[example-app]:  src/demo.html
+[example-apps]:  https://github.com/adtrace/Adtrace-web-frameworks-examples
+[demo-app]: src/demo.html
 [sri-mdn]:      https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
 
 [en-readme]:  README.md
