@@ -22,7 +22,7 @@ Read this in other languages: [English][en-readme], [Persian][fa-readme]
 
 ## <a id="example-app">Example apps</a>
 
-You can check how our SDK can be used in the web app by checking [example apps][example-apps] or [demo app][demp-app] in this repository.
+You can check how our SDK can be used in the web app by checking [example apps][example-apps] or [demo app][demo-app] in this repository.
 
 ## <a id="installation">Installation</a>
 
