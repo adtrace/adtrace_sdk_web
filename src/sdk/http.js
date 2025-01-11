@@ -190,18 +190,39 @@ function _prepareUrlAndParams ({endpoint, url, method, params}: HttpRequestParam
  * @param {string} method
  * @private
  */
-function _prepareHeaders (xhr: XMLHttpRequest, method: $PropertyType<HttpRequestParamsT, 'method'>): void {
+function _prepareHeaders (xhr: XMLHttpRequest, method: $PropertyType<HttpRequestParamsT, 'method'>): Promise<void> {
   const logHeader = 'REQUEST HEADERS:'
   const headers = [
     ['Client-SDK', `js${Globals.version}`],
     ['Content-Type', method === 'POST' ? 'application/x-www-form-urlencoded' : 'application/json']
   ]
 
-  Logger.log(logHeader)
-  headers
-    .forEach(([key, value]) => {
-      xhr.setRequestHeader(key, value)
-      Logger.log(_logKey(logHeader, key), value)
+  return new Promise((resolve) => {
+    return resolve(
+      navigator.userAgentData
+        ? navigator.userAgentData
+          .getHighEntropyValues([
+            'model',
+            'platform',
+            'platformVersion',
+          ])
+          .then((ua) => {
+            headers.push(
+              ['Ad-Sec-Ch-Ua-Platform', ua.platform],
+              ['Ad-Sec-Ch-Ua-Platform-Version', ua.platformVersion],
+              ['Ad-Sec-Ch-Ua-Model', ua.model],
+            )
+          })
+        : undefined
+    )
+  })
+    .then(() => {
+      Logger.log(logHeader)
+      headers
+        .forEach(([key, value]) => {
+          xhr.setRequestHeader(key, value)
+          Logger.log(_logKey(logHeader, key), value)
+        })
     })
 }
 
@@ -221,11 +242,14 @@ function _buildXhr ({endpoint, url, method = 'GET', params = {}}: HttpRequestPar
     let xhr = new XMLHttpRequest()
 
     xhr.open(method, fullUrl, true)
-    _prepareHeaders(xhr, method)
-    xhr.onreadystatechange = () => _handleReadyStateChange(reject, resolve, {xhr, url})
-    xhr.onerror = () => reject(_getErrorResponse(xhr, 'TRANSACTION_ERROR'))
+    return _prepareHeaders(xhr, method)
+      .then(() => {
+        xhr.onreadystatechange = () => _handleReadyStateChange(reject, resolve, {xhr, url})
+        xhr.onerror = () => reject(_getErrorResponse(xhr, 'TRANSACTION_ERROR'))
 
-    xhr.send(method === 'GET' ? undefined : encodedParams)
+        xhr.send(method === 'GET' ? undefined : encodedParams)
+      })
+      .catch()
   })
 }
 

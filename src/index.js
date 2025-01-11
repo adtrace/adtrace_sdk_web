@@ -4,7 +4,7 @@ import main from './demo/main'
 
 const appConfig = {
   appToken: 'wzfjavr56krp',
-  environment: 'sandbox', // production or sandbox
+  environment: 'production', // production or sandbox
   logLevel: 'verbose', // none, error, info, verbose
   logOutput: '#log',
   // defaultTracker: 'YOUR_DEFAULT_TRACKER',
