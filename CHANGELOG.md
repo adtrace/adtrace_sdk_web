@@ -1,3 +1,7 @@
+### Version 2.3.3 (Jan 2025)
+#### Fixed
+- send user-agent missing data on chrome v+110 as new Client headers in requests
+
 ### Version 2.3.2 (Jan 2024)
 #### Fixed
 - `attribution` request for first open after successful `sdk_click`.
