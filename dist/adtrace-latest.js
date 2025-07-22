@@ -2180,7 +2180,7 @@ function isLocalStorageSupported() /*: boolean*/{
 |}*/
 var Globals = {
   namespace: "adtrace-sdk" || 0,
-  version: "2.3.2" || 0,
+  version: "2.3.3" || 0,
   env: "production"
 };
 /* harmony default export */ const globals = (Globals);
@@ -5796,16 +5796,24 @@ function _prepareUrlAndParams(_ref12 /*:: */, defaultParams /*: DefaultParamsT*/
  * @param {string} method
  * @private
  */
-function _prepareHeaders(xhr /*: XMLHttpRequest*/, method /*: $PropertyType<HttpRequestParamsT, 'method'>*/) /*: void*/{
+function _prepareHeaders(xhr /*: XMLHttpRequest*/, method /*: $PropertyType<HttpRequestParamsT, 'method'>*/) /*: Promise<void>*/{
   var logHeader = 'REQUEST HEADERS:';
   var headers = [['Client-SDK', "js".concat(globals.version)], ['Content-Type', method === 'POST' ? 'application/x-www-form-urlencoded' : 'application/json']];
-  logger.log(logHeader);
-  headers.forEach(function (_ref13) {
-    var _ref14 = _slicedToArray(_ref13, 2),
-      key = _ref14[0],
-      value = _ref14[1];
-    xhr.setRequestHeader(key, value);
-    logger.log(_logKey(logHeader, key), value);
+  return new http_Promise(function (resolve) {
+    if (navigator.userAgentData) {
+      return resolve(navigator.userAgentData.getHighEntropyValues(['model', 'platform', 'platformVersion']).then(function (ua) {
+        headers.push(['Ad-Sec-Ch-Ua-Platform', ua.platform], ['Ad-Sec-Ch-Ua-Platform-Version', ua.platformVersion], ['Ad-Sec-Ch-Ua-Model', ua.model]);
+      }));
+    }
+  }).then(function () {
+    logger.log(logHeader);
+    headers.forEach(function (_ref13) {
+      var _ref14 = _slicedToArray(_ref13, 2),
+        key = _ref14[0],
+        value = _ref14[1];
+      xhr.setRequestHeader(key, value);
+      logger.log(_logKey(logHeader, key), value);
+    });
   });
 }
 
@@ -5836,17 +5844,18 @@ function _buildXhr(_ref15 /*:: */, defaultParams /*: DefaultParamsT*/) /*: Promi
   return new http_Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open(method, fullUrl, true);
-    _prepareHeaders(xhr, method);
-    xhr.onreadystatechange = function () {
-      return _handleReadyStateChange(reject, resolve, {
-        xhr: xhr,
-        url: url
-      });
-    };
-    xhr.onerror = function () {
-      return reject(_getErrorResponse(xhr, 'TRANSACTION_ERROR'));
-    };
-    xhr.send(method === 'GET' ? undefined : encodedParams);
+    return _prepareHeaders(xhr, method).then(function () {
+      xhr.onreadystatechange = function () {
+        return _handleReadyStateChange(reject, resolve, {
+          xhr: xhr,
+          url: url
+        });
+      };
+      xhr.onerror = function () {
+        return reject(_getErrorResponse(xhr, 'TRANSACTION_ERROR'));
+      };
+      xhr.send(method === 'GET' ? undefined : encodedParams);
+    }).catch();
   });
 }
 
