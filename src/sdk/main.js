@@ -15,7 +15,7 @@ import Logger from './logger'
 import {run as queueRun, setOffline, clear as queueClear, destroy as queueDestroy} from './queue'
 import {subscribe, unsubscribe, destroy as pubSubDestroy} from './pub-sub'
 import {watch as sessionWatch, destroy as sessionDestroy} from './session'
-import {start, clear as identityClear, destroy as identityDestroy} from './identity'
+import {start, persist, clear as identityClear, destroy as identityDestroy} from './identity'
 import {add, remove, removeAll, clear as globalParamsClear} from './global-params'
 import {check as attributionCheck, destroy as attributionDestroy} from './attribution'
 import {disable, restore, status} from './disable'
@@ -136,6 +136,25 @@ function setReferrer (referrer: string) {
     waitForInitFinished: true,
     optionalInit: true
   })
+}
+
+/**
+ * Set push token to be sent with each request
+ *
+ * @param {string} pushToken
+ */
+function setPushToken (pushToken: string): void {
+  if (typeof pushToken !== 'string') {
+    Logger.error('You must provide a string push token')
+    return
+  }
+
+  Config.setBaseParam('push_token', pushToken)
+
+  if (ActivityState.isStarted()) {
+    ActivityState.setPushToken(pushToken)
+    persist()
+  }
 }
 
 /**
@@ -393,6 +412,18 @@ function _continue (activityState: ActivityStateMapT): Promise<void> {
   Logger.log(`Adtrace SDK is starting with web_uuid set to ${activityState.uuid}`)
 
   const isInstalled = ActivityState.current.installed
+  const storedPushToken = activityState && activityState.push_token
+  const configPushToken = Config.getBaseParams().push_token
+  let syncPushToken = Promise.resolve()
+
+  if (storedPushToken && !configPushToken) {
+    Config.setBaseParam('push_token', storedPushToken)
+  }
+
+  if (configPushToken && configPushToken !== storedPushToken) {
+    ActivityState.setPushToken(configPushToken)
+    syncPushToken = persist()
+  }
 
   gdprForgetCheck()
 
@@ -417,25 +448,28 @@ function _continue (activityState: ActivityStateMapT): Promise<void> {
     return Promise.reject({interrupted: true, message: message('due to multiple synchronous start attempt')})
   }
 
-  queueRun({cleanUp: true})
-
-  return sessionWatch()
+  return syncPushToken
     .then(() => {
-      _isInitialising = false
-      _isStarted = true
+      queueRun({cleanUp: true})
 
-      if (isInstalled) {
-        _handleSdkInstalled()
-        sharingDisableCheck()
-      }
-    }).then(() => {
-      if (!activityState.sdkClickSent) {
-        Adtrace.setReferrer('adtrace-default-web-referrer')
-      }
-    }).then(() => {
-      if (!activityState.attrSent) {
-        attributionCheck({ask_in: 3000})
-      }
+      return sessionWatch()
+        .then(() => {
+          _isInitialising = false
+          _isStarted = true
+
+          if (isInstalled) {
+            _handleSdkInstalled()
+            sharingDisableCheck()
+          }
+        }).then(() => {
+          if (!activityState.sdkClickSent) {
+            Adtrace.setReferrer('adtrace-default-web-referrer')
+          }
+        }).then(() => {
+          if (!activityState.attrSent) {
+            attributionCheck({ask_in: 3000})
+          }
+        })
     })
 }
 
@@ -486,6 +520,17 @@ function _error (error: CustomErrorT | Error) {
  * @param {string} options.environment
  * @param {string=} options.defaultTracker
  * @param {string=} options.externalDeviceId
+ * @param {string=} options.gps_adid
+ * @param {string=} options.oaid
+ * @param {string=} options.android_uuid
+ * @param {string=} options.fb_id
+ * @param {string=} options.fire_adid
+ * @param {string=} options.persistent_ios_uuid
+ * @param {string=} options.ios_uuid
+ * @param {string=} options.idfa
+ * @param {string=} options.idfv
+ * @param {string=} options.primary_dedupe_token
+ * @param {string=} options.push_token
  * @param {string=} options.customUrl
  * @param {number=} options.eventDeduplicationListLimit
  * @param {Function=} options.attributionCallback
@@ -599,6 +644,7 @@ const Adtrace = {
   getAttribution,
   getWebUUID,
   setReferrer,
+  setPushToken,
   trackEvent,
   addGlobalCallbackParameters,
   addGlobalPartnerParameters,

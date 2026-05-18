@@ -53,7 +53,18 @@ const _mandatory: BaseParamsMandatoryListT = [
 const _allowedParams: BaseParamsListT = [
   ..._mandatory,
   'defaultTracker',
-  'externalDeviceId'
+  'externalDeviceId',
+  'gps_adid',
+  'oaid',
+  'android_uuid',
+  'fb_id',
+  'fire_adid',
+  'persistent_ios_uuid',
+  'ios_uuid',
+  'idfa',
+  'idfv',
+  'primary_dedupe_token',
+  'push_token',
 ]
 
 /**
@@ -103,6 +114,29 @@ function isInitialised (): boolean {
  */
 function getBaseParams (): BaseParamsT {
   return {..._baseParams}
+}
+
+/**
+ * Set a single base parameter
+ *
+ * @param {string} key
+ * @param {string} value
+ */
+function setBaseParam (key: $Keys<BaseParamsT>, value: ?string): void {
+  if (_allowedParams.indexOf(key) === -1) {
+    return
+  }
+
+  if (typeof value === 'string' && value.length > 0) {
+    _baseParams = {..._baseParams, [key]: value}
+    return
+  }
+
+  if (_baseParams[key]) {
+    const updated = {..._baseParams}
+    delete updated[key]
+    _baseParams = updated
+  }
 }
 
 /**
@@ -166,6 +200,7 @@ function destroy (): void {
 const Config = {
   ..._baseConfig,
   set,
+  setBaseParam,
   getBaseParams,
   getCustomConfig,
   isInitialised,

@@ -28,6 +28,7 @@ export type AttributionWhiteListT = $ReadOnlyArray<$Keys<AttributionMapT>>
 
 export type ActivityStateMapT = $Shape<{|
   uuid: string,
+  push_token: string,
   lastActive: number,
   lastInterval: number,
   timeSpent: number,
@@ -161,7 +162,18 @@ export type BaseParamsT = $ReadOnly<$Shape<{
   appToken: string,
   environment: 'production' | 'sandbox',
   defaultTracker: string,
-  externalDeviceId: string
+  externalDeviceId: string,
+  gps_adid: string,
+  oaid: string,
+  android_uuid: string,
+  fb_id: string,
+  fire_adid: string,
+  persistent_ios_uuid: string,
+  ios_uuid: string,
+  idfa: string,
+  idfv: string,
+  primary_dedupe_token: string,
+  push_token: string,
 }>>
 
 export type CustomConfigT = $ReadOnly<$Shape<{
@@ -187,7 +199,18 @@ export type InitOptionsT = $ReadOnly<$Shape<{|
   urlStrategy: $PropertyType<CustomConfigT, 'urlStrategy'>,
   eventDeduplicationListLimit: $PropertyType<CustomConfigT, 'eventDeduplicationListLimit'>,
   namespace: $PropertyType<CustomConfigT, 'namespace'>,
-  attributionCallback: (string, Object) => mixed
+  attributionCallback: (string, Object) => mixed,
+  gps_adid: $PropertyType<BaseParamsT, 'gps_adid'>,
+  oaid: $PropertyType<BaseParamsT, 'oaid'>,
+  android_uuid: $PropertyType<BaseParamsT, 'android_uuid'>,
+  fb_id: $PropertyType<BaseParamsT, 'fb_id'>,
+  fire_adid: $PropertyType<BaseParamsT, 'fire_adid'>,
+  persistent_ios_uuid: $PropertyType<BaseParamsT, 'persistent_ios_uuid'>,
+  ios_uuid: $PropertyType<BaseParamsT, 'ios_uuid'>,
+  idfa: $PropertyType<BaseParamsT, 'idfa'>,
+  idfv: $PropertyType<BaseParamsT, 'idfv'>,
+  primary_dedupe_token: $PropertyType<BaseParamsT, 'primary_dedupe_token'>,
+  push_token: $PropertyType<BaseParamsT, 'push_token'>,
 |}>>
 
 export type BaseParamsListT = $ReadOnlyArray<$Keys<BaseParamsT>>

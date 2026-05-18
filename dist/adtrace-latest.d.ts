@@ -129,6 +129,39 @@ declare namespace Adtrace {
     /** Optional. */
     externalDeviceId?: string;
 
+    /** Optional. Google Advertising ID for TWA attribution. */
+    gps_adid?: string;
+
+    /** Optional. IDFA for TWA attribution. */
+    idfa?: string;
+
+    /** Optional. Huawei Advertising ID for TWA attribution. */
+    oaid?: string;
+
+    /** Optional. Android ID for TWA attribution. */
+    android_uuid?: string;
+
+    /** Optional. facebook advertising ID for TWA attribution. */
+    fb_id?: string;
+
+    /** Optional. Amazon Advertising ID for TWA attribution. */
+    fire_adid?: string;
+
+    /** Optional. Persistent iOS ID for TWA attribution. */
+    persistent_ios_uuid?: string;
+
+    /** Optional. iOS ID for TWA attribution. */
+    ios_uuid?: string;
+
+    /** Optional. idfv for TWA attribution. */
+    idfv?: string;
+
+    /** Optional. Primary Dedupe Token for TWA attribution. */
+    primary_dedupe_token?: string;
+
+    /** Optional. Push token to be sent with each request. */
+    push_token?: string;
+
     /** Optional. By default this param is set to `10`. It is possible to override this limit but make sure that it is a
      * positive number and not too big. This will cache last `n` deduplication ids (defined by this param) and use them
      * to deduplicate events with repeating ids. */
@@ -239,6 +272,13 @@ declare namespace Adtrace {
    * Adtrace.setReferrer("adtrace_external_click_id%3DclickIdValue")
    */
   function setReferrer(referrer: string): void
+
+  /**
+   * Set push token to be sent with each request.
+   *
+   * @param {string} pushToken
+   */
+  function setPushToken(pushToken: string): void
 
   /**
    * Track event with already initiated Adtrace SDK instance

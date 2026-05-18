@@ -2180,7 +2180,7 @@ function isLocalStorageSupported() /*: boolean*/{
 |}*/
 var Globals = {
   namespace: "adtrace-sdk" || 0,
-  version: "2.3.3" || 0,
+  version: "2.4.0" || 0,
   env: "production"
 };
 /* harmony default export */ const globals = (Globals);
@@ -2333,6 +2333,7 @@ var Logger = {
 
 
 
+
 /*:: // 
 import { type BaseParamsT, type CustomConfigT, type InitOptionsT, type BaseParamsListT, type BaseParamsMandatoryListT, type CustomConfigListT } from './types';*/
 
@@ -2375,7 +2376,7 @@ var _mandatory /*: BaseParamsMandatoryListT*/ = ['appToken', 'environment'];
  * @type {string[]}
  * @private
  */
-var _allowedParams /*: BaseParamsListT*/ = [].concat(_mandatory, ['defaultTracker', 'externalDeviceId']);
+var _allowedParams /*: BaseParamsListT*/ = [].concat(_mandatory, ['defaultTracker', 'externalDeviceId', 'gps_adid', 'oaid', 'android_uuid', 'fb_id', 'fire_adid', 'persistent_ios_uuid', 'ios_uuid', 'idfa', 'idfv', 'primary_dedupe_token', 'push_token']);
 
 /**
  * Allowed configuration overrides
@@ -2420,6 +2421,27 @@ function isInitialised() /*: boolean*/{
  */
 function getBaseParams() /*: BaseParamsT*/{
   return _objectSpread2({}, _baseParams);
+}
+
+/**
+ * Set a single base parameter
+ *
+ * @param {string} key
+ * @param {string} value
+ */
+function setBaseParam(key /*: $Keys<BaseParamsT>*/, value /*: ?string*/) /*: void*/{
+  if (_allowedParams.indexOf(key) === -1) {
+    return;
+  }
+  if (typeof value === 'string' && value.length > 0) {
+    _baseParams = _objectSpread2(_objectSpread2({}, _baseParams), {}, _defineProperty({}, key, value));
+    return;
+  }
+  if (_baseParams[key]) {
+    var updated = _objectSpread2({}, _baseParams);
+    delete updated[key];
+    _baseParams = updated;
+  }
 }
 
 /**
@@ -2484,6 +2506,7 @@ function destroy() /*: void*/{
 }
 var Config = _objectSpread2(_objectSpread2({}, _baseConfig), {}, {
   set: set,
+  setBaseParam: setBaseParam,
   getBaseParams: getBaseParams,
   getCustomConfig: getCustomConfig,
   isInitialised: isInitialised,
@@ -2569,6 +2592,7 @@ var _activityStateScheme /*: StoreOptions*/ = {
         unknown: '-'
       }
     },
+    push_token: 'pt',
     timeSpent: 'ts',
     sessionLength: 'sl',
     sessionCount: 'sc',
@@ -3454,6 +3478,23 @@ function getWebUUID() /*: string*/{
   }
   return _activityState.uuid;
 }
+function getPushToken() /*: ?string*/{
+  if (!_started) {
+    return null;
+  }
+  return _activityState.push_token;
+}
+function setPushToken(pushToken /*: ?string*/) /*: void*/{
+  if (!_started) {
+    return;
+  }
+  _update({
+    push_token: pushToken
+  });
+}
+function removePushToken() /*: void*/{
+  setPushToken(null);
+}
 var ActivityState = {
   get current() {
     return currentGetter();
@@ -3475,7 +3516,10 @@ var ActivityState = {
   updateLastActive: updateLastActive,
   destroy: activity_state_destroy,
   getAttribution: getAttribution,
-  getWebUUID: getWebUUID
+  getWebUUID: getWebUUID,
+  getPushToken: getPushToken,
+  setPushToken: setPushToken,
+  removePushToken: removePushToken
 };
 /* harmony default export */ const activity_state = (ActivityState);
 ;// CONCATENATED MODULE: ./src/sdk/pub-sub.js
@@ -5800,11 +5844,9 @@ function _prepareHeaders(xhr /*: XMLHttpRequest*/, method /*: $PropertyType<Http
   var logHeader = 'REQUEST HEADERS:';
   var headers = [['Client-SDK', "js".concat(globals.version)], ['Content-Type', method === 'POST' ? 'application/x-www-form-urlencoded' : 'application/json']];
   return new http_Promise(function (resolve) {
-    if (navigator.userAgentData) {
-      return resolve(navigator.userAgentData.getHighEntropyValues(['model', 'platform', 'platformVersion']).then(function (ua) {
-        headers.push(['Ad-Sec-Ch-Ua-Platform', ua.platform], ['Ad-Sec-Ch-Ua-Platform-Version', ua.platformVersion], ['Ad-Sec-Ch-Ua-Model', ua.model]);
-      }));
-    }
+    return resolve(navigator.userAgentData ? navigator.userAgentData.getHighEntropyValues(['model', 'platform', 'platformVersion']).then(function (ua) {
+      headers.push(['Ad-Sec-Ch-Ua-Platform', ua.platform], ['Ad-Sec-Ch-Ua-Platform-Version', ua.platformVersion], ['Ad-Sec-Ch-Ua-Model', ua.model]);
+    }) : undefined);
   }).then(function () {
     logger.log(logHeader);
     headers.forEach(function (_ref13) {
@@ -9528,6 +9570,23 @@ function setReferrer(referrer /*: string*/) {
 }
 
 /**
+ * Set push token to be sent with each request
+ *
+ * @param {string} pushToken
+ */
+function main_setPushToken(pushToken /*: string*/) /*: void*/{
+  if (typeof pushToken !== 'string') {
+    logger.error('You must provide a string push token');
+    return;
+  }
+  config.setBaseParam('push_token', pushToken);
+  if (activity_state.isStarted()) {
+    activity_state.setPushToken(pushToken);
+    persist();
+  }
+}
+
+/**
  * Track event with already initiated instance
  *
  * @param {Object} params
@@ -9771,6 +9830,16 @@ function main_destroy() /*: void*/{
 function main_continue(activityState /*: ActivityStateMapT*/) /*: Promise<void>*/{
   logger.log("Adtrace SDK is starting with web_uuid set to ".concat(activityState.uuid));
   var isInstalled = activity_state.current.installed;
+  var storedPushToken = activityState && activityState.push_token;
+  var configPushToken = config.getBaseParams().push_token;
+  var syncPushToken = main_Promise.resolve();
+  if (storedPushToken && !configPushToken) {
+    config.setBaseParam('push_token', storedPushToken);
+  }
+  if (configPushToken && configPushToken !== storedPushToken) {
+    activity_state.setPushToken(configPushToken);
+    syncPushToken = persist();
+  }
   gdpr_forget_device_check();
   if (!isInstalled) {
     third_party_sharing_check();
@@ -9799,26 +9868,28 @@ function main_continue(activityState /*: ActivityStateMapT*/) /*: Promise<void>*
       message: message('due to multiple synchronous start attempt')
     });
   }
-  run({
-    cleanUp: true
-  });
-  return watch().then(function () {
-    _isInitialising = false;
-    _isStarted = true;
-    if (isInstalled) {
-      _handleSdkInstalled();
-      third_party_sharing_check();
-    }
-  }).then(function () {
-    if (!activityState.sdkClickSent) {
-      Adtrace.setReferrer('adtrace-default-web-referrer');
-    }
-  }).then(function () {
-    if (!activityState.attrSent) {
-      check({
-        ask_in: 3000
-      });
-    }
+  return syncPushToken.then(function () {
+    run({
+      cleanUp: true
+    });
+    return watch().then(function () {
+      _isInitialising = false;
+      _isStarted = true;
+      if (isInstalled) {
+        _handleSdkInstalled();
+        third_party_sharing_check();
+      }
+    }).then(function () {
+      if (!activityState.sdkClickSent) {
+        Adtrace.setReferrer('adtrace-default-web-referrer');
+      }
+    }).then(function () {
+      if (!activityState.attrSent) {
+        check({
+          ask_in: 3000
+        });
+      }
+    });
   });
 }
 
@@ -9865,6 +9936,17 @@ function main_error(error /*: CustomErrorT | Error*/) {
  * @param {string} options.environment
  * @param {string=} options.defaultTracker
  * @param {string=} options.externalDeviceId
+ * @param {string=} options.gps_adid
+ * @param {string=} options.oaid
+ * @param {string=} options.android_uuid
+ * @param {string=} options.fb_id
+ * @param {string=} options.fire_adid
+ * @param {string=} options.persistent_ios_uuid
+ * @param {string=} options.ios_uuid
+ * @param {string=} options.idfa
+ * @param {string=} options.idfv
+ * @param {string=} options.primary_dedupe_token
+ * @param {string=} options.push_token
  * @param {string=} options.customUrl
  * @param {number=} options.eventDeduplicationListLimit
  * @param {Function=} options.attributionCallback
@@ -9968,6 +10050,7 @@ var Adtrace = {
   getAttribution: main_getAttribution,
   getWebUUID: main_getWebUUID,
   setReferrer: setReferrer,
+  setPushToken: main_setPushToken,
   trackEvent: trackEvent,
   addGlobalCallbackParameters: addGlobalCallbackParameters,
   addGlobalPartnerParameters: addGlobalPartnerParameters,

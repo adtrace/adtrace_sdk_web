@@ -331,6 +331,26 @@ function getWebUUID (): string {
   return _activityState.uuid
 }
 
+function getPushToken (): ?string {
+  if (!_started) {
+    return null
+  }
+
+  return _activityState.push_token
+}
+
+function setPushToken (pushToken: ?string): void {
+  if (!_started) {
+    return
+  }
+
+  _update({push_token: pushToken})
+}
+
+function removePushToken (): void {
+  setPushToken(null)
+}
+
 const ActivityState = {
   get current () { return currentGetter() },
   set current (value) { currentSetter(value) },
@@ -348,7 +368,10 @@ const ActivityState = {
   updateLastActive,
   destroy,
   getAttribution,
-  getWebUUID
+  getWebUUID,
+  getPushToken,
+  setPushToken,
+  removePushToken
 }
 
 export default ActivityState

@@ -134,6 +134,7 @@ const _activityStateScheme: StoreOptions = {
         unknown: '-'
       }
     },
+    push_token: 'pt',
     timeSpent: 'ts',
     sessionLength: 'sl',
     sessionCount: 'sc',

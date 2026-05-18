@@ -1,3 +1,7 @@
+### Version 2.4.0 (Feb 2026)
+#### Added
+- ability to pass native Mobile OS advertising IDs on sdk initialization. suitable for TWA integration and no longer need for S2S event sending on TWA Apps.
+
 ### Version 2.3.3 (Jan 2025)
 #### Fixed
 - send user-agent missing data on chrome v+110 as new Client headers in requests
